@@ -17,19 +17,18 @@ const ClassNameObject = ( prefix: string, a: {} ) => {
 };
 
 export namespace Props{
-	export const className = ( a1: string, a2?: string | {}, a3?: string | {} ) => {
+	export const className = ( a1: string, ...args: any[] ) => {
 
 		let name = a1 ? a1 : "";
 
-		if( a2 && typeof a2 == "object" ){
-			name += ClassNameObject( a1, a2 );
-		}else if( a2 ){
-			name += " " + a2;
-		};
-		if( a3 && typeof a3 == "object" ){
-			name += ClassNameObject( a1, a3 );
-		}else if( a3 ){
-			name += " " + a3;
+		for( const a of args ){
+
+			if( a && typeof a == "object" ){
+				name += ClassNameObject( a1, a );
+			}else if( a ){
+				name += " " + a;
+			};
+
 		};
 
 //		name += (a1 ? (" " + a1) : "");

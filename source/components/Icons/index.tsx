@@ -5,11 +5,16 @@ import "./styles/index.scss"
 import { Props } from "@utility/props";
 
 const Icon = ( props ) => {
-	let { className, children, ...rest } = props;
+	let { className, children, active, ...rest } = props;
 
 	return <span className={
-		Props.className( "icon", className, props.hidden ? "hidden" : "" )
-	} { ...props }>{ children }</span>;
+		Props.className(
+			"icon",
+			className,
+			props.hidden ? "hidden" : "",
+			{ active: active }
+		)
+	} { ...rest }>{ children }</span>;
 };
 
 export namespace Icons{

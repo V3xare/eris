@@ -31,17 +31,25 @@ export function Editable( props ){
 			{ text || " " }
 		</Text>
 
-		<Icons.pencil hidden={ focus } onClick={() => {
-			setFocus( !focus );
-			setTimeout(() => {
+		<Icons.pencil
+			active
+			hidden={ focus }
+			onClick={() => {
+				setFocus( !focus );
+				setTimeout(() => {
 
-				if( !area.current )
-					return;
+					if( !area.current )
+						return;
 
-				area.current.focus();
+					area.current.focus();
+					area.current.setSelectionRange(
+						area.current.value.length,
+						area.current.value.length
+					);
 
-			});
-		}}/>
+				});
+			}}
+		/>
 
 		<textarea
 			ref={ area }
@@ -71,6 +79,13 @@ export function Editable( props ){
 					props.onBlur( e );
 
 				setFocus( false );
+
+			}}
+			onKeyDown={( e ) => {
+
+				if( e.keyCode == 13 && !e.shiftKey ){
+					e.target.blur();
+				};
 
 			}}
 			style={{ height: (height ? (height + "px") : "") }}
