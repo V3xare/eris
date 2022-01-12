@@ -1,0 +1,39 @@
+.tooltip{
+	position: fixed;
+	padding: 4px;
+	opacity: 0;
+	max-height: 0;
+	max-width: 256px;
+	transition: all .2s 0.05s ease-in-out, left 0s, top 0s, height 0s;
+	transform: scale(0.7);
+	background: #424242;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.22);
+
+	&-arrow{
+		width: 0;
+		height: 0;
+		border-left: 7px solid transparent;
+		border-right: 7px solid transparent;
+		border-top: 7px solid #424242;
+		position: absolute;
+		bottom: -7px;
+		left: 50%;
+		margin-left: -7px;
+	};
+
+}
+.tooltip-active{
+	transform: scale(1.0);
+	max-height: 99999px;
+	opacity: 1;
+}
+.tooltip > div{
+	transition: all .2s;
+	max-height: 0;
+}
+.tooltip-active > div{
+	max-height: 99999px;
+};
+.tooltip > div > .typography{
+	color: #f4f4f4;
+}

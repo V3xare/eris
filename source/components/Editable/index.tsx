@@ -24,7 +24,6 @@ export function Editable( props ){
 		<Text
 			className={
 				(className || "")
-				+ (focus ? "hidden" : "")
 			}
 			{ ...rest }
 		>

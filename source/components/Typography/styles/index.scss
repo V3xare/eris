@@ -8,3 +8,15 @@
     overflow-wrap: break-word;
 	line-height: 1.56;
 }
+.typography-italic{
+	font-style: italic;
+}
+.typography-strong{
+	font-weight: bold;
+}
+.typography-link, .typography-link > a{
+	font-weight: bold;
+	color: $link;
+	cursor: pointer;
+	text-decoration: none;
+}

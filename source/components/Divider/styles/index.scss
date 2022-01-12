@@ -1,0 +1,32 @@
+.divider{
+	display: flex;
+	margin: 16px 0;
+	color: rgba(0, 0, 0, 0.85);
+	font-weight: 500;
+	font-size: 16px;
+	white-space: nowrap;
+	text-align: center;
+	border-top: 0;
+	border-top-color: rgba(0, 0, 0, 0.06);
+}
+.divider > div{
+	padding: 0px 18px;
+}
+.divider:before, .divider:after{
+	position: relative;
+	top: 50%;
+	width: 50%;
+	border-top: 1px solid transparent;
+	border-top-color: inherit;
+	border-bottom: 0;
+	transform: translateY(50%);
+	content: '';
+}
+.divider:before{
+	top: 50%;
+	width: 5%;
+}
+.divider:after{
+	top: 50%;
+	width: 95%;
+}
