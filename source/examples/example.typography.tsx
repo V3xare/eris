@@ -25,19 +25,17 @@ export const Example = ( props ) => {
 
 					<Card borderless padding={ 0 }>
 
-						<Tooltip content={ "Hello There!111" }>
-							<span><div>111<div>333</div></div></span>
-						</Tooltip>
-
 						<Card>
 							<Divider>Raw flex style</Divider>
 							<Row gap={ 20 }>
-								<Tooltip content={ "Hello There!222" }>
-									<Column flex={ 1 } style={{ backgroundColor: "blue" }}>1</Column>
+								<Tooltip content={ "Blue Block" } bg={ "#67d9b4" }>
+									<Column flex={ 1 } style={{ backgroundColor: "#67d9b4" }}>1</Column>
 								</Tooltip>
-								<Column flex={ 9 } style={{ backgroundColor: "red" }}>2</Column>
-								<Column flex={ "50%" } style={{ backgroundColor: "red" }}>2</Column>
-								<Column flex={ "6 6 auto" } style={{ backgroundColor: "red" }}>2</Column>
+								<Tooltip content={ "Red Block" } bg={ "#f0a21b" }>
+									<Column flex={ 9 } style={{ backgroundColor: "#f0a21b" }}>2</Column>
+								</Tooltip>
+								<Column flex={ "50%" } style={{ backgroundColor: "#e64ef0" }}>2</Column>
+								<Column flex={ "6 6 auto" } style={{ backgroundColor: "#56b7ff" }}>2</Column>
 							</Row>
 						</Card>
 

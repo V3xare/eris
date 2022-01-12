@@ -50,11 +50,16 @@ const TooltipCalcPosition = ( event, tooltip, target ) => {
 };
 
 export const Tooltip = ( props ) => {
-	let { className, children, style, content, ...rest } = props;
+	let { className, children, style, content, bg, ...rest } = props;
 	const [ target, setTarget ] = useState( null );
 	const [ created, setCreated ] = useState( false );
 	const element = useRef( null );
 	const mouse = useRef({ clientX: 0, clientY: 0 });
+
+	let inlineStyle = { ...style };
+
+	if( bg )
+		inlineStyle[ "backgroundColor" ] = bg;
 
 	useEffect(() => {
 
@@ -89,10 +94,12 @@ export const Tooltip = ( props ) => {
 							active: false
 						})
 					}
+					style={ inlineStyle }
 					ref={ element }
+					{ ...rest }
 				>
 					<div>
-						<div className={ "tooltip-arrow" }></div>
+						<div className={ "tooltip-arrow" } style={{ borderTopColor: inlineStyle[ "backgroundColor" ] }}></div>
 						<Text>{ content }</Text>
 					</div>
 				</div>),
@@ -102,21 +109,7 @@ export const Tooltip = ( props ) => {
 		{
 			React.cloneElement( children, {
 				onMouseMove: ( e ) => {
-
 					mouse.current = { clientX: e.clientX, clientY: e.clientY }
-
-//					if( !target || !element.current )
-//						return;
-//
-//					let position = TooltipCalcPosition( e, element.current, e.currentTarget );
-//					element.current.style.left = position.x;
-//					element.current.style.top = position.y;
-//
-//
-//					position = TooltipCalcPosition( e, element.current, e.currentTarget );
-//					element.current.style.left = position.x;
-//					element.current.style.top = position.y;
-
 				},
 				onMouseOver: ( e ) => {
 					setCreated( true );

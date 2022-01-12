@@ -5,6 +5,7 @@ import { Props } from "@utility/props";
 import "./styles/index.scss"
 import { Text } from "@components/Typography";
 import { Icons } from "@components/Icons";
+import { Tooltip } from "@components/Tooltip";
 
 export function Editable( props ){
 
@@ -30,25 +31,28 @@ export function Editable( props ){
 			{ text || " " }
 		</Text>
 
-		<Icons.pencil
-			active
-			hidden={ focus }
-			onClick={() => {
-				setFocus( !focus );
-				setTimeout(() => {
+		<Tooltip content={ "Edit" }>
+			<Icons.pencil
+				active
+				hidden={ focus }
+				onClick={() => {
+					setFocus( !focus );
+					setTimeout(() => {
 
-					if( !area.current )
-						return;
+						if( !area.current )
+							return;
 
-					area.current.focus();
-					area.current.setSelectionRange(
-						area.current.value.length,
-						area.current.value.length
-					);
+						area.current.focus();
+						area.current.setSelectionRange(
+							area.current.value.length,
+							area.current.value.length
+						);
 
-				});
-			}}
-		/>
+					});
+				}}
+			/>
+		</Tooltip>
+
 
 		<textarea
 			ref={ area }
