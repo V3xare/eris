@@ -5,6 +5,7 @@ import {
 	BrowserRouter,
 	Routes,
 	Route,
+	useNavigate,
 	Link
 } from "react-router-dom";
 
@@ -18,13 +19,16 @@ import { Divider } from "@components/Divider";
 import { Card } from "@components/Card";
 import { Tooltip } from "@components/Tooltip";
 import { TypographyRoute } from "./routes/typography";
+import { ListRoute } from "@examples/routes/list";
 
 const Header = Row, Wrap = Row, Footer = Row;
 const Body = Column, Content = Column, Side = Column;
 
 export const Example = ( props ) => {
-	return (<BrowserRouter>
 
+	const nav = useNavigate();
+
+	return (
 	<Body>
 
 		<Header flex={ "100px" }></Header>
@@ -34,19 +38,10 @@ export const Example = ( props ) => {
 			<Side flex={ 1 }>
 				<Divider style={{ color: "red" }}>Tools</Divider>
 
-
-
-
-				<List value={ 111 }>
-					<List.Item icon={<Icons.pencil/>} title="Navigation One">
-						<List.Item title="Item 1">
-							<List.Item value="1">Option 1</List.Item>
-							<List.Item value="2">Option 2</List.Item>
-						</List.Item>
-						<List.Item title="Item 2">
-							<List.Item value="3">Option 3</List.Item>
-							<List.Item value="4">Option 4</List.Item>
-						</List.Item>
+				<List value={ 111 } onChange={( event ) => nav( event.selected ) }>
+					<List.Item icon={<Icons.pencil/>} title="General">
+						<List.Item value={ "/typography" }>Typography</List.Item>
+						<List.Item value={ "/icons" }>Icons</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.pencil/>} title="Navigation Two">
 						<List.Item value="5">Option 5</List.Item>
@@ -64,9 +59,6 @@ export const Example = ( props ) => {
 					</List.Item>
 				</List>
 
-
-
-
 			</Side>
 
 			<Content flex={ 9 }>
@@ -74,6 +66,7 @@ export const Example = ( props ) => {
 				<Routes>
 					<Route path="/" element={ <TypographyRoute/> } />
 					<Route path="typography" element={ <TypographyRoute/> } />
+					<Route path="list" element={ <ListRoute/> } />
 				</Routes>
 
 			</Content>
@@ -81,6 +74,5 @@ export const Example = ( props ) => {
 		</Wrap>
 
 	</Body>
-
-	</BrowserRouter>);
+	);
 };

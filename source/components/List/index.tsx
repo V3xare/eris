@@ -16,7 +16,12 @@ export const List = ( props ) => {
 	let selection = useState( null );
 
 	useEffect(() => {
-		console.log( selection[ 0 ] );
+
+		if( selection[ 0 ] === null || !props.onChange )
+			return;
+
+		props.onChange({ selected: selection[ 0 ] });
+
 	}, [ selection[ 0 ] ]);
 
 	return (<div
