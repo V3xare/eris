@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import ReactDOM from "react-dom";
 import { Props } from "@utility/props";
+import { Link } from "react-router-dom";
 
 import "./styles/index.scss"
 
@@ -14,10 +15,12 @@ export const Text = ( props ) => {
 				editable: props.editable,
 				italic: props.italic,
 				strong: props.strong,
-				link: props.link
+				link: props.link,
+				q: props.q,
+				transition: props.transition
 			})
 		}
 	>{
-		props.link !== undefined ? (<a href={ props.link }>{ children }</a>) : children
+		props.link !== undefined ? (<Link to={ props.link }>{ children }</Link>) : children
 	}</div>);
 };

@@ -50,6 +50,9 @@ module.exports = {
 	},
 	devServer: {
 		hot: false,
-		inline: false
+		inline: false,
+		historyApiFallback: {
+			index: 'index.html'
+		}
 	}
 };

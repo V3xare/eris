@@ -8,6 +8,9 @@
     overflow-wrap: break-word;
 	line-height: 1.56;
 }
+.typography-q{
+	color: inherit;
+}
 .typography-italic{
 	font-style: italic;
 }
@@ -19,4 +22,7 @@
 	color: $link;
 	cursor: pointer;
 	text-decoration: none;
+}
+.typography-transition{
+	transition: all .2s ease-in-out;
 }
