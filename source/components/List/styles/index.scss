@@ -13,6 +13,7 @@
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
+	z-index: 0;
 
 	&-title{
 		padding: 9px 0px;
@@ -35,7 +36,6 @@
 		left: 0px;
 		position: absolute;
 		content: " ";
-		background-color: #fff;
 		z-index: -1;
 		opacity: 1;
 		transform-origin: top;
@@ -48,12 +48,18 @@
 	}
 	&-title > .icon:last-child{
 		margin-left: auto;
+		display: none;
+	}
+	&-expandable > &-title > .icon:last-child{
+		display: block;
 	}
 
 	&-title:hover{
 		color: #1890ff;
 	}
-
+	&-chain > &-title{
+		color: #1890ff;
+	}
 	&-reduced &-title:before{
 		height: 0px;
 		opacity: 0;
@@ -83,8 +89,12 @@
 	}
 	&-title:before{
 		width: calc( 100% - 3px );
-		background-color: #fafafa;
+		background-color: #fff;
 		border-right: 2px solid #fafafa;
+	}
+
+	&-root > &-title:before{
+		background-color: #fafafa;
 	}
 
 }

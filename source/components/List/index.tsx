@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState, useRef } from "react";
+import React, { useContext, useEffect, useReducer, useState, useRef , useMemo} from "react";
 import ReactDOM from "react-dom";
 import { Props } from "@utility/props";
 
@@ -6,25 +6,67 @@ import "./styles/index.scss"
 import Common from "@utility/common";
 import { Text } from "@components/Typography";
 import { Icons } from "@components/Icons";
+import { ListLeaf } from "@components/List/leaf";
 
-const ListContext = React.createContext({});
-//const ListReducer = ( state, [ type, data ] ) => {};
+export const ListContext = React.createContext({});
+
+const MakeChain = ( key: string, pairs: any[], chain: any[] ) => {
+
+	let parent = pairs[ key ];
+
+	if( !parent )
+		return chain;
+
+	chain.push( parent );
+
+	return MakeChain( parent, pairs, chain );
+};
+
+const ListReducer = ( state, [ type, params ] ) => {
+
+	if( type == "select" ){
+		return {
+			...state,
+			selection: {
+				...params,
+				chain: MakeChain( params.key, state.hierarchy.pairs, [] )
+			}
+		};
+	}else if( type == "hierarchy" ){
+		return {
+			...state,
+			hierarchy: {
+				...state.hierarchy,
+				pairs: { ...state.hierarchy.pairs, [params.key]: params.parent }
+			}
+		};
+	};
+
+	return state;
+};
 
 export const List = ( props ) => {
 	let { className, children, style, ...rest } = props;
 	let inlineStyle = { ...style };
-	let selection = useState( null );
+	let [ state, dispatch ] = useReducer( ListReducer, {
+		selection: null,
+		selectionNeedle: props.value,
+		hierarchy: {
+			pairs: {}
+		}
+	});
 
 	useEffect(() => {
 
-		if( selection[ 0 ] === null || !props.onChange )
+		if( state.selection === null || !props.onChange )
 			return;
 
-		props.onChange({ selected: selection[ 0 ] });
+		props.onChange({ selected: state.selection });
 
-	}, [ selection[ 0 ] ]);
+	}, [ state.selection ]);
 
-	return (<div
+	return useMemo(() =>
+	<div
 		className={
 			Props.className( "list", className )
 		}
@@ -32,90 +74,10 @@ export const List = ( props ) => {
 		{ ...rest }
 	>{
 		<ListContext.Provider
-			value={[ props, selection ]}
+			value={[ props, [ state, dispatch ], -1 ]}
 		>
-			{ children }
+			<ListLeaf expandable={ false }>{ children }</ListLeaf>
 		</ListContext.Provider>
-	}</div>);
+	}</div>, [ state.selection, state.selectionNeedle ]);
 };
-
-List.Item = ( props ) => {
-	let { className, children, style, title, icon, ...rest } = props;
-	let inlineStyle = { ...style };
-	const [ inherited, [ selection, setSelection ] ] = useContext( ListContext );
-	let type = typeof props.children;
-	let single = type == "string" || type == "number";
-
-	const [ expanded, setExpanded ] = useState( false );
-	const childrenElem = useRef( null );
-
-	useEffect(() => {
-		childrenElem.current.style.height = "0px";
-	}, []);
-
-	const transition = ( e ) => {
-
-		if( !childrenElem.current )
-			return;
-
-		if( expanded )
-			childrenElem.current.style.height = null;
-		else
-			childrenElem.current.style.height = "0px";
-		childrenElem.current.removeEventListener( "transitionend", transition );
-	};
-
-	useEffect(() => {
-		childrenElem.current.removeEventListener( "transitionend", transition );
-
-		requestAnimationFrame(function(){
-			childrenElem.current.style.height = expanded ? "0px" : childrenElem.current.scrollHeight + "px";
-
-			requestAnimationFrame(function(){
-				childrenElem.current.style.height = !expanded ? "0px" : childrenElem.current.scrollHeight + "px";
-			});
-
-		});
-
-		childrenElem.current.addEventListener( "transitionend", transition );
-
-		return () => {
-
-			if( !childrenElem.current )
-				return;
-
-			childrenElem.current.removeEventListener( "transitionend", transition );
-		};
-	}, [ expanded ]);
-
-	return (
-		<div
-			className={
-				Props.className( "list-item", className, { selected: selection != null && selection == props.value } )
-			}
-			style={ inlineStyle }
-		>
-			<div className={ "list-item-title" }
-				 onClick={() => {
-
-				 	if( single ){
-				 		setSelection( props.value );
-					}else{
-				 		setExpanded( !expanded )
-					};
-
-				 }}
-			>
-				{ icon ? React.cloneElement( icon, { transition: true }) : null }
-				<Text q transition>{ single ? props.children : props.title }</Text>
-				{ single ? null : <Icons.expand transition reverse={ !expanded }/> }
-			</div>
-			<div
-				className={ Props.className( "list-item", "list-item-children", { expanded: expanded, reduced: !expanded } ) }
-				ref={ childrenElem }>
-			{
-				single ? null : props.children
-			}</div>
-		</div>
-	);
-};
+List.Item = ListLeaf;

@@ -6,6 +6,7 @@ import {
 	Routes,
 	Route,
 	useNavigate,
+	useLocation,
 	Link
 } from "react-router-dom";
 
@@ -27,6 +28,7 @@ const Body = Column, Content = Column, Side = Column;
 export const Example = ( props ) => {
 
 	const nav = useNavigate();
+	const location = useLocation();
 
 	return (
 	<Body>
@@ -38,24 +40,20 @@ export const Example = ( props ) => {
 			<Side flex={ 1 }>
 				<Divider style={{ color: "red" }}>Tools</Divider>
 
-				<List value={ 111 } onChange={( event ) => nav( event.selected ) }>
-					<List.Item icon={<Icons.pencil/>} title="General">
+				<List value={ location.pathname } onChange={( event ) => nav( event.selected.value ) }>
+					<List.Item icon={<Icons.pencil/>} title="General" expandable={ false }>
 						<List.Item value={ "/typography" }>Typography</List.Item>
 						<List.Item value={ "/icons" }>Icons</List.Item>
 					</List.Item>
-					<List.Item icon={<Icons.pencil/>} title="Navigation Two">
-						<List.Item value="5">Option 5</List.Item>
-						<List.Item value="6">Option 6</List.Item>
-						<List.Item title="Submenu">
-							<List.Item value="7">Option 7</List.Item>
-							<List.Item value="8">Option 8</List.Item>
-						</List.Item>
+					<List.Item icon={<Icons.pencil/>} title="Hierarchy">
+						<List.Item value="/list">List</List.Item>
+						<List.Item value="/tree">Tree</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.pencil/>} title="Navigation Three">
-						<List.Item value="9">Option 9</List.Item>
-						<List.Item value="10">Option 10</List.Item>
-						<List.Item value="11">Option 11</List.Item>
-						<List.Item value="12">Option 12</List.Item>
+						<List.Item value="/9">Option 9</List.Item>
+						<List.Item value="/10">Option 10</List.Item>
+						<List.Item value="/11">Option 11</List.Item>
+						<List.Item value="/12">Option 12</List.Item>
 					</List.Item>
 				</List>
 

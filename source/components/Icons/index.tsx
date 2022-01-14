@@ -20,13 +20,13 @@ const Icon = ( props ) => {
 export namespace Icons{
 	export const pencil = ( props: any ) => {
 		return <Icon { ...props }></Icon>;
-	}
+	};
 	export const loading = ( props: any ) => {
 		return <Icon { ...props }></Icon>;
-	}
+	};
 	export const expand = ( props: any ) => {
 		return <Icon { ...props }>
 			<div className={ "icon-arrow" + (props.reverse ? " icon-arrow-reverse" : "") }></div>
 		</Icon>;
-	}
+	};
 };
