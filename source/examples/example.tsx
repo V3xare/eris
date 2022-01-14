@@ -21,6 +21,7 @@ import { Card } from "@components/Card";
 import { Tooltip } from "@components/Tooltip";
 import { TypographyRoute } from "./routes/typography";
 import { ListRoute } from "@examples/routes/list";
+import { IconsRoute } from "@examples/routes/icons";
 
 const Header = Row, Wrap = Row, Footer = Row;
 const Body = Column, Content = Column, Side = Column;
@@ -37,7 +38,7 @@ export const Example = ( props ) => {
 
 		<Wrap flex={ 9 }>
 
-			<Side flex={ 1 }>
+			<Side flex={ "1 1 256px" }>
 				<Divider style={{ color: "red" }}>Tools</Divider>
 
 				<List value={ location.pathname } onChange={( event ) => nav( event.selected.value ) }>
@@ -45,11 +46,11 @@ export const Example = ( props ) => {
 						<List.Item value={ "/typography" }>Typography</List.Item>
 						<List.Item value={ "/icons" }>Icons</List.Item>
 					</List.Item>
-					<List.Item icon={<Icons.pencil/>} title="Hierarchy">
+					<List.Item icon={<Icons.tree/>} title="Hierarchy">
 						<List.Item value="/list">List</List.Item>
 						<List.Item value="/tree">Tree</List.Item>
 					</List.Item>
-					<List.Item icon={<Icons.pencil/>} title="Navigation Three">
+					<List.Item icon={<Icons.calendar/>} title="Navigation Three">
 						<List.Item value="/9">Option 9</List.Item>
 						<List.Item value="/10">Option 10</List.Item>
 						<List.Item value="/11">Option 11</List.Item>
@@ -65,6 +66,7 @@ export const Example = ( props ) => {
 					<Route path="/" element={ <TypographyRoute/> } />
 					<Route path="typography" element={ <TypographyRoute/> } />
 					<Route path="list" element={ <ListRoute/> } />
+					<Route path="icons" element={ <IconsRoute/> } />
 				</Routes>
 
 			</Content>

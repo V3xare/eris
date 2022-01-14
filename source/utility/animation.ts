@@ -46,3 +46,22 @@ export namespace useAnimation{
 		return elem;
 	};
 };
+
+
+/*
+(() => {
+	let list = document.getElementsByClassName( "glyph" );
+	let text = "";
+
+	for( const item of list ){
+		const name = item.getElementsByClassName( "glyphName" )[ 0 ].innerText.replace( /[-]/g, "" );
+		const value = item.getElementsByClassName( "talign-right" )[ 0 ].firstChild.value;
+		text +=
+"	export const " + name + " = ( props: any ) => {\n" +
+"		return <Icon { ...props }>" + value + "</Icon>;\n" +
+"	};\n";
+	};
+
+	return text;
+})();
+ */
