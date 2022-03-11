@@ -74,6 +74,7 @@ export const Tooltip = ( props ) => {
 			};
 
 			element.current.classList.add( "tooltip-active" );
+			element.current.classList.remove( "tooltip-hidden" );
 			let position = TooltipCalcPosition( mouse.current, element.current, target );
 			element.current.style.left = position.x;
 			element.current.style.top = position.y;
@@ -81,6 +82,7 @@ export const Tooltip = ( props ) => {
 
 		return () => {
 			element.current.classList.remove( "tooltip-active" );
+			element.current.classList.add( "tooltip-hidden" );
 			clearInterval( interval );
 		};
 	}, [ target ]);
@@ -117,8 +119,10 @@ export const Tooltip = ( props ) => {
 				},
 				onMouseOut: ( e ) => {
 					setTarget( null );
-					if( element.current )
+					if( element.current ){
 						element.current.classList.remove( "tooltip-active" );
+						element.current.classList.add( "tooltip-hidden" );
+					}
 				}
 			})
 		}
