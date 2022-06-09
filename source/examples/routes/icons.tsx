@@ -5,10 +5,11 @@ import { List } from "@components/List";
 import { Icons } from "@components/Icons";
 import { Card } from "@components/Card";
 import { Tooltip } from "@components/Tooltip";
+import { Column } from "@components/Column";
+import { Divider } from "@components/Divider";
+import { Row } from "@components/Row";
 
 export const IconsRoute = ( props ) => {
-
-	console.log( Icons );
 
 	const icons = useMemo(() => {
 
@@ -18,7 +19,7 @@ export const IconsRoute = ( props ) => {
 
 		for( let key in values ){
 			list.push(
-				<Tooltip key={ key } content={ keys[ key ] }>{ values[ key ]({ ...props, size: "200%", padding: 10 })  }</Tooltip>
+				<Tooltip key={ key } content={ keys[ key ] }>{ values[ key ]({ ...props, size: "200%", padding: 10, color: "#000" })  }</Tooltip>
 			);
 		};
 
@@ -28,7 +29,10 @@ export const IconsRoute = ( props ) => {
 	return (
 		<Card borderless padding={ 0 }>
 
-			<Card>{ icons }</Card>
+			<Card>
+				<Divider>Icomoon pack</Divider>		
+				{ icons }
+			</Card>
 
 		</Card>
 	);

@@ -1,35 +1,4 @@
 import React, { useEffect, useRef, useReducer } from "react";
-import { CreateMutable, useSubscription, useAsync } from "@utility/mutable";
-import { Storage } from "@utility/storage";
 
-function ThemeReducer( state, [ type, data, data2 ] ){
+export const ThemeContext = React.createContext({});
 
-	if( type == "table" ){
-		return {
-			...state,
-			[ "loaded" ]: true,
-			[ "table" ]: { ...state.table, ...{ [data.toLowerCase()]: data2 } }
-		};
-	}else if( type == "visible" ){
-		return {
-			...state,
-			[ "visible" ]: !!data
-		};
-	}else if( type == "select" ){
-		return {
-			...state,
-			[ "current" ]: (data || "en").toLowerCase(),
-			[ "selected" ]: data2 ? (data2 || "").toLowerCase() : state.selected
-		};
-	};
-
-	return state;
-};
-
-export const ThemeMutable = CreateMutable( ThemeReducer, {
-	current: Storage.get( "theme" ) || "",
-	selected: Storage.get( "theme" ) || "",
-	table: {},
-	loaded: false,
-	visible: false
-});

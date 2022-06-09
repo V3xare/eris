@@ -12,6 +12,7 @@ import {
 
 import { Text } from "@components/Typography";
 import { Editable } from "@components/Editable";
+import { Eris } from "@components/Eris";
 import { Icons } from "@components/Icons";
 import { Row } from "@components/Row";
 import { List } from "@components/List";
@@ -38,7 +39,7 @@ export const Example = ( props ) => {
 
 		<Wrap flex={ 9 }>
 
-			<Side flex={ "1 1 256px" }>
+			<Side flex={ "0 0 256px" }>
 				<Divider style={{ color: "red" }}>Tools</Divider>
 
 				<List value={ location.pathname } onChange={( event ) => nav( event.selected.value ) }>
