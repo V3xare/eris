@@ -51,7 +51,7 @@ export const Example = ( props ) => {
 						<List.Item value="/list">List</List.Item>
 						<List.Item value="/tree">Tree</List.Item>
 					</List.Item>
-					<List.Item icon={<Icons.calendar/>} title="Navigation Three">
+					<List.Item icon={<Icons.calendar/>} title="Navigation Tree">
 						<List.Item value="/9">Option 9</List.Item>
 						<List.Item value="/10">Option 10</List.Item>
 						<List.Item value="/11">Option 11</List.Item>

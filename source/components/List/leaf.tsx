@@ -15,7 +15,7 @@ const ListLeafReducer = ( state, [ type, params ] ) => {
 
 export const ListLeaf = ( props ) => {
 	let { className, children, style, title, icon, expandable, value, ...rest } = props;
-	const [ inherited, [ listState, listDispatch ], parent ] = useContext( ListContext );
+	const [ inherited, [ listState, listDispatch ], parent, level ] = useContext( ListContext );
 	const [ state, dispatch ] = useReducer( ListLeafReducer, {
 		key: parent === -1 ? 0 : Common.sid( 8 )
 	});
@@ -61,19 +61,19 @@ export const ListLeaf = ( props ) => {
 					root: parent === 0
 				})
 			}
-			kk={ state.key }
 			style={ inlineStyle }
 		>
 			<div className={ "list-item-title" + (!expandable && !(single ? children : title) ? " hidden" : "") }
-				 onClick={() => {
+				style={{ paddingLeft: (level * 20) + "px" }}
+				onClick={() => {
 
-				 	if( single ){
+					if( single ){
 				 		listDispatch([ "select", { key: state.key, value: value } ]);
 					}else{
 				 		setExpanded( !expanded )
 					};
 
-				 }}
+				}}
 			>
 				{ icon ? React.cloneElement( icon, { transition: true }) : null }
 				<Text q transition>{ single ? children : title }</Text>
@@ -81,9 +81,10 @@ export const ListLeaf = ( props ) => {
 			</div>
 			<div
 				className={ Props.className( "list-item", "list-item-children", { expanded: expanded, reduced: !expanded } ) }
-				ref={ childrenElem }>
+				ref={ childrenElem }
+				>
 			{
-				single ? null : (<ListContext.Provider value={[ props, [ listState, listDispatch ], state.key ]}>{ children }</ListContext.Provider>)
+				single ? null : (<ListContext.Provider value={[ props, [ listState, listDispatch ], state.key, level + 1 ]}>{ children }</ListContext.Provider>)
 			}</div>
 		</div>
 	);

@@ -45,8 +45,29 @@ const ListReducer = ( state, [ type, params ] ) => {
 	return state;
 };
 
+const ListParser = ( list: any ) => {
+
+	if( !list || !Array.isArray( list ) )
+		return null;
+
+	let array: any[] = [];
+
+	for( let item of list ){
+		const children = item.children === undefined ? item.title : ListParser( item.children );
+		const props = {
+			value: item.value,
+			title: item.title,
+		};
+		array.push( 
+			<List.Item key={ item.value } { ...props }>{ children }</List.Item> 
+		);
+	};
+	
+	return array;
+};
+
 export const List = ( props ) => {
-	let { className, children, style, ...rest } = props;
+	let { className, children, style, load, data, ...rest } = props;
 	let inlineStyle = { ...style };
 	let [ state, dispatch ] = useReducer( ListReducer, {
 		selection: null,
@@ -55,6 +76,11 @@ export const List = ( props ) => {
 			pairs: {}
 		}
 	});
+
+	if( data ){
+		children = ListParser( data );
+	};
+	console.log( state.hierarchy );
 
 	useEffect(() => {
 
@@ -74,7 +100,7 @@ export const List = ( props ) => {
 		{ ...rest }
 	>{
 		<ListContext.Provider
-			value={[ props, [ state, dispatch ], -1 ]}
+			value={[ props, [ state, dispatch ], -1, -1 ]}
 		>
 			<ListLeaf expandable={ false }>{ children }</ListLeaf>
 		</ListContext.Provider>
