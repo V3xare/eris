@@ -114,6 +114,24 @@ export default class Common{
 		};
 	};
 
+	public static equal( array1: any[], array2: any[] ) : boolean{
+
+		if( array1.length != array2.length )
+			return false;
+
+		let n: number = 0;
+		let length: number = array1.length;
+
+		for( ; n < length; n++ ){
+
+			if( array1[ n ] != array2[ n ] )
+				return false;
+
+		};
+
+		return true;
+	};
+
 	public static string( object: any ) : string{
 
 		if( object === undefined )

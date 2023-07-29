@@ -10,42 +10,62 @@ import { ListLeaf } from "@components/List/leaf";
 
 export const ListContext = React.createContext({});
 
-const MakeChain = ( key: string, pairs: any[], chain: any[] ) => {
-
-	let parent = pairs[ key ];
-
-	if( !parent )
-		return chain;
-
-	chain.push( parent );
-
-	return MakeChain( parent, pairs, chain );
-};
-
 const ListReducer = ( state, [ type, params ] ) => {
 
 	if( type == "select" ){
 		return {
 			...state,
 			selection: {
-				...params,
-				chain: MakeChain( params.key, state.hierarchy.pairs, [] )
+				chain: params.chain,
+				value: params.value,
+				token: params.token,
+				it: state.selection.it + 1
 			}
 		};
-	}else if( type == "hierarchy" ){
+	}else if( type == "build" ){
+		let list = ListParser( params.children, -1, "", [] );
+		let selection : any= ListFindSelected( list, params.selected );
 		return {
 			...state,
-			hierarchy: {
-				...state.hierarchy,
-				pairs: { ...state.hierarchy.pairs, [params.key]: params.parent }
-			}
-		};
+			selection: {
+				chain: selection ? selection.chain : [],
+				value: selection ? selection.value : [],
+				token: selection ? selection.token : [],
+				it: 0
+			},
+			list: list
+		}
 	};
 
 	return state;
 };
 
-const ListParser = ( list: any ) => {
+const ListFindSelected = ( list: any, selected: string ) => {
+
+	if( !list )
+		return null;
+
+	for( let item of list ){
+
+		if( item.props.value === selected )
+			return {
+				chain: item.props.chain,
+				value: item.props.value,
+				token: item.props.token,
+				it: 0
+			};
+
+		let needle = ListFindSelected( item.props.children, selected );	
+
+		if( needle )
+			return needle;
+
+	};
+
+	return null;
+};
+
+const ListParser = ( list: any,  level: number, parent: string, parentChain: string[] ) => {
 
 	if( !list || !Array.isArray( list ) )
 		return null;
@@ -53,43 +73,69 @@ const ListParser = ( list: any ) => {
 	let array: any[] = [];
 
 	for( let item of list ){
-		const children = item.children === undefined ? item.title : ListParser( item.children );
+		const isStatic = item.$$typeof;
+		const elem = item;
+
+		if( isStatic )
+			item = item.props;
+
+		const token = item.token || Common.sid( 8 );
+		const single = typeof item.children == "string" || typeof item.children == "number";
+
 		const props = {
+			key: token,
+			token: token,
+			level: level + 1,
+			chain: [ ...parentChain, token ],
+			parent: parent,
 			value: item.value,
-			title: item.title,
+			title: single ? (item.title || item.children) : item.title,
+			single: single,
+			children: item.children
 		};
-		array.push( 
-			<List.Item key={ item.value } { ...props }>{ children }</List.Item> 
-		);
+		
+		const children = item.children === undefined ? null : ListParser( item.children, props.level, token, props.chain );
+
+		if( isStatic ){
+			array.push( 
+				React.cloneElement( elem, props, children ) 
+			);
+		}else{
+			array.push( 
+				<ListLeaf { ...props }>{ children }</ListLeaf>
+			);
+		};
+
 	};
 	
-	return array;
+	return array;;
 };
 
 export const List = ( props ) => {
 	let { className, children, style, load, data, ...rest } = props;
 	let inlineStyle = { ...style };
 	let [ state, dispatch ] = useReducer( ListReducer, {
-		selection: null,
-		selectionNeedle: props.value,
-		hierarchy: {
-			pairs: {}
-		}
+		list: [],
+		selection: {
+			chain: [],
+			value: props.value,
+			token: "",
+			it: 0
+		},
 	});
 
-	if( data ){
-		children = ListParser( data );
-	};
-	console.log( state.hierarchy );
+	useEffect(() => {
+		dispatch([ "build", { children: children, selected: props.value } ]);
+	}, [ data || children ]);
 
 	useEffect(() => {
 
-		if( state.selection === null || !props.onChange )
+		if( !state.selection.token || !props.onChange )
 			return;
 
 		props.onChange({ selected: state.selection });
 
-	}, [ state.selection ]);
+	}, [ state.selection.it ]);
 
 	return useMemo(() =>
 	<div
@@ -100,10 +146,12 @@ export const List = ( props ) => {
 		{ ...rest }
 	>{
 		<ListContext.Provider
-			value={[ props, [ state, dispatch ], -1, -1 ]}
+			value={[ props, [ state, dispatch ], -1 ]}
 		>
-			<ListLeaf expandable={ false }>{ children }</ListLeaf>
+			{
+				<ListLeaf expandable={ false } token={ -1 } chain={[]} level={ -1 } parent={ -1 }>{ state.list }</ListLeaf>
+			}
 		</ListContext.Provider>
-	}</div>, [ state.selection, state.selectionNeedle ]);
+	}</div>, [ state.selection, state.list ]);
 };
 List.Item = ListLeaf;

@@ -9,66 +9,46 @@ import { Text } from "@components/Typography";
 import { Icons } from "@components/Icons";
 import { ListContext } from "./index";
 
-const ListLeafReducer = ( state, [ type, params ] ) => {
-	return state;
-};
-
 export const ListLeaf = ( props ) => {
-	let { className, children, style, title, icon, expandable, value, ...rest } = props;
-	const [ inherited, [ listState, listDispatch ], parent, level ] = useContext( ListContext );
-	const [ state, dispatch ] = useReducer( ListLeafReducer, {
-		key: parent === -1 ? 0 : Common.sid( 8 )
-	});
+	let { className, children, style, title, icon, expandable, value, token, level, single, parent, chain, ...rest } = props;
+	//console.log( 111, token, level, parent, chain );
+	const [ inherited, [ listState, listDispatch ] ] = useContext( ListContext );
 	let inlineStyle = { ...style };
-
-	let type = typeof children;
-	let single = type == "string" || type == "number";
 	expandable = expandable !== false;
-	let chain = listState.selection && listState.selection.chain.indexOf( state.key ) > -1;
-	let selected = listState.selection != null && listState.selection.key == state.key;
+	let selectedChained = token != 0 && listState.selection.chain.indexOf( token ) > -1;
+	let selected = value && value === listState.selection.value;
 
 	const [ expanded, setExpanded ] = useState( expandable ? false : true );
 
 	useEffect(() => {
-		listDispatch([ "hierarchy", { key: state.key, parent: parent } ]);
-	}, []);
-	useEffect(() => {
 
-		if( !listState.selectionNeedle || listState.selectionNeedle !== value )
+		if( !selectedChained )
 			return;
 
-		const timeout = setTimeout(() => {
-			listDispatch([ "select", { key: state.key, value: value } ]);
-		});
+		setExpanded( true );
 
-		return () => {
-			clearTimeout( timeout );
-		};
-	}, [ listState.selectionNeedle ]);
-	useEffect(() => {
-		setExpanded( expandable ? (chain || false) : true );
-	}, [ chain ]);
+	}, [ selectedChained ]);
 
-	const childrenElem = useAnimation.Expand( expanded );
+	//const childrenElem = useAnimation.Expand( expanded );
 
 	return (
 		<div
 			className={
 				Props.className( "list-item", className, {
 					selected: selected,
+					chain: selectedChained,
 					expandable: expandable,
-					chain: chain,
 					root: parent === 0
 				})
 			}
 			style={ inlineStyle }
 		>
-			<div className={ "list-item-title" + (!expandable && !(single ? children : title) ? " hidden" : "") }
+			<div className={ "list-item-title" + (!expandable && !(title) ? " hidden" : "") }
 				style={{ paddingLeft: (level * 20) + "px" }}
 				onClick={() => {
 
 					if( single ){
-				 		listDispatch([ "select", { key: state.key, value: value } ]);
+				 		listDispatch([ "select", { token: token, value: value, chain: chain } ]);
 					}else{
 				 		setExpanded( !expanded )
 					};
@@ -76,15 +56,15 @@ export const ListLeaf = ( props ) => {
 				}}
 			>
 				{ icon ? React.cloneElement( icon, { transition: true }) : null }
-				<Text q transition>{ single ? children : title }</Text>
+				<Text q transition>{ title }</Text>
 				{ single ? null : <Icons.expand transition reverse={ !expanded }/> }
 			</div>
 			<div
 				className={ Props.className( "list-item", "list-item-children", { expanded: expanded, reduced: !expanded } ) }
-				ref={ childrenElem }
+				//ref={ childrenElem }
 				>
 			{
-				single ? null : (<ListContext.Provider value={[ props, [ listState, listDispatch ], state.key, level + 1 ]}>{ children }</ListContext.Provider>)
+				single ? null : (<ListContext.Provider value={[ props, [ listState, listDispatch ] ]}>{ children }</ListContext.Provider>)
 			}</div>
 		</div>
 	);
