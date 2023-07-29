@@ -29,7 +29,7 @@ export const ListLeaf = ( props ) => {
 
 	}, [ selectedChained ]);
 
-	//const childrenElem = useAnimation.Expand( expanded );
+	const childrenElem = useAnimation.Expand( expanded );
 
 	return (
 		<div
@@ -61,7 +61,7 @@ export const ListLeaf = ( props ) => {
 			</div>
 			<div
 				className={ Props.className( "list-item", "list-item-children", { expanded: expanded, reduced: !expanded } ) }
-				//ref={ childrenElem }
+				ref={ childrenElem }
 				>
 			{
 				single ? null : (<ListContext.Provider value={[ props, [ listState, listDispatch ] ]}>{ children }</ListContext.Provider>)
