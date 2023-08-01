@@ -1,6 +1,6 @@
 {
   "name": "eris",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "bootstrapVersion": 3,
   "styleLoaders": [],
@@ -9,7 +9,7 @@
   "types": "./source/index.ts",
   "scripts": {
     "webpack": "webpack --mode development",
-	"auto": "tsc -watch - tsconfig.json",
+    "auto": "tsc -watch - tsconfig.json",
     "build": "yarn build:esm && yarn build:cjs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir release/cjs",
@@ -18,7 +18,8 @@
     "tsc3": "tsc --emitDeclarationOnly",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
-    "production": "webpack --mode production"
+    "production": "webpack --mode production",
+    "pub": "tsc && npm version patch --force && npm publish --access public"
   },
   "files": [
     "package.json",
@@ -34,9 +35,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/V3xare/eris.git",
-	"pub": "tsc && npm version patch --force && npm publish --access public"
-  }, 
+    "url": "git+https://github.com/V3xare/eris.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -52,7 +52,7 @@
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
-	"react": "^18.2.0",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.2.1"
   },
