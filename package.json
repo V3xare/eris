@@ -20,9 +20,6 @@
     "start": "webpack-dev-server --mode development",
     "production": "webpack --mode production"
   },
-  "repository": {
-    "type": "git"
-  },
   "files": [
     "package.json",
     "tsconfig.json",
@@ -35,6 +32,11 @@
     "@examples/*": "../source/examples/*",
     "@utility/*": "../source/utility/*"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/V3xare/eris.git",
+	"pub": "tsc && npm version patch --force && npm publish --access public"
+  }, 
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -44,18 +46,18 @@
     "html-webpack-plugin": "^5.5.3",
     "module-alias": "^2.2.3",
     "node-sass": "^9.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+	"react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
     "esbuild-loader": "^3.0.1",
-    "react-router-dom": "^6.2.1",
     "webpack-dev-server": "^4.15.1"
   }
 }
