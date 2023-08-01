@@ -1,6 +1,6 @@
 {
   "name": "v-eris",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "bootstrapVersion": 3,
   "styleLoaders": [],
@@ -24,7 +24,8 @@
   "files": [
     "package.json",
     "tsconfig.json",
-    "release/*"
+    "release/*",
+    "types/*"
   ],
   "imports": {
     "@assets/*": "../assets/*",
