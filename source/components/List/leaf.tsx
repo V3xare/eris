@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState, useRef } from "react";
-import ReactDOM from "react-dom";
+
 import { Props } from "../../utility/props";
 import { useAnimation } from "../../utility/animation";
 

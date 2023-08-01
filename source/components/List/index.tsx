@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState, useRef , useMemo} from "react";
-import ReactDOM from "react-dom";
+
 import { Props } from "../../utility/props";
 
 import "./styles/index.scss"

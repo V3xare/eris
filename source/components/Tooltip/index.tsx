@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from 'react-dom';
+
 import { Props } from "../../utility/props";
 
 import "./styles/index.scss"
@@ -89,7 +90,7 @@ export const Tooltip = ( props ) => {
 
 	return <React.Fragment>
 		{
-			created ? (ReactDOM.createPortal(
+			created ? (createPortal(
 				(<div
 					className={
 						Props.className( "tooltip", className, {
