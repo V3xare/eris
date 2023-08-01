@@ -62,10 +62,11 @@ export const ListLeaf = ( props ) => {
 			<div
 				className={ Props.className( "list-item", "list-item-children", { expanded: expanded, reduced: !expanded } ) }
 				ref={ childrenElem }
-				>
+			>
 			{
 				single ? null : (<ListContext.Provider value={[ props, [ listState, listDispatch ] ]}>{ children }</ListContext.Provider>)
-			}</div>
+			}
+			</div>
 		</div>
 	);
 };

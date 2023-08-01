@@ -1,5 +1,5 @@
-import Common from "../../utility/common";
-import VMath from "../../utility/vmath";
+import Common from "../utility/common";
+import VMath from "../utility/vmath";
 
 export class Time{
 	public static daysInMonth( year: number, month: number ) : number{

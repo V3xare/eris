@@ -7,7 +7,7 @@ import axios, {
 	Cancel,
 	CancelToken,
 	CancelTokenSource,
-	Canceler, Method, AxiosTransformer, AxiosBasicCredentials, ResponseType, AxiosProxyConfig
+	Canceler, Method, AxiosBasicCredentials, ResponseType, AxiosProxyConfig
 } from "axios";
 
 export class Response{

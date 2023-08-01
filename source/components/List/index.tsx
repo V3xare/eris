@@ -126,7 +126,7 @@ export const List = ( props ) => {
 
 	useEffect(() => {
 		dispatch([ "build", { children: children, selected: props.value } ]);
-	}, [ data || children ]);
+	}, []);
 
 	useEffect(() => {
 
