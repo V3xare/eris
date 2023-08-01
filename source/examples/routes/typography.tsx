@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { Text } from "@components/Typography";
-import { Editable } from "@components/Editable";
-import { Row } from "@components/Row";
-import { Column } from "@components/Column";
-import { Divider } from "@components/Divider";
-import { Card } from "@components/Card";
-import { Tooltip } from "@components/Tooltip";
+import { Text } from "../../components/Typography";
+import { Editable } from "../../components/Editable";
+import { Row } from "../../components/Row";
+import { Column } from "../../components/Column";
+import { Divider } from "../../components/Divider";
+import { Card } from "../../components/Card";
+import { Tooltip } from "../../components/Tooltip";
 
 export const TypographyRoute = ( props ) => {
 	return (

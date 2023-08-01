@@ -1,30 +1,37 @@
 {
   "compilerOptions": {
-	"target": "es2015",
-	"module": "es6",
-	"declaration": true,
-	"moduleResolution": "node",
-	"outDir": "./release",
-	"sourceMap": true,
-	"allowJs": true,
-	"checkJs": true,
-	"strict": true,
-	"jsx": "react",
-	"noImplicitAny": false,
-	"esModuleInterop": true,
-	"alwaysStrict": true,
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "importHelpers": true,
+    "declaration": true, // generate typings
+    "declarationMap": true, // generate source maps, if desired
+    "declarationDir": "types", // explicit directory
+    "sourceMap": true,
+    "rootDir": "./source",
 	"baseUrl": "./source",
+    "outDir": "./release/esm",
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+	"noImplicitAny": false,
 	"paths": {
 	  "@assets/*": [ "../assets/*" ],
 	  "@styles/*": [ "../assets/styles/*" ],
-	  "@core/*": [ "core/*" ],
-	  "@components/*": [ "components/*" ],
-	  "@examples/*": [ "examples/*" ],
-	  "@utility/*": [ "utility/*" ]
+	  "@components/*": [ "../source/components/*" ],
+	  "@examples/*": [ "../source/examples/*" ],
+	  "@utility/*": [ "../source/utility/*" ]
 	}
   },
   "exclude": [
-	"node_modules/"
+	"node_modules",
+	"release",
   ],
   "include": [
 	"source/*"

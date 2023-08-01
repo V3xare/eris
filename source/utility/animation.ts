@@ -22,12 +22,24 @@ export namespace useAnimation{
 		};
 
 		useEffect(() => {
+
+			if( !elem.current )
+				return;
+
 			elem.current.removeEventListener( "transitionend", transition );
 
 			requestAnimationFrame(function(){
+
+				if( !elem.current )
+					return;
+
 				elem.current.style.height = expanded ? "0px" : elem.current.scrollHeight + "px";
 
 				requestAnimationFrame(function(){
+
+					if( !elem.current )
+						return;
+
 					elem.current.style.height = !expanded ? "0px" : elem.current.scrollHeight + "px";
 					elem.current.addEventListener( "transitionend", transition );
 				});

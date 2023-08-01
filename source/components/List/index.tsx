@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useReducer, useState, useRef , useMemo} from "react";
 import ReactDOM from "react-dom";
-import { Props } from "@utility/props";
+import { Props } from "../../utility/props";
 
 import "./styles/index.scss"
-import Common from "@utility/common";
-import { Text } from "@components/Typography";
-import { Icons } from "@components/Icons";
-import { ListLeaf } from "@components/List/leaf";
+import Common from "../../utility/common";
+import { Text } from "../../components/Typography";
+import { Icons } from "../../components/Icons";
+import { ListLeaf } from "../../components/List/leaf";
 
 export const ListContext = React.createContext({});
 

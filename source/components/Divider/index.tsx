@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import ReactDOM from "react-dom";
-import { Props } from "@utility/props";
-import { Text } from "@components/Typography";
+import { Props } from "../../utility/props";
+import { Text } from "../../components/Typography";
 
 import "./styles/index.scss"
 

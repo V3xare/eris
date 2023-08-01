@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import ReactDOM from "react-dom";
-import { Props } from "@utility/props";
+import { Props } from "../../utility/props";
 
 import "./styles/index.scss"
-import Common from "@utility/common";
+import Common from "../../utility/common";
 
 export const ParseFlexParam = ( value ) => {
 

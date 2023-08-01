@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useReducer } from "react";
-import { CreateMutable, useSubscription, useAsync } from "@utility/mutable";
-import { Storage } from "@utility/storage";
+import { CreateMutable, useSubscription, useAsync } from "../../utility/mutable";
+import { Storage } from "../../utility/storage";
 
 function LangReducer( state, [ type, data, data2 ] ){
 

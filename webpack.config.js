@@ -1,31 +1,34 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
+const { EsbuildPlugin } = require('esbuild-loader');
 
 module.exports = {
-	entry: "./source/main.tsx",
-	watch: true,
-	watchOptions: {
-		aggregateTimeout: 50,
-		poll: 50
-	},
+	entry: "./source/main.ts",
+	//watch: true,
+	//watchOptions: {
+	//	aggregateTimeout: 50,
+	//	poll: 50
+	//},
 	output: {
-		path: path.join(__dirname, "./release"),
-		filename: "main.js"
+		path: path.join(__dirname, "./release/esm"),
+		//publicPath: "/",
+		filename: "index.js"
 	},
 	devtool: 'source-map',
 	module: {
 		rules: [
 			{
-				test: /\.tsx?$/,
-				use: 'ts-loader',
-				exclude: /node_modules/
-			},
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				use: ["babel-loader"]
+				test: /\.([cm]?ts|tsx)$/,
+				use: [ 
+					{ 
+						loader: 'ts-loader',
+						options: {
+							//transpileOnly: true
+						}					
+					}
+				],
+				exclude: /node_modules/,			
 			},
 			{
 				test: /\.css$/,
@@ -50,7 +53,14 @@ module.exports = {
 	},
 	devServer: {
 		hot: false,
-		inline: false,
+		liveReload: false,
+		port: 8080,
+		devMiddleware: {
+			writeToDisk: true,
+		},
+		static: { 
+			directory: path.resolve(__dirname, "") 
+		},
 		historyApiFallback: {
 			index: 'index.html'
 		}

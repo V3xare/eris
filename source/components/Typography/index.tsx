@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import ReactDOM from "react-dom";
-import { Props } from "@utility/props";
+import { Props } from "../../utility/props";
 import { Link } from "react-router-dom";
 
 import "./styles/index.scss"

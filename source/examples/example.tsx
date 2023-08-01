@@ -10,19 +10,19 @@ import {
 	Link
 } from "react-router-dom";
 
-import { Text } from "@components/Typography";
-import { Editable } from "@components/Editable";
-import { Eris } from "@components/Eris";
-import { Icons } from "@components/Icons";
-import { Row } from "@components/Row";
-import { List } from "@components/List";
-import { Column } from "@components/Column";
-import { Divider } from "@components/Divider";
-import { Card } from "@components/Card";
-import { Tooltip } from "@components/Tooltip";
+import { Text } from "../components//Typography";
+import { Editable } from "../components//Editable";
+import { Eris } from "../components//Eris";
+import { Icons } from "../components//Icons";
+import { Row } from "../components//Row";
+import { List } from "../components//List";
+import { Column } from "../components//Column";
+import { Divider } from "../components//Divider";
+import { Card } from "../components//Card";
+import { Tooltip } from "../components//Tooltip";
 import { TypographyRoute } from "./routes/typography";
-import { ListRoute } from "@examples/routes/list";
-import { IconsRoute } from "@examples/routes/icons";
+import { ListRoute } from "../examples//routes/list";
+import { IconsRoute } from "../examples//routes/icons";
 
 const Header = Row, Wrap = Row, Footer = Row;
 const Body = Column, Content = Column, Side = Column;

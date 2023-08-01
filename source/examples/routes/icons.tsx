@@ -1,13 +1,13 @@
 import React, { useMemo } from "react";
 import ReactDOM from "react-dom";
 
-import { List } from "@components/List";
-import { Icons } from "@components/Icons";
-import { Card } from "@components/Card";
-import { Tooltip } from "@components/Tooltip";
-import { Column } from "@components/Column";
-import { Divider } from "@components/Divider";
-import { Row } from "@components/Row";
+import { List } from "../../components/List";
+import { Icons } from "../../components/Icons";
+import { Card } from "../../components/Card";
+import { Tooltip } from "../../components/Tooltip";
+import { Column } from "../../components/Column";
+import { Divider } from "../../components/Divider";
+import { Row } from "../../components/Row";
 
 export const IconsRoute = ( props ) => {
 

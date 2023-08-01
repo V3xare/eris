@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import ReactDOM from "react-dom";
 
 import "./styles/index.scss"
-import { Props } from "@utility/props";
+import { Props } from "../../utility/props";
 
 const Icon = ( props ) => {
 	let {

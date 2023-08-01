@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { Props } from "@utility/props";
+import { Props } from "../../utility/props";
 
 import "./styles/index.scss"
-import Common from "@utility/common";
-import { Text } from "@components/Typography";
+import Common from "../../utility/common";
+import { Text } from "../../components/Typography";
 
 const TooltipCalcPosition = ( event, tooltip, target ) => {
 

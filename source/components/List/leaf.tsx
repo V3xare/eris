@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useReducer, useState, useRef } from "react";
 import ReactDOM from "react-dom";
-import { Props } from "@utility/props";
-import { useAnimation } from "@utility/animation";
+import { Props } from "../../utility/props";
+import { useAnimation } from "../../utility/animation";
 
 import "./styles/index.scss"
-import Common from "@utility/common";
-import { Text } from "@components/Typography";
-import { Icons } from "@components/Icons";
+import Common from "../../utility/common";
+import { Text } from "../../components/Typography";
+import { Icons } from "../../components/Icons";
 import { ListContext } from "./index";
 
 export const ListLeaf = ( props ) => {

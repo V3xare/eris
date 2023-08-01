@@ -1,15 +1,29 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
+
+//import "./components/";
+//export { default as Card } from './components/Card';
+//import VMath from "./utility/vmath"
+//export { VMath };
+//
+//import Card from "./components/Card"
+//export { Card };
+//
+//console.log(555);
 
 import {
 	BrowserRouter,
 } from "react-router-dom";
-
-
+//
+console.log( "eris" );
+//
 import "../assets/styles/main.scss"
-import { Example } from "@examples/example";
+import { Example } from "./examples/example";
+//
 
-ReactDOM.render(
-<BrowserRouter>
-	<Example/>
-</BrowserRouter>, document.getElementById( "main" ) );
+const root = createRoot( document.getElementById( "main" ) );
+root.render( 
+	<BrowserRouter>
+		<Example/>
+	</BrowserRouter>
+);

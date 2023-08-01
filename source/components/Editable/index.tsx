@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import ReactDOM from "react-dom";
-import { Props } from "@utility/props";
+import { Props } from "../../utility/props";
 
 import "./styles/index.scss"
-import { Text } from "@components/Typography";
-import { Icons } from "@components/Icons";
-import { Tooltip } from "@components/Tooltip";
+import { Text } from "../../components/Typography";
+import { Icons } from "../../components/Icons";
+import { Tooltip } from "../../components/Tooltip";
 
 export function Editable( props ){
 

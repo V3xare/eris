@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useReducer, useState, useRef , useMemo} from "react";
 import ReactDOM from "react-dom";
 
-import { List } from "@components/List";
-import { Icons } from "@components/Icons";
-import { Card } from "@components/Card";
-import { Divider } from "@components/Divider";
+import { List } from "../../components/List";
+import { Icons } from "../../components/Icons";
+import { Card } from "../../components/Card";
+import { Divider } from "../../components/Divider";
 
 const DynamicListRoute = ( props ) => {
 	
