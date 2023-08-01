@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { EsbuildPlugin } = require('esbuild-loader');
 
 module.exports = {
-	entry: "./source/main.tsx",
+	entry: "./source/index.ts",
 	//watch: true,
 	//watchOptions: {
 	//	aggregateTimeout: 50,
