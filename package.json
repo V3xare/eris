@@ -1,12 +1,12 @@
 {
   "name": "v-eris",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "bootstrapVersion": 3,
   "styleLoaders": [],
   "main": "./release/cjs/index.js",
-  "module": "./source/index.ts",
-  "types": "./source/index.ts",
+  "module": "./release/index.js",
+  "types": "./types/index.d.ts",
   "scripts": {
     "webpack": "webpack --mode development",
     "auto": "tsc -watch - tsconfig.json",
