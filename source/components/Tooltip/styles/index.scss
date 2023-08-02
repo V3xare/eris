@@ -24,6 +24,13 @@
 	};
 
 }
+
+.tooltip-reverseY > div > .tooltip-arrow{
+	border-top: 0px solid #424242;
+	border-bottom: 7px solid #424242;
+	top: -7px;
+}
+
 .tooltip-active{
 	transform: scale(1.0);
 	max-height: 99999px;

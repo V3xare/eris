@@ -35,7 +35,7 @@ export const Example = ( props ) => {
 	return (
 	<Body>
 
-		<Header flex={ "100px" }></Header>
+		<Header flex={ "0px" }></Header>
 
 		<Wrap flex={ 9 }>
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, createRef } from "react";
 
 import { Props } from "../../utility/props";
 
@@ -15,6 +15,7 @@ export function Editable( props ){
 	const [ focus, setFocus ] = useState( false );
 
 	const area = useRef( null );
+	const textElem = useRef( null );
 
 	return (
 	<div
@@ -27,6 +28,8 @@ export function Editable( props ){
 				(className || "")
 			}
 			{ ...rest }
+			preserveNL={ true }
+			ref={ textElem }
 		>
 			{ text || " " }
 		</Text>
@@ -34,7 +37,7 @@ export function Editable( props ){
 		<Tooltip content={ "Edit" }>
 			<Icons.pencil
 				active
-				hidden={ focus }
+				transparent={ focus }
 				onClick={() => {
 					setFocus( !focus );
 					setTimeout(() => {
@@ -58,11 +61,15 @@ export function Editable( props ){
 			ref={ area }
 			className={ Props.className( "typography", className, (!focus ? "hidden" : "") ) }
 			onChange={( e ) => {
-				e.target.style.height = 0 + "px";
-				e.target.scrollTop = 0 + "px";
-				setHeight( e.target.scrollHeight );
-				e.target.style.height = height + "px";
+
+				textElem.current.innerHTML = e.target.value;
+
+				area.current.style.height = 0 + "px";
+				area.current.scrollTop = 0 + "px";
+				setHeight( area.current.scrollHeight );
+				area.current.style.height = height + "px";
 				setText( e.target.value );
+
 			}}
 			onFocus={( e ) => {
 

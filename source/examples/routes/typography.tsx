@@ -11,6 +11,17 @@ import { Tooltip } from "../../components/Tooltip";
 export const TypographyRoute = ( props ) => {
 	return (
 		<Card borderless padding={ 0 }>
+					<Tooltip content={ "Red Block" } bg={ "#f0a21b" }>
+						<Column flex={ 9 } style={{ backgroundColor: "#f0a21b" }}>2</Column>
+					</Tooltip>
+
+			<Column>
+				<Row>Name: <Editable>Alex</Editable></Row>
+				<Row>Age: <Editable>18</Editable></Row>
+				<Row>Name: <Editable>Alex</Editable></Row>
+				<Row>Name: <Editable>Alex</Editable></Row>
+			</Column>
+
 
 			<Card>
 				<Divider>Raw flex style</Divider>

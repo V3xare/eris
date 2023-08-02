@@ -15,6 +15,7 @@ const Icon = ( props ) => {
 		color,
 		padding,
 		reverse,
+		transparent,
 		...rest
 	} = props;
 	let inlineStyle = { ...style };
@@ -31,6 +32,7 @@ const Icon = ( props ) => {
 			"icon",
 			className,
 			props.hidden ? "hidden" : "",
+			transparent ? "transparent" : "",
 			{ active: active, transition: transition }
 		)
 	} { ...rest } style={ inlineStyle }>{ children }</span>;

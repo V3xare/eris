@@ -13,7 +13,7 @@ const TooltipCalcPosition = ( event, tooltip, target ) => {
 	let margin = 10;
 	let padding = 10;
 
-	let aabb = tooltip.getBoundingClientRect();
+	//let aabb = tooltip.getBoundingClientRect();
 	let c = {
 		x: tooltip.scrollWidth, y: tooltip.scrollHeight
 	};
@@ -39,15 +39,18 @@ const TooltipCalcPosition = ( event, tooltip, target ) => {
 	let offsetXR = m.x + c.x * 0.5 + padding;
 	let offsetYT = p.y - c.y - margin - padding;
 	let screenWidth = document.documentElement.clientWidth;
+	let reverseY = false;
 
 	if( offsetXL < 0 )
 		position.x -= offsetXL;
 	if( offsetXR > screenWidth )
 		position.x += screenWidth - offsetXR;
-	if( offsetYT < 0 )
-		position.y = (p.y + s.y) + margin;
+	if( offsetYT < 0 ){
+		position.y = (p.y + s.y) + margin * 2;
+		reverseY = true;
+	};
 
-	return { x: position.x + "px", y: position.y + "px" };
+	return { x: position.x + "px", y: position.y + "px", reverseY: reverseY };
 };
 
 export const Tooltip = ( props ) => {
@@ -77,6 +80,12 @@ export const Tooltip = ( props ) => {
 			element.current.classList.add( "tooltip-active" );
 			element.current.classList.remove( "tooltip-hidden" );
 			let position = TooltipCalcPosition( mouse.current, element.current, target );
+
+			if( position.reverseY )
+				element.current.classList.add( "tooltip-reverseY" );
+			else
+				element.current.classList.remove( "tooltip-reverseY" );	
+
 			element.current.style.left = position.x;
 			element.current.style.top = position.y;
 		}, 8 );
@@ -102,7 +111,10 @@ export const Tooltip = ( props ) => {
 					{ ...rest }
 				>
 					<div>
-						<div className={ "tooltip-arrow" } style={{ borderTopColor: inlineStyle[ "backgroundColor" ] }}></div>
+						<div className={ "tooltip-arrow" } style={{ 
+							borderTopColor: inlineStyle[ "backgroundColor" ], 
+							borderBottomColor: inlineStyle[ "backgroundColor" ] 
+						}}></div>
 						<Text>{ content }</Text>
 					</div>
 				</div>),

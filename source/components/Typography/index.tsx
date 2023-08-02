@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 import "./styles/index.scss"
 
-export const Text = ( props ) => {
+export const Text = forwardRef(( props, ref ) => {
 
-	const { className, children } = props;
+	const { className, children, preserveNL } = props;
 
 	return (<div
 		className={
@@ -20,7 +20,12 @@ export const Text = ( props ) => {
 				transition: props.transition
 			})
 		}
+		ref={ ref }
 	>{
-		props.link !== undefined ? (<Link to={ props.link }>{ children }</Link>) : children
+		props.link !== undefined ? (<Link to={ props.link }>{ 
+			(preserveNL && children.length > 0 && children[ children.length -1 ] == '\n' ? (children + '\n') : children)
+		}</Link>) 
+		: 
+			(preserveNL && children.length > 0 && children[ children.length -1 ] == '\n' ? (children + '\n') : children)
 	}</div>);
-};
+});
