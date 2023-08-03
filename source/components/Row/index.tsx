@@ -28,6 +28,7 @@ export const Row = ( props ) => {
 		style,
 		flex,
 		gap,
+		stretch,
 		...rest
 	} = props;
 
@@ -38,6 +39,9 @@ export const Row = ( props ) => {
 
 	if( gap )
 		inlineStyle[ "gap" ] = gap;
+
+	if( stretch )
+		inlineStyle[ "width" ] = "100%";
 
 	return (<div
 		className={

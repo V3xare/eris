@@ -7,12 +7,15 @@ import Common from "../../utility/common";
 import { ParseFlexParam } from "../../components/Row";
 
 export const Column = ( props ) => {
-	let { className, children, style, flex, ...rest } = props;
+	let { className, children, style, flex, stretch, ...rest } = props;
 
 	let inlineStyle = { ...style };
 
 	if( flex )
 		inlineStyle[ "flex" ] = ParseFlexParam( flex );
+
+	if( stretch )
+		inlineStyle[ "height" ] = "100%";
 
 	return (<div
 		className={
