@@ -67,8 +67,14 @@ const ListFindSelected = ( list: any, selected: string ) => {
 
 const ListParser = ( list: any,  level: number, parent: string, parentChain: string[] ) => {
 
-	if( !list || !Array.isArray( list ) )
+	if( !list )
 		return null;
+
+	if( !Array.isArray( list ) && !list.$$typeof )
+		return null;
+
+	if( list.$$typeof )
+		list = [ list ];	
 
 	let array: any[] = [];
 

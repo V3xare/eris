@@ -23,6 +23,7 @@ import { Tooltip } from "../components//Tooltip";
 import { TypographyRoute } from "./routes/typography";
 import { ListRoute } from "../examples//routes/list";
 import { IconsRoute } from "../examples//routes/icons";
+import { OverlayRoute } from "../examples//routes/overlay";
 
 const Header = Row, Wrap = Row, Footer = Row;
 const Body = Column, Content = Column, Side = Column;
@@ -47,6 +48,9 @@ export const Example = ( props ) => {
 						<List.Item value={ "/typography" }>Typography</List.Item>
 						<List.Item value={ "/icons" }>Icons</List.Item>
 					</List.Item>
+					<List.Item icon={<Icons.stack/>} title="Layout">
+						<List.Item value={ "/overlay" }>Overlay</List.Item>
+					</List.Item>					
 					<List.Item icon={<Icons.tree/>} title="Hierarchy">
 						<List.Item value="/list">List</List.Item>
 						<List.Item value="/tree">Tree</List.Item>
@@ -68,6 +72,7 @@ export const Example = ( props ) => {
 					<Route path="typography" element={ <TypographyRoute/> } />
 					<Route path="list" element={ <ListRoute/> } />
 					<Route path="icons" element={ <IconsRoute/> } />
+					<Route path="overlay" element={ <OverlayRoute/> } />
 				</Routes>
 
 			</Content>

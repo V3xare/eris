@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { EsbuildPlugin } = require('esbuild-loader');
 
 module.exports = {
 	entry: "./source/index.ts",
