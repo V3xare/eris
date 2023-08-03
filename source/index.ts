@@ -54,3 +54,5 @@ import { Tooltip } from "./components/Tooltip"
 export { Tooltip };
 import { Text } from "./components/Typography"
 export { Text };
+import { Overlay } from "./components/Overlay"
+export { Overlay };
