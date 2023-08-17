@@ -29,16 +29,16 @@ export const ParseGapParam = ( value ) => {
 			+ (Common.int( value[ 0 ] ) == value[ 0 ] || typeof value[ 0 ] == "number" ? (value[ 0 ] + "px") : value[ 0 ]) 
 			+ " " 
 			+ (Common.int( value[ 1 ] ) == value[ 1 ] || typeof value[ 1 ] == "number" ? (value[ 1 ] + "px") : value[ 1 ]);
-	}else{
+	}else if( typeof value == "string" ){
 		value = (value || "").trim();
 
 		if( !value.match( / /g ) ){
 			value = "0 0 " + value;
 		};
 
+	}else if( value === true ){
+		value = "8px";
 	};
-
-	console.log( value );
 
 	return value;
 };

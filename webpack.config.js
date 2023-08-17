@@ -3,7 +3,10 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-	entry: "./source/main.tsx",
+	entry: { 
+		main: "./source/main.tsx",
+		index: "./source/index.ts",
+	},
 	//watch: true,
 	//watchOptions: {
 	//	aggregateTimeout: 50,
@@ -12,7 +15,7 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, "./release/esm"),
 		//publicPath: "/",
-		filename: "index.js"
+		filename: "[name].js"
 	},
 	devtool: 'source-map',
 	module: {

@@ -16,7 +16,7 @@ export const AutoCompleteRoute = ( props ) => {
 			<Card>
 				<Divider>AutoComplete</Divider>	
 
-				<Row gap={ 8 }>
+				<Row gap={ true }>
 
 					<AutoComplete onChange={( value, callback ) => callback([ 
 						{ icon: <Icons.blog/>, value: value + " title1" },
