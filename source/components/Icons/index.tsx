@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 
 
-import "./styles/index.scss"
+import "./index.scss"
 import { Props } from "../../utility/props";
 
 const Icon = ( props ) => {

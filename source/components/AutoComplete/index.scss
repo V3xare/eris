@@ -1,0 +1,47 @@
+@import "../../../assets/styles/preset";
+
+.autocomplete{
+	position: relative;
+	display: inline-block;
+
+	&-suggestions{
+		position: absolute;
+		padding: 4px 4px;
+		background: #ffffff;
+		width: 100%;
+		overflow-y: auto;
+		box-sizing: border-box;
+		box-shadow: 0px 6px 16px 0px #0003;
+		transition: all 240ms;
+		max-height: 200px;
+		border-radius: 8px;
+		display: none;
+	}
+	&-suggestions-expanded{
+		display: block;
+	}
+
+	&-item{
+		padding: 7px 9px;
+		position: relative;
+		transition: all 240ms;
+		border-radius: 4px;
+		align-items: baseline;
+	}	
+	&-item .icon{
+		color: $icons-accent;
+	}
+
+	&-selected{
+		background-color: #f4f4f4;
+	}
+
+	&-suggestions-expanded &-item{
+		opacity: 1;
+	}
+
+	&-value{
+		margin-left: 8px;
+	}
+
+}

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useReducer, useState, useRef , useMemo} f
 
 import { Props } from "../../utility/props";
 
-import "./styles/index.scss"
+import "./index.scss"
 import Common from "../../utility/common";
 import { Text } from "../../components/Typography";
 import { Icons } from "../../components/Icons";
@@ -114,7 +114,7 @@ const ListParser = ( list: any,  level: number, parent: string, parentChain: str
 
 	};
 	
-	return array;;
+	return array;
 };
 
 export const List = ( props ) => {

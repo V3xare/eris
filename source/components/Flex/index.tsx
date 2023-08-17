@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 
 import { Props } from "../../utility/props";
 
-import "./styles/index.scss"
+import "./index.scss"
 
 export const Flex = ( props, ref ) => {
 

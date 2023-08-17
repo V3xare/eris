@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { Props } from "../../utility/props";
 import { Text } from "../../components/Typography";
 
-import "./styles/index.scss"
+import "./index.scss"
 
 export const Divider = ( props ) => {
 	const { className, children, style, ...rest } = props;

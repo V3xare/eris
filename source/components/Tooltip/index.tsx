@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import { Props } from "../../utility/props";
 
-import "./styles/index.scss"
+import "./index.scss"
 import Common from "../../utility/common";
 import { Text } from "../../components/Typography";
 

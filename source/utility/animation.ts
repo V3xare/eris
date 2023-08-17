@@ -1,12 +1,24 @@
 import React, { useContext, useEffect, useReducer, useState, useRef } from "react";
 
 export namespace useAnimation{
-	export const Expand = ( expanded, ref? ) => {
+	export const Expand = ( expanded, params?, ref? ) => {
 
 		const elem = ref || useRef( null );
+		
+		if( !params )
+			params = {};
+
+		//const computed = getComputedStyle( elem.current );		
+		//console.log( computed.overflowY );	
 
 		useEffect(() => {
+
+			if( !elem.current )
+				return;
+
 			elem.current.style.height = "0px";
+			elem.current.style.overflowY = "hidden";
+
 		}, []);
 
 		const transition = ( e ) => {
@@ -14,10 +26,14 @@ export namespace useAnimation{
 			if( !elem.current )
 				return;
 
-			if( expanded )
+			if( expanded ){
 				elem.current.style.height = null;
-			else
+				elem.current.style.overflowY = null;
+			}else{
 				elem.current.style.height = "0px";
+				elem.current.style.overflowY = "hidden";
+			};
+
 			elem.current.removeEventListener( "transitionend", transition );
 		};
 
@@ -32,15 +48,28 @@ export namespace useAnimation{
 
 				if( !elem.current )
 					return;
-
-				elem.current.style.height = expanded ? "0px" : elem.current.scrollHeight + "px";
+					
+				if( expanded ){
+					elem.current.style.height = "0px";
+					elem.current.style.overflowY = null;
+				}else{
+					elem.current.style.height = elem.current.scrollHeight + "px";
+					elem.current.style.overflowY = "hidden";
+				};
 
 				requestAnimationFrame(function(){
 
 					if( !elem.current )
 						return;
 
-					elem.current.style.height = !expanded ? "0px" : elem.current.scrollHeight + "px";
+					if( !expanded ){
+						elem.current.style.height = "0px";
+						elem.current.style.overflowY = null;
+					}else{
+						elem.current.style.height = elem.current.scrollHeight + "px";
+						elem.current.style.overflowY = "hidden";
+					};						
+
 					elem.current.addEventListener( "transitionend", transition );
 				});
 

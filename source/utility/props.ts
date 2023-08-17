@@ -26,16 +26,27 @@ export namespace Props{
 			if( a && typeof a == "object" ){
 				name += ClassNameObject( a1, a );
 			}else if( a ){
-				name += " " + a;
+				name = a + " " + name;
 			};
 
 		};
 
-//		name += (a1 ? (" " + a1) : "");
-//
-//		if( name && name[ 0 ] == " " )
-//			name = name.substr( 1 );
+		return name;
+	};
+	export const classNameEx = ( a1: string, ...args: any[] ) => {
+
+		let name = "";
+
+		for( const a of args ){
+
+			if( a && typeof a == "object" ){
+				name += ClassNameObject( a1, a );
+			}else if( a ){
+				name = name ? (a + " " + name) : (a);
+			};
+
+		};
 
 		return name;
-	}
+	};
 };

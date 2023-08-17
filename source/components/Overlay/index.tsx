@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Props } from "../../utility/props";
 import Common from "../../utility/common";
 
-import "./styles/index.scss"
+import "./index.scss"
 
 export const Overlay = ( props ) => {
 	let { className, children, style, stretch, direction, margin, ...rest } = props;

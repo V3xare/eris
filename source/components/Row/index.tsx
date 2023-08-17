@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 
 import { Props } from "../../utility/props";
 
-import "./styles/index.scss"
+import "./index.scss"
 import Common from "../../utility/common";
 
 export const ParseFlexParam = ( value ) => {
@@ -17,6 +17,28 @@ export const ParseFlexParam = ( value ) => {
 		};
 
 	};
+
+	return value;
+};
+export const ParseGapParam = ( value ) => {
+
+	if( Common.int( value ) == value || typeof value == "number" )
+		value = value + "px " + value + "px";
+	else if( Array.isArray( value ) ){
+		value = ""
+			+ (Common.int( value[ 0 ] ) == value[ 0 ] || typeof value[ 0 ] == "number" ? (value[ 0 ] + "px") : value[ 0 ]) 
+			+ " " 
+			+ (Common.int( value[ 1 ] ) == value[ 1 ] || typeof value[ 1 ] == "number" ? (value[ 1 ] + "px") : value[ 1 ]);
+	}else{
+		value = (value || "").trim();
+
+		if( !value.match( / /g ) ){
+			value = "0 0 " + value;
+		};
+
+	};
+
+	console.log( value );
 
 	return value;
 };
@@ -38,7 +60,7 @@ export const Row = ( props ) => {
 		inlineStyle[ "flex" ] = ParseFlexParam( flex );
 
 	if( gap )
-		inlineStyle[ "gap" ] = gap;
+		inlineStyle[ "gap" ] = ParseGapParam( gap );
 
 	if( stretch )
 		inlineStyle[ "width" ] = "100%";

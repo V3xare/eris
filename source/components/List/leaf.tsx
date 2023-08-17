@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useReducer, useState, useRef } from "reac
 import { Props } from "../../utility/props";
 import { useAnimation } from "../../utility/animation";
 
-import "./styles/index.scss"
+import "./index.scss"
 import Common from "../../utility/common";
 import { Text } from "../../components/Typography";
 import { Icons } from "../../components/Icons";
@@ -60,7 +60,7 @@ export const ListLeaf = ( props ) => {
 				{ single ? null : <Icons.expand transition reverse={ !expanded }/> }
 			</div>
 			<div
-				className={ Props.className( "list-item", "list-item-children", { expanded: expanded, reduced: !expanded } ) }
+				className={ Props.classNameEx( "list-item", "list-item-children", { expanded: expanded, reduced: !expanded } ) }
 				ref={ childrenElem }
 			>
 			{

@@ -56,3 +56,7 @@ import { Text } from "./components/Typography"
 export { Text };
 import { Overlay } from "./components/Overlay"
 export { Overlay };
+import { Input } from "./components/Input"
+export { Input };
+import { AutoComplete } from "./components/AutoComplete"
+export { AutoComplete };

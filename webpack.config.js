@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-	entry: "./source/index.ts",
+	entry: "./source/main.tsx",
 	//watch: true,
 	//watchOptions: {
 	//	aggregateTimeout: 50,

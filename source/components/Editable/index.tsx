@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, createRef } from "react";
 
 import { Props } from "../../utility/props";
 
-import "./styles/index.scss"
+import "./index.scss"
 import { Text } from "../../components/Typography";
 import { Icons } from "../../components/Icons";
 import { Tooltip } from "../../components/Tooltip";

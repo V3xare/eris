@@ -24,6 +24,8 @@ import { TypographyRoute } from "./routes/typography";
 import { ListRoute } from "../examples//routes/list";
 import { IconsRoute } from "../examples//routes/icons";
 import { OverlayRoute } from "../examples//routes/overlay";
+import { InputRoute } from "../examples//routes/input";
+import { AutoCompleteRoute } from "../examples//routes/autocomplete";
 
 const Header = Row, Wrap = Row, Footer = Row;
 const Body = Column, Content = Column, Side = Column;
@@ -55,6 +57,10 @@ export const Example = ( props ) => {
 						<List.Item value="/list">List</List.Item>
 						<List.Item value="/tree">Tree</List.Item>
 					</List.Item>
+					<List.Item icon={<Icons.quill/>} title="Inputs">
+						<List.Item value="/autocomplete">AutoComplete</List.Item>
+						<List.Item value="/input">Input</List.Item>
+					</List.Item>					
 					<List.Item icon={<Icons.calendar/>} title="Navigation Tree">
 						<List.Item value="/9">Option 9</List.Item>
 						<List.Item value="/10">Option 10</List.Item>
@@ -73,6 +79,8 @@ export const Example = ( props ) => {
 					<Route path="list" element={ <ListRoute/> } />
 					<Route path="icons" element={ <IconsRoute/> } />
 					<Route path="overlay" element={ <OverlayRoute/> } />
+					<Route path="input" element={ <InputRoute/> } />
+					<Route path="autocomplete" element={ <AutoCompleteRoute/> } />
 				</Routes>
 
 			</Content>

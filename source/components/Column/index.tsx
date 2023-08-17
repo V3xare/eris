@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 
 import { Props } from "../../utility/props";
 
-import "./styles/index.scss"
+import "./index.scss"
 import { ParseFlexParam } from "../../components/Row";
 
 export const Column = ( props ) => {

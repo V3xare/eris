@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { Props } from "../../utility/props";
 import { Link } from "react-router-dom";
 
-import "./styles/index.scss"
+import "./index.scss"
 
 export const Text = forwardRef(( props, ref ) => {
 
