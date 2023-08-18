@@ -17,7 +17,7 @@ export const AutoCompleteContext = React.createContext({
 });
 
 export const AutoComplete = ( props ) => {
-	let { className, children, onChange, onSelect, margin, padding, label, ...rest } = props;
+	let { className, children, onChange, onSelect, margin, padding, label, larger, ...rest } = props;
 	const [ expanded, setExpanded ] = useState( false );
 	const [ search, setSearch ] = useState( "" );
 	const [ list, setList ] = useState([]);
@@ -88,18 +88,15 @@ export const AutoComplete = ( props ) => {
 
 	return (<div
 		className={
-			Props.className( "autocomplete", className )
+			Props.className( "autocomplete", className, { expanded: expanded, larger: larger } )
 		}
 	>
 		<AutoCompleteContext.Provider value={{
 			value: forcedValue,
 			select: () => {
-				console.log( 111, list, selected  );
 				if( list && list[ selected ] ){
-					console.log( 222 );
 					const v = list[ selected ].value;
 					onSelect( v, () => {
-						console.log( 333 );
 						setForcedValue( v );
 					});
 				};				
@@ -161,7 +158,10 @@ export const AutoComplete = ( props ) => {
 			{ children }
 		</AutoCompleteContext.Provider>
 		<div className={ 
-			Props.className( "autocomplete-suggestions", { expanded: expanded }) 
+			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 
+		}></div>		
+		<div className={ 
+			Props.className( "autocomplete-suggestions" ) 
 		}
 			style={ props.style }
 			ref={ childrenElem }

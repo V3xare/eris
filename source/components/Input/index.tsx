@@ -2,6 +2,7 @@ import React, { forwardRef, useState, useEffect, useContext, useMemo } from "rea
 import { Props } from "../../utility/props";
 import { AutoCompleteContext } from "../../components/AutoComplete";
 import { Text } from "../../components/Typography";
+import { Icons } from "../../components/Icons";
 
 import "./index.scss"
 
@@ -9,7 +10,7 @@ export const Input = ( props ) => {
 	let { 
 		className, children, propValue, style, margin, padding, 
 		placeholder, tools,
-		onChange, onFocus, onBlur, onKeyDown, onKeyUp, onClear,
+		onChange, onFocus, onBlur, onKeyDown, onKeyUp, onClear, larger,
 		...rest 
 	} = props;
 	const [ value, setValue ] = useState( children );
@@ -38,7 +39,22 @@ export const Input = ( props ) => {
 
 		let index: number = 0;	
 
-		for( const item of list ){
+		for( let item of list ){
+
+			if( typeof item == "string" ){
+
+				if( item == "search" ){
+					item = { icon: <Icons.search active/>, direction: 0, onClick: ( event ) => {
+						event.autocomplete.select();
+					}};
+				}else if( item == "clear" ){
+					item = { icon: <Icons.cross active style={{ fontSize: "70%" }}/>, direction: 1, onClick: ( event ) => {
+						event.setValue( "" );
+					}};
+				}else 
+					continue;
+
+			};			
 
 			if( !item || !item.icon )
 				continue;
@@ -54,8 +70,6 @@ export const Input = ( props ) => {
 					key={ index }
 					className={ Props.classNameEx( "input", { "tool": true } ) }
 					onClick={( event ) => {
-
-						console.log( event, item.onClick  );
 
 						if( !item.onClick )
 							return;
@@ -91,7 +105,7 @@ export const Input = ( props ) => {
 	return (
 	<span 
 		className={ 
-			Props.className( "input", className, { focus: isFocused } ) 
+			Props.className( "input", className, { focus: isFocused, larger: larger } ) 
 		}
 		style={ style }
 	>

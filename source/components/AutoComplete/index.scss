@@ -3,21 +3,42 @@
 .autocomplete{
 	position: relative;
 	display: inline-block;
+	align-self: flex-start;
 
+	&-shadowfix{
+		left: 0px;
+		right: 0px;
+		display: block;
+		position: absolute;
+		background: white;
+		z-index: 3;
+		bottom: 0px;
+		height: 7px;
+		display: none;
+	}
+	&-shadowfix-hidden{
+		display: none;
+	}
 	&-suggestions{
+		border: 0px solid;
 		position: absolute;
 		padding: 4px 4px;
 		background: #ffffff;
 		width: 100%;
 		overflow-y: auto;
 		box-sizing: border-box;
-		box-shadow: 0px 6px 16px 0px #0003;
+		box-shadow: 0px 14px 20px -14px #0000005c;
 		transition: all 240ms;
 		max-height: 200px;
-		border-radius: 8px;
+		border-radius: 0px 0px 4px 4px;
+		border-color: transparent;
+		//border-top: 1px solid #f9f9f9;
+		z-index: 2;
+		border: 1px solid #00000005;
+		border-top: 0px solid #f9f9f9;
 		display: none;
 	}
-	&-suggestions-expanded{
+	&-expanded > &-suggestions{
 		display: block;
 	}
 
@@ -36,7 +57,7 @@
 		background-color: #f4f4f4;
 	}
 
-	&-suggestions-expanded &-item{
+	&-expanded > &-suggestions &-item{
 		opacity: 1;
 	}
 
@@ -44,4 +65,21 @@
 		margin-left: 8px;
 	}
 
+}
+
+.autocomplete > .input-focus{
+	border-color: transparent;
+}
+.autocomplete-expanded > .input{
+	border-radius: 4px 4px 0px 0px;
+	box-shadow: 0px 5px 20px -1px #00000045;
+    border-bottom-width: 0px;
+	border-color: transparent;
+}
+
+.autocomplete-larger > .autocomplete-suggestions{
+	border-radius: 0px 0px 8px 8px;
+}
+.autocomplete-larger.autocomplete-expanded > .input{
+    border-radius: 8px 8px 0px 0px;
 }
