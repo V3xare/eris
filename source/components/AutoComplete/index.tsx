@@ -17,7 +17,7 @@ export const AutoCompleteContext = React.createContext({
 });
 
 export const AutoComplete = ( props ) => {
-	let { className, children, onChange, margin, padding, label, ...rest } = props;
+	let { className, children, onChange, onSelect, margin, padding, label, ...rest } = props;
 	const [ expanded, setExpanded ] = useState( false );
 	const [ search, setSearch ] = useState( "" );
 	const [ list, setList ] = useState([]);
@@ -25,6 +25,15 @@ export const AutoComplete = ( props ) => {
 	const [ forcedValue, setForcedValue ] = useState( null );
 	const [ delayedExpand, setDelayedExpand ] = useState( 0 );
 	const childrenElem = useAnimation.Expand( expanded );
+
+	if( !onChange )
+		onChange = ( value, callback ) => {
+			callback([]);
+		};
+	if( !onSelect )
+		onSelect = ( value, callback ) => {
+			callback();
+		};		
 
 	useEffect(() => {
 
@@ -53,7 +62,9 @@ export const AutoComplete = ( props ) => {
 				}}	
 				onMouseDown={() => {
 					setSelected( s );
-					setForcedValue( item.value );
+					onSelect( item.value, () => {
+						setForcedValue( item.value );
+					});
 				}}	
 				>{
 
@@ -74,11 +85,6 @@ export const AutoComplete = ( props ) => {
 
 		return result;
 	}, [ list, selected ]);
-
-	if( !onChange )
-		onChange = ( value, callback ) => {
-			callback();
-		};
 
 	return (<div
 		className={
@@ -131,8 +137,12 @@ export const AutoComplete = ( props ) => {
 
 					e.event.preventDefault();
 
-					if( list && list[ selected ] )
-						setForcedValue( list[ selected ].value );
+					if( list && list[ selected ] ){
+						const v = list[ selected ].value;
+						onSelect( v, () => {
+							setForcedValue( v );
+						});
+					};
 				};
 
 			}			
