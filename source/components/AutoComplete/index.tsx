@@ -50,7 +50,11 @@ export const AutoComplete = ( props ) => {
 				} key={ item.id || item.value } 
 				onMouseOver={() => {
 					setSelected( s );
-				}}		
+				}}	
+				onMouseDown={() => {
+					setSelected( s );
+					setForcedValue( item.value );
+				}}	
 				>{
 
 					(item.label ? item.label : (
