@@ -3,7 +3,6 @@ import React, { forwardRef } from "react";
 import { Props } from "../../utility/props";
 
 import "./index.scss"
-import { ParseFlexParam } from "../../components/Row";
 
 export const Column = ( props ) => {
 	let { className, children, style, flex, stretch, ...rest } = props;
@@ -11,7 +10,7 @@ export const Column = ( props ) => {
 	let inlineStyle = { ...style };
 
 	if( flex )
-		inlineStyle[ "flex" ] = ParseFlexParam( flex );
+		inlineStyle[ "flex" ] = Props.parseFlex( flex );
 
 	if( stretch )
 		inlineStyle[ "height" ] = "100%";

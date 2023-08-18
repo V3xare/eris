@@ -93,6 +93,17 @@ export const AutoComplete = ( props ) => {
 	>
 		<AutoCompleteContext.Provider value={{
 			value: forcedValue,
+			select: () => {
+				console.log( 111, list, selected  );
+				if( list && list[ selected ] ){
+					console.log( 222 );
+					const v = list[ selected ].value;
+					onSelect( v, () => {
+						console.log( 333 );
+						setForcedValue( v );
+					});
+				};				
+			},
 			onChange: ( e ) => {
 				onChange( e.value, ( resultList ) => {
 					setSearch( e.value );

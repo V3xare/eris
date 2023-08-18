@@ -1,12 +1,44 @@
+@import "../../../assets/styles/preset";
+
 .input{
-	border: 1px solid;
+	position: relative;
+    border: 1px solid;
     border-color: #dcdcdc;
     box-shadow: inset 0 0 2px 0px #cccccc;
-    padding: 6px 10px;
+    padding: 0px 0px;
     border-radius: 4px;
-	outline: none;
-	box-sizing: border-box;
-}
-.input:focus{
-	border-color: #40a9ff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+
+	& > input{
+		border: 0px;
+		padding: 3px 0px 1px;
+		border-radius: 0px;
+		outline: none;
+		box-sizing: border-box;
+		flex-basis: 100%;
+		background: transparent;
+	}
+	&-focus{
+		border-color: $accent;
+	}
+	&-left{
+		position: relative;
+		padding: 0px 5px;
+		user-select: none;
+	}
+	&-right{
+		position: relative;
+		padding: 0px 5px;
+		user-select: none;
+	}
+
+	&-tool{
+		padding: 0px 2px;
+		color: $icons;
+	}
+
 }

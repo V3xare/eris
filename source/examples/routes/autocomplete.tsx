@@ -35,7 +35,13 @@ export const AutoCompleteRoute = ( props ) => {
 						{ icon: <Icons.dice/>, value: value + " title4" },
 						{ icon: <Icons.podcast/>, value: value + " title5" }
 					])}>
-						<Input style={{ width: "300px" }}>Hello</Input>
+						<Input 
+							style={{ width: "300px" }} 
+							tools={[
+								{ icon: <Icons.search/>, direction: 0 },
+							]}
+							placeholder={ "What would you like to find?" }
+						></Input>
 					</AutoComplete>
 
 					<AutoComplete onChange={( value, callback ) => callback([ 
@@ -45,7 +51,18 @@ export const AutoCompleteRoute = ( props ) => {
 						{ icon: <Icons.dice/>, value: value + " title4" },
 						{ icon: <Icons.podcast/>, value: value + " title5" }
 					])}>
-						<Input style={{ width: "300px" }}>Hello</Input>
+						<Input 
+							style={{ width: "300px" }} 
+							tools={[
+								{ icon: <Icons.search active/>, direction: 0, onClick: ( event ) => {
+									event.autocomplete.select();
+								}},
+								{ icon: <Icons.cross active style={{ fontSize: "70%" }}/>, direction: 1, onClick: ( event ) => {
+									event.setValue( "" );
+								}},
+							]}
+							placeholder={ "What would you like to find?" }
+						></Input>
 					</AutoComplete>
 
 				</Row>
