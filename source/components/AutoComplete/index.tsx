@@ -158,6 +158,7 @@ export const AutoComplete = ( props ) => {
 						const v = list[ selected ].value;
 						onSelect( v, () => {
 							setForcedValue( v );
+							e.target.blur();
 						});
 					};
 				};
