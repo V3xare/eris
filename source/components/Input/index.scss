@@ -36,11 +36,15 @@
 		position: relative;
 		padding: 0px 5px;
 		user-select: none;
+		flex-direction: row;
+		flex-wrap: nowrap;
 	}
 	&-right{
 		position: relative;
 		padding: 0px 5px;
 		user-select: none;
+		flex-direction: row;
+		flex-wrap: nowrap;
 	}
 
 	&-tool{
