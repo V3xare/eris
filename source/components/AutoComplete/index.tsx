@@ -17,7 +17,7 @@ export const AutoCompleteContext = React.createContext({
 });
 
 export const AutoComplete = ( props ) => {
-	let { className, children, onChange, onSelect, margin, padding, label, larger, ...rest } = props;
+	let { className, children, onChange, onSelect, margin, padding, label, larger, value, ...rest } = props;
 	const [ expanded, setExpanded ] = useState( false );
 	const [ search, setSearch ] = useState( "" );
 	const [ list, setList ] = useState([]);
@@ -34,6 +34,15 @@ export const AutoComplete = ( props ) => {
 		onSelect = ( value, callback ) => {
 			callback();
 		};		
+
+	useEffect(() => {
+
+		if( !value )
+			return;
+
+		setList( value );
+
+	}, [ value ]);		
 
 	useEffect(() => {
 
