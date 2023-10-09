@@ -16,6 +16,7 @@ export const Icon = ( props ) => {
 		padding,
 		reverse,
 		transparent,
+		font,
 		...rest
 	} = props;
 	let inlineStyle = { ...style };
@@ -26,6 +27,8 @@ export const Icon = ( props ) => {
 		inlineStyle[ "color" ] = color;
 	if( padding !== undefined )
 		inlineStyle[ "padding" ] = padding;
+	else if( font !== undefined )
+		inlineStyle[ "fontFamily" ] = font;
 
 	return <span className={
 		Props.className(
