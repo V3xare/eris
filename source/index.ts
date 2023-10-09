@@ -40,8 +40,8 @@ import { Editable } from "./components/Editable"
 export { Editable };
 import { Flex } from "./components/Flex"
 export { Flex };
-import { Icons } from "./components/Icons"
-export { Icons };
+import { Icons, Icon } from "./components/Icons"
+export { Icons, Icon };
 import { LangMutable } from "./components/Lang"
 export { LangMutable };
 import { List } from "./components/List"

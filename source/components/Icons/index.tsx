@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 import "./index.scss"
 import { Props } from "../../utility/props";
 
-const Icon = ( props ) => {
+export const Icon = ( props ) => {
 	let {
 		className,
 		children,
