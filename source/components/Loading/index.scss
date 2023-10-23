@@ -1,0 +1,11 @@
+.loading{
+	opacity: 0.6;
+}
+.loading-overlay{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+	row-gap: 11px;
+}

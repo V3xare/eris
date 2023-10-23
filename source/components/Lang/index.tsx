@@ -1,40 +1,53 @@
 import React, { useEffect, useRef, useReducer } from "react";
-import { CreateMutable, useSubscription, useAsync } from "../../utility/mutable";
-import { Storage } from "../../utility/storage";
 
-function LangReducer( state, [ type, data, data2 ] ){
+export const LangContext = React.createContext({
+	get: ( arg1: string, arg2?: string ) => { 
+		return ""; 
+	}, 
+});
 
-	if( type == "table" ){
+const LangReducer = ( state, [ type, data, data2 ] ) => {
+
+	if( type == "select" ){
 		return {
 			...state,
-			[ "loaded" ]: true,
-			[ "table" ]: { ...state.table, ...{ [data.toLowerCase()]: data2 } }
+			current: data
 		};
-	}else if( type == "visible" ){
+	}else if( type == "add" ){
+		let table = { ...state.table };
+		
+		if( !table[ data ] )
+			table[ data ] = { ...data2 };
+		else
+			table[ data ] = { ...table[ data ], ...data2 };
+
 		return {
 			...state,
-			[ "visible" ]: !!data
-		};
-	}else if( type == "select" ){
-		return {
-			...state,
-			[ "current" ]: (data || "en").toLowerCase(),
-			[ "selected" ]: data2 ? (data2 || "").toLowerCase() : state.selected
+			table: table
 		};
 	};
 
 	return state;
 };
 
-export const LangMutable = CreateMutable( LangReducer, {
-	current: Storage.get( "lang" ) || "en",
-	selected: Storage.get( "lang" ) || "en",
-	table: {},
-	loaded: false,
-	visible: false,
-	get: ( state ) => {
-		return ( name ) => {
-			return state.table[ state.current ] ? (state.table[ state.current ][ name ] || "") : "";
-		};
-	}
-});
+export const Lang = ( props ) => {
+
+	let [ state, dispatch ] = useReducer( LangReducer, {
+		current: "en",
+		table: {
+			en: {},
+			ru: {},
+		},
+	});
+
+	return (
+		<LangContext.Provider value={{ 
+			get: ( arg1: string, arg2?: string ) => { 
+				return arg2 === undefined ? (state.table[ state.current ][ arg1 ] || "") : (state.table[ arg2 ][ arg1 ] || ""); 
+			}, 
+			dispatch: dispatch
+		}}>
+			{ props.children }
+		</LangContext.Provider>
+	);
+};

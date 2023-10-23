@@ -16,6 +16,7 @@ export const Icon = ( props ) => {
 		padding,
 		reverse,
 		transparent,
+		spin,
 		font,
 		...rest
 	} = props;
@@ -36,7 +37,7 @@ export const Icon = ( props ) => {
 			className,
 			props.hidden ? "hidden" : "",
 			transparent ? "transparent" : "",
-			{ active: active, transition: transition }
+			{ active: active, transition: transition, spin: spin }
 		)
 	} { ...rest } style={ inlineStyle }>{ children }</span>;
 };

@@ -42,8 +42,12 @@ import { Flex } from "./components/Flex"
 export { Flex };
 import { Icons, Icon } from "./components/Icons"
 export { Icons, Icon };
-import { LangMutable } from "./components/Lang"
-export { LangMutable };
+
+import { Loading } from "./components/Loading"
+export { Loading };
+import { Lang, LangContext } from "./components/Lang"
+export { Lang, LangContext };
+
 import { List } from "./components/List"
 export { List };
 import { Row } from "./components/Row"

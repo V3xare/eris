@@ -25,6 +25,8 @@ import { ListRoute } from "../examples//routes/list";
 import { IconsRoute } from "../examples//routes/icons";
 import { OverlayRoute } from "../examples//routes/overlay";
 import { InputRoute } from "../examples//routes/input";
+import { LangRoute } from "../examples//routes/lang.route";
+import { LoadingRoute } from "../examples//routes/loading.route";
 import { AutoCompleteRoute } from "../examples//routes/autocomplete";
 
 const Header = Row, Wrap = Row, Footer = Row;
@@ -49,6 +51,8 @@ export const Example = ( props ) => {
 					<List.Item icon={<Icons.pencil/>} title="General" expandable={ false }>
 						<List.Item value={ "/typography" }>Typography</List.Item>
 						<List.Item value={ "/icons" }>Icons</List.Item>
+						<List.Item value={ "/lang" }>Lang</List.Item>
+						<List.Item value={ "/loading" }>Loading</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.stack/>} title="Layout">
 						<List.Item value={ "/overlay" }>Overlay</List.Item>
@@ -78,6 +82,8 @@ export const Example = ( props ) => {
 					<Route path="typography" element={ <TypographyRoute/> } />
 					<Route path="list" element={ <ListRoute/> } />
 					<Route path="icons" element={ <IconsRoute/> } />
+					<Route path="lang" element={ <LangRoute/> } />
+					<Route path="loading" element={ <LoadingRoute/> } />
 					<Route path="overlay" element={ <OverlayRoute/> } />
 					<Route path="input" element={ <InputRoute/> } />
 					<Route path="autocomplete" element={ <AutoCompleteRoute/> } />
