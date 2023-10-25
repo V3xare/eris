@@ -1,5 +1,5 @@
 .loading{
-	opacity: 0.6;
+	position: relative;
 }
 .loading-overlay{
 	display: flex;
@@ -8,4 +8,23 @@
     flex-wrap: nowrap;
     flex-direction: column;
 	row-gap: 11px;
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+	color: #5eb1ff;
+	user-select: none;
+}
+.loading-overlay-hidden{
+	display: none;
+}
+.loading-container{
+	position: relative;
+	opacity: 1.0;
+	transition: 240ms ease-in-out;
+}
+.loading-container-active{
+	opacity: 0.4;
 }
