@@ -42,8 +42,9 @@ export const Lang = ( props ) => {
 
 	return (
 		<LangContext.Provider value={{ 
+			current: state.current,
 			get: ( arg1: string, arg2?: string ) => { 
-				return arg2 === undefined ? (state.table[ state.current ][ arg1 ] || "") : (state.table[ arg2 ][ arg1 ] || ""); 
+				return arg2 === undefined ? (state.table[ state.current ][ arg1 ] || state.table[ "en" ][ arg1 ] || "") : (state.table[ arg2 ][ arg1 ] || state.table[ "en" ][ arg1 ] || ""); 
 			}, 
 			dispatch: dispatch
 		}}>
