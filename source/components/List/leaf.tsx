@@ -12,11 +12,11 @@ import { ListContext } from "./index";
 export const ListLeaf = ( props ) => {
 	let { className, children, style, title, icon, expandable, value, token, level, single, parent, chain, ...rest } = props;
 	//console.log( 111, token, level, parent, chain );
-	const [ inherited, [ listState, listDispatch ] ] = useContext( ListContext );
+	const listContext = useContext( ListContext );
 	let inlineStyle = { ...style };
 	expandable = expandable !== false;
-	let selectedChained = token != 0 && listState.selection.chain.indexOf( token ) > -1;
-	let selected = value && value === listState.selection.value;
+	let selectedChained = token != 0 && listContext.state.selection.chain.indexOf( token ) > -1;
+	let selected = value && value === listContext.state.selection.value;
 
 	const [ expanded, setExpanded ] = useState( expandable ? false : true );
 
@@ -48,7 +48,7 @@ export const ListLeaf = ( props ) => {
 				onClick={() => {
 
 					if( single ){
-				 		listDispatch([ "select", { token: token, value: value, chain: chain } ]);
+						listContext.dispatch([ "select", { token: token, value: value, chain: chain } ]);
 					}else{
 				 		setExpanded( !expanded )
 					};
@@ -64,7 +64,7 @@ export const ListLeaf = ( props ) => {
 				ref={ childrenElem }
 			>
 			{
-				single ? null : (<ListContext.Provider value={[ props, [ listState, listDispatch ] ]}>{ children }</ListContext.Provider>)
+				single ? null : (<div>{ children }</div>)
 			}
 			</div>
 		</div>

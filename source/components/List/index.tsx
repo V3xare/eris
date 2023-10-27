@@ -152,7 +152,7 @@ export const List = ( props ) => {
 		{ ...rest }
 	>{
 		<ListContext.Provider
-			value={[ props, [ state, dispatch ], -1 ]}
+			value={{ state: state, dispatch: dispatch }}
 		>
 			{
 				<ListLeaf expandable={ false } token={ -1 } chain={[]} level={ -1 } parent={ -1 }>{ state.list }</ListLeaf>
