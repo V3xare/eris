@@ -32,7 +32,7 @@ export const List = ( props ) => {
 	let inlineStyle = { ...style };
 	let [ state, dispatch ] = useReducer( ListReducer, {
 		list: [],
-		padding: Common.uint( padding ) || 20,
+		padding: padding === undefined ? 20 : Common.uint( padding ),
 		selection: {
 			chain: [],
 			value: value 
@@ -48,7 +48,7 @@ export const List = ( props ) => {
 		{ ...rest }
 	>{
 		<ListContext.Provider
-			value={{ state: state, dispatch: dispatch, level: 0, parent: 0, chain: [] }}
+			value={{ state: state, dispatch: dispatch, level: -1, parent: 0, chain: [] }}
 		>
 			{
 				<ListLeaf expandable={ false }>{ children }</ListLeaf>

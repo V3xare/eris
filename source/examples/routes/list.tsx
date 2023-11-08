@@ -62,7 +62,7 @@ export const ListRoute = ( props ) => {
 
 				<Divider>Content List</Divider>
 
-				<List value="pencil">
+				<List value="pencil" padding={ 10 }>
 					<List.Item icon={<Icons.table size={ "120%" }/>} title="Navigation One">
 					<List.Item content value="table">
 							<div>hello table</div>
