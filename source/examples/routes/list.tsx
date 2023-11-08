@@ -39,7 +39,6 @@ export const ListRoute = ( props ) => {
 				<List value={ "/7" }>
 					<List.Item icon={<Icons.pencil/>} title="Navigation One">
 						<List.Item value={ "/1" }>Option 1</List.Item>
-						<List.Item value={ "/2" }>Option 2</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.pencil/>} title="Navigation Two">
 						<List.Item value="/5">Option 5</List.Item>
@@ -55,6 +54,35 @@ export const ListRoute = ( props ) => {
 						<List.Item value="/11">Option 11</List.Item>
 						<List.Item value="/12">Option 12</List.Item>
 					</List.Item>
+				</List>
+
+			</Card>
+
+			<Card>
+
+				<Divider>Content List</Divider>
+
+				<List value="pencil">
+					<List.Item icon={<Icons.table size={ "120%" }/>} title="Navigation One">
+					<List.Item content value="table">
+							<div>hello table</div>
+						</List.Item>
+					</List.Item>
+					<List.Item icon={<Icons.pencil/>} title="Navigation Two">
+						<List.Item content value="pencil">
+							<div>hello pencil</div>
+						</List.Item>
+					</List.Item>
+					<List.Item icon={<Icons.scissors/>} title="Navigation Tree">
+						<List.Item content value="scissors">
+							<div>hello scissors</div>
+						</List.Item>
+					</List.Item>
+					<List.Item icon={<Icons.road/>} title="Navigation One">
+						<List.Item content value="road">
+							<div>hello road</div>
+						</List.Item>
+					</List.Item>					
 				</List>
 
 			</Card>

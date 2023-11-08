@@ -52,4 +52,13 @@
 		border-right: 2px solid #1890ff !important;		
 	}
 
+	&-content > &-title{
+		cursor: default !important;
+		color: inherit !important;
+		background-color: inherit !important;
+	}	
+	&-content > &-title:hover{
+		color: inherit;
+	}
+
 }
