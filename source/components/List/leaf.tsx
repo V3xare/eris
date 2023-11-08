@@ -26,8 +26,6 @@ export const ListLeaf = ( props ) => {
 
 	title = single ? (title || children) : title;
 
-	console.log( value, single, title, children );
-
 	useEffect(() => {
 		if( selected )
 			listContext.dispatch([ "select", { token: token, value: value, chain: chain } ]);
