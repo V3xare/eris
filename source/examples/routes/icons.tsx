@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 
 
-import { List } from "../../components/List";
 import { Icons } from "../../components/Icons";
 import { Card } from "../../components/Card";
 import { Tooltip } from "../../components/Tooltip";

@@ -16,7 +16,7 @@ export const ListLeaf = ( props ) => {
 
 	let { className, children, style, title, icon, expandable, expandedProp, value, content, ...rest } = props;
 	let inlineStyle = { ...style };
-	let single = typeof children == "string" || typeof children == "number" || content;
+	let single = typeof children == "string" || typeof children == "number" || !!content || (Array.isArray( children ) && !children.length);
 	expandable = expandable !== false && !single;
 	
 	let [ token, setToken ] = useState( Common.token() );
@@ -24,7 +24,7 @@ export const ListLeaf = ( props ) => {
 	let selectedChained = listContext.state.selection.chain.indexOf( token ) > -1;
 	let selected = value && value === listContext.state.selection.value;
 
-	title = single ? (title || children) : title;
+	title = single ? ((content && typeof content !== "boolean" ? content : (title || children))) : title;
 
 	useEffect(() => {
 		if( selected )

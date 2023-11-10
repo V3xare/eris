@@ -5,6 +5,7 @@ import { List } from "../../components/List";
 import { Icons } from "../../components/Icons";
 import { Card } from "../../components/Card";
 import { Divider } from "../../components/Divider";
+import Common from "../../utility/common";
 
 const DynamicListRoute = ( props ) => {
 	
@@ -19,16 +20,14 @@ const DynamicListRoute = ( props ) => {
 			{ value: "/202", title: "Hello202" }
 		] }
 	]);
-	const dataLoader = () => {
-
-	};
 
 	return (
-	<List load={ dataLoader } data={ data }></List>
+	<List data={ data }></List>
 	);
 };
 
 export const ListRoute = ( props ) => {
+
 	return (
 		<Card borderless padding={ 0 }>
 
@@ -38,7 +37,7 @@ export const ListRoute = ( props ) => {
 
 				<List value={ "/7" }>
 					<List.Item icon={<Icons.pencil/>} title="Navigation One">
-						<List.Item value={ "/1" }>Option 1</List.Item>
+						<List.Item value={ "/1" }>title</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.pencil/>} title="Navigation Two">
 						<List.Item value="/5">Option 5</List.Item>
@@ -48,7 +47,7 @@ export const ListRoute = ( props ) => {
 							<List.Item value="/8">Option 8</List.Item>
 						</List.Item>
 					</List.Item>
-					<List.Item icon={<Icons.pencil/>} title="Navigation Tree">
+					<List.Item icon={<Icons.pencil/>} title="Navigation Three">
 						<List.Item value="/9">Option 9</List.Item>
 						<List.Item value="/10">Option 10</List.Item>
 						<List.Item value="/11">Option 11</List.Item>
@@ -59,13 +58,21 @@ export const ListRoute = ( props ) => {
 			</Card>
 
 			<Card>
+				<Divider>Dynamic List</Divider>
+				<DynamicListRoute/>
+			</Card>			
+
+
+
+			<Card>
 
 				<Divider>Content List</Divider>
 
-				<List value="pencil" padding={ 10 }>
-					<List.Item icon={<Icons.table size={ "120%" }/>} title="Navigation One">
-					<List.Item content value="table">
-							<div>hello table</div>
+				<List value="table" padding={ 10 }>
+
+					<List.Item icon={<Icons.table size={ "120%" }/>} title="Navigation Two">
+						<List.Item content key="table" value="table">
+								<div>hello table</div>
 						</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.pencil/>} title="Navigation Two">
@@ -82,15 +89,11 @@ export const ListRoute = ( props ) => {
 						<List.Item content value="road">
 							<div>hello road</div>
 						</List.Item>
-					</List.Item>					
+					</List.Item>	
+
 				</List>
 
 			</Card>
-
-			<Card>
-				<Divider>Dynamic List</Divider>
-				<DynamicListRoute/>
-			</Card>			
 
 		</Card>
 	);

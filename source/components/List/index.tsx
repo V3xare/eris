@@ -10,6 +10,30 @@ import { ListLeaf } from "./leaf";
 
 export const ListContext = React.createContext({});
 
+const ListCreateItem = ( data: any ) => {
+
+	let children: any[] = [];
+
+	if( Array.isArray( data.children ) ){
+
+		for( const item of data.children ){
+			children.push( ListCreateItem( item ) );
+		};
+
+	};
+
+	let result = (<List.Item 
+		key={ data.value }
+		icon={ data.icon } 
+		value={ data.value } 
+		title={ data.title }
+		content={ data.content }
+	>
+		{ children }
+	</List.Item>);
+
+	return result;
+};
 const ListReducer = ( state, [ type, params ] ) => {
 
 	if( type == "select" ){
@@ -22,6 +46,21 @@ const ListReducer = ( state, [ type, params ] ) => {
 				it: state.selection.it + 1
 			}
 		};
+	}else if( type == "data" ){
+
+		if( !Array.isArray( params ) )
+			return state;
+
+		let list: any[] = [];
+
+		for( const item of params ){
+			list.push( ListCreateItem( item ) );
+		};
+
+		return {
+			...state,
+			list: list
+		};		
 	};
 
 	return state;
@@ -31,13 +70,19 @@ export const List = ( props ) => {
 	let { className, children, style, load, data, value, padding, ...rest } = props;
 	let inlineStyle = { ...style };
 	let [ state, dispatch ] = useReducer( ListReducer, {
-		list: [],
+		list: null,
 		padding: padding === undefined ? 20 : Common.uint( padding ),
 		selection: {
 			chain: [],
 			value: value 
 		},
 	});
+
+	useEffect(() => {
+		dispatch([ "data", data ]);
+	}, [ data ]);
+
+	children = state.list ? state.list : children;
 
 	return useMemo(() =>
 	<div
