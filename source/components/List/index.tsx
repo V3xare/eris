@@ -34,6 +34,7 @@ const ListCreateItem = ( data: any ) => {
 
 	return result;
 };
+
 const ListReducer = ( state, [ type, params ] ) => {
 
 	if( type == "select" ){
@@ -46,6 +47,11 @@ const ListReducer = ( state, [ type, params ] ) => {
 				it: state.selection.it + 1
 			}
 		};
+	}else if( type == "children" ){
+		return {
+			...state,
+			list: params
+		};	
 	}else if( type == "data" ){
 
 		if( !Array.isArray( params ) )
@@ -70,7 +76,7 @@ export const List = ( props ) => {
 	let { className, children, style, load, data, value, padding, ...rest } = props;
 	let inlineStyle = { ...style };
 	let [ state, dispatch ] = useReducer( ListReducer, {
-		list: null,
+		list: [],
 		padding: padding === undefined ? 20 : Common.uint( padding ),
 		selection: {
 			chain: [],
@@ -79,10 +85,11 @@ export const List = ( props ) => {
 	});
 
 	useEffect(() => {
+		dispatch([ "children", children ]);
+	}, [ children ]);	
+	useEffect(() => {
 		dispatch([ "data", data ]);
-	}, [ data ]);
-
-	children = state.list ? state.list : children;
+	}, [ data ]);	
 
 	return useMemo(() =>
 	<div
@@ -96,7 +103,7 @@ export const List = ( props ) => {
 			value={{ state: state, dispatch: dispatch, level: -1, parent: 0, chain: [] }}
 		>
 			{
-				<ListLeaf expandable={ false }>{ children }</ListLeaf>
+				<ListLeaf expandable={ false }>{ state.list }</ListLeaf>
 			}
 		</ListContext.Provider>
 	}</div>, [ state.selection, state.list ]);

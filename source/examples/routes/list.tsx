@@ -28,6 +28,19 @@ const DynamicListRoute = ( props ) => {
 
 export const ListRoute = ( props ) => {
 
+	const [ title, setTitle ] = useState( "Navigation" );
+
+	useEffect(() => {
+		
+		let timeout = setTimeout(() => {
+			setTitle( Common.token() );
+		}, 1000 );
+		
+		return () => {
+			clearTimeout( timeout );
+		};
+	}, [ title ]);
+
 	return (
 		<Card borderless padding={ 0 }>
 
@@ -70,9 +83,9 @@ export const ListRoute = ( props ) => {
 
 				<List value="table" padding={ 10 }>
 
-					<List.Item icon={<Icons.table size={ "120%" }/>} title="Navigation Two">
-						<List.Item content key="table" value="table">
-								<div>hello table</div>
+					<List.Item icon={<Icons.table size={ "120%" }/>} title="Navigation One">
+						<List.Item content value="table">
+								<div>{ title }</div>
 						</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.pencil/>} title="Navigation Two">

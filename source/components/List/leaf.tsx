@@ -45,6 +45,8 @@ export const ListLeaf = ( props ) => {
 
 	const childrenElem = useAnimation.Expand( expanded );
 
+	//console.log( single ? null : (content && typeof content !== "boolean" ? content : children) );
+
 	return (
 		<div
 			className={
