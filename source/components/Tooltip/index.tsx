@@ -122,7 +122,8 @@ export const Tooltip = ( props ) => {
 			)) : null
 		}
 		{
-			React.cloneElement( children, {
+			children ?
+			(React.cloneElement( children, {
 				onMouseMove: ( e ) => {
 					mouse.current = { clientX: e.clientX, clientY: e.clientY }
 				},
@@ -137,7 +138,7 @@ export const Tooltip = ( props ) => {
 						element.current.classList.add( "tooltip-hidden" );
 					}
 				}
-			})
+			})) : null
 		}
 	</React.Fragment>
 };

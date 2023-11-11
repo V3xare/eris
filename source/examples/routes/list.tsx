@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useReducer, useState, useRef , useMemo} f
 
 import { List } from "../../components/List";
 import { Icons } from "../../components/Icons";
+import { Tooltip } from "../../components/Tooltip";
 import { Card } from "../../components/Card";
 import { Divider } from "../../components/Divider";
 import Common from "../../utility/common";
@@ -83,7 +84,7 @@ export const ListRoute = ( props ) => {
 
 				<List value="table" padding={ 10 }>
 
-					<List.Item icon={<Icons.table size={ "120%" }/>} title="Navigation One">
+					<List.Item icon={<Icons.table/>} tooltip={{ content: "Orange Block", bg: "#f0a21b" }} title="Navigation One">
 						<List.Item content value="table">
 								<div>{ title }</div>
 						</List.Item>

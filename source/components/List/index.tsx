@@ -77,7 +77,7 @@ export const List = ( props ) => {
 	let inlineStyle = { ...style };
 	let [ state, dispatch ] = useReducer( ListReducer, {
 		list: [],
-		padding: padding === undefined ? 20 : Common.uint( padding ),
+		padding: Props.parseVec4( padding || [ 8, 10, 8, 20 ] ),
 		selection: {
 			chain: [],
 			value: value 

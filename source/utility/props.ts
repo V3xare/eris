@@ -88,6 +88,63 @@ export namespace Props{
 	
 		return value;
 	};	
+	export const parseVec2 = ( value ) => {
+	
+		if( Common.int( value ) == value || typeof value == "number" )
+			value = [ value, value ];
+		else if( Array.isArray( value ) ){
+			value = [
+				(Common.int( value[ 0 ] ) == value[ 0 ] || typeof value[ 0 ] == "number" ? (value[ 0 ]) : value[ 0 ]),
+				(Common.int( value[ 1 ] ) == value[ 1 ] || typeof value[ 1 ] == "number" ? (value[ 1 ]) : value[ 1 ])
+			];
+		}else if( typeof value == "string" ){
+			value = (value || "").trim().split( / ,/g );
+			value = [ value[ 0 ] || 8, value[ 1 ] || 8 ];
+		}else if( value === true ){
+			value = [ 8, 8 ];
+		}else{
+			value = [ undefined, undefined ];
+		};
+	
+		return value;
+	};
+	export const parseVec4 = ( value ) => {
+	
+		if( Common.int( value ) == value || typeof value == "number" )
+			value = [ value, value, value, value ];
+		else if( Array.isArray( value ) ){
+
+			if( value.length == 4 ){
+				value = [
+					(Common.int( value[ 0 ] ) == value[ 0 ] || typeof value[ 0 ] == "number" ? (value[ 0 ]) : value[ 0 ]),
+					(Common.int( value[ 1 ] ) == value[ 1 ] || typeof value[ 1 ] == "number" ? (value[ 1 ]) : value[ 1 ]),
+					(Common.int( value[ 2 ] ) == value[ 2 ] || typeof value[ 2 ] == "number" ? (value[ 2 ]) : value[ 2 ]),
+					(Common.int( value[ 3 ] ) == value[ 3 ] || typeof value[ 3 ] == "number" ? (value[ 3 ]) : value[ 3 ])
+				];
+			}else if( value.length == 3 ){
+				let v0 = (Common.int( value[ 0 ] ) == value[ 0 ] || typeof value[ 0 ] == "number" ? (value[ 0 ]) : value[ 0 ]);
+				let v1 = (Common.int( value[ 1 ] ) == value[ 1 ] || typeof value[ 1 ] == "number" ? (value[ 1 ]) : value[ 1 ]);
+				let v2 = (Common.int( value[ 2 ] ) == value[ 2 ] || typeof value[ 2 ] == "number" ? (value[ 2 ]) : value[ 2 ]);
+				value = [ v0, v1, v2, v1 ];					
+			}else if( value.length == 2 ){
+				let v0 = (Common.int( value[ 0 ] ) == value[ 0 ] || typeof value[ 0 ] == "number" ? (value[ 0 ]) : value[ 0 ]);
+				let v1 = (Common.int( value[ 1 ] ) == value[ 1 ] || typeof value[ 1 ] == "number" ? (value[ 1 ]) : value[ 1 ]);
+				value = [ v0, v1, v0, v1 ];				
+			}else if( value.length == 1 ){
+				let v = (Common.int( value[ 0 ] ) == value[ 0 ] || typeof value[ 0 ] == "number" ? (value[ 0 ]) : value[ 0 ]);
+				value = [ v, v, v, v ];
+			}
+		}else if( typeof value == "string" ){
+			value = (value || "").trim().split( / ,/g );
+			value = [ value[ 0 ] || 8, value[ 1 ] || 8, value[ 2 ] || 8, value[ 3 ] || 8 ];
+		}else if( value === true ){
+			value = [ 8, 8, 8, 8 ];
+		}else{
+			value = [ undefined, undefined, undefined, undefined ];
+		};
+	
+		return value;
+	};			
 	export const parseIcon = ( value, params? ) => {
 
 		if( !params )

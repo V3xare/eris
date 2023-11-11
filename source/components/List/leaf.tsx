@@ -8,13 +8,14 @@ import Common from "../../utility/common";
 import { Text } from "../Typography";
 import { Icons } from "../Icons";
 import { ListContext } from "./index";
+import { Tooltip } from "../Tooltip";
 
 export const ListLeaf = ( props ) => {
 	const listContext = useContext( ListContext );
 	const parent = listContext.parent;
 	const level = listContext.level;
 
-	let { className, children, style, title, icon, expandable, expandedProp, value, content, ...rest } = props;
+	let { className, children, style, title, icon, expandable, expandedProp, tooltip, value, content, ...rest } = props;
 	let inlineStyle = { ...style };
 	let single = typeof children == "string" || typeof children == "number" || !!content || (Array.isArray( children ) && !children.length);
 	expandable = expandable !== false && !single;
@@ -61,7 +62,12 @@ export const ListLeaf = ( props ) => {
 			style={ inlineStyle }
 		>
 			<div className={ "list-item-title" + (!expandable && !(title) ? " hidden" : "") }
-				style={{ paddingLeft: (level * listContext.state.padding) + "px" }}
+				style={{ 
+					paddingTop: listContext.state.padding[ 0 ], 
+					paddingRight: listContext.state.padding[ 1 ],
+					paddingBottom: listContext.state.padding[ 2 ] ,
+					paddingLeft: (level * listContext.state.padding[ 3 ])
+				}}
 				onClick={() => {
 
 					//if( content )
@@ -76,7 +82,12 @@ export const ListLeaf = ( props ) => {
 				}}
 			>
 				{ icon ? React.cloneElement( icon, { transition: true }) : null }
-				<Text q transition>{ title }</Text>
+				{
+					tooltip ? 
+					(<Tooltip content={ tooltip.content ? tooltip.content : tooltip } bg={ tooltip.bg ? tooltip.bg : undefined }><Text q transition>{ title }</Text></Tooltip>) 
+					: 
+					(<Text q transition>{ title }</Text>)			
+				}
 				{ single ? null : <Icons.expand transition reverse={ !expanded }/> }
 			</div>
 			<div
