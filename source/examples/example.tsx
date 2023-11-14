@@ -47,7 +47,7 @@ export const Example = ( props ) => {
 			<Side flex={ "0 0 256px" }>
 				<Divider style={{ color: "red" }}>Tools</Divider>
 
-				<List value={ location.pathname } onChange={( event ) => nav( event.selected.value ) }>
+				<List value={ location.pathname } onChange={( event ) => nav( event.value ) }>
 					<List.Item icon={<Icons.pencil/>} title="General" expandable={ false }>
 						<List.Item value={ "/typography" }>Typography</List.Item>
 						<List.Item value={ "/icons" }>Icons</List.Item>

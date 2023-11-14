@@ -49,14 +49,14 @@ export const ListRoute = ( props ) => {
 
 				<Divider>Static List</Divider>
 
-				<List value={ "/7" }>
-					<List.Item icon={<Icons.pencil/>} title="Navigation One">
+				<List value={ "/7" } onChange={( event ) => { console.log( 123, event.value ); }}>
+					<List.Item icon={<Icons.pencil/>} title="Navigation One" expanded={ true }>
 						<List.Item value={ "/1" }>title</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.pencil/>} title="Navigation Two">
 						<List.Item value="/5">Option 5</List.Item>
 						<List.Item value="/6">Option 6</List.Item>
-						<List.Item title="Submenu">
+						<List.Item title="Submenu" expandable={ false }>
 							<List.Item value="/7">Option 7</List.Item>
 							<List.Item value="/8">Option 8</List.Item>
 						</List.Item>
@@ -99,7 +99,7 @@ export const ListRoute = ( props ) => {
 							<div>hello scissors</div>
 						</List.Item>
 					</List.Item>
-					<List.Item icon={<Icons.road/>} title="Navigation One">
+					<List.Item icon={<Icons.road/>} title="Navigation One" expanded={ true }>
 						<List.Item content value="road">
 							<div>hello road</div>
 						</List.Item>

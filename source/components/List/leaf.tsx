@@ -15,7 +15,7 @@ export const ListLeaf = ( props ) => {
 	const parent = listContext.parent;
 	const level = listContext.level;
 
-	let { className, children, style, title, icon, expandable, expandedProp, tooltip, value, content, ...rest } = props;
+	let { className, children, style, title, icon, expandable, expanded, tooltip, value, content, ...rest } = props;
 	let inlineStyle = { ...style };
 	let single = typeof children == "string" || typeof children == "number" || !!content || (Array.isArray( children ) && !children.length);
 	expandable = expandable !== false && !single;
@@ -29,22 +29,23 @@ export const ListLeaf = ( props ) => {
 
 	useEffect(() => {
 		if( selected )
-			listContext.dispatch([ "select", { token: token, value: value, chain: chain } ]);
+			listContext.dispatch([ "select", { token: token, value: value, chain: chain, preventEvent: true } ]);
 	}, [ selected ]);
 
-	const [ expanded, setExpanded ] = useState( expandable ? false : true );
+	const [ expandedValue, setExpanded ] = useState( expandable ? false : true );
+	
 	useEffect(() => {
 		if( !selectedChained || !expandable )
 			return;
 		setExpanded( true );
 	}, [ selectedChained ]);	
 	useEffect(() => {
-		if( expandedProp === undefined )
+		if( expanded === undefined )
 			return;
-		setExpanded( !!expandedProp );
-	}, [ expandedProp ]);
+		setExpanded( !!expanded );
+	}, [ expanded ]);
 
-	const childrenElem = useAnimation.Expand( expanded );
+	const childrenElem = useAnimation.Expand( expandedValue );
 
 	//console.log( single ? null : (content && typeof content !== "boolean" ? content : children) );
 
@@ -70,13 +71,10 @@ export const ListLeaf = ( props ) => {
 				}}
 				onClick={() => {
 
-					//if( content )
-					//	return;
-
 					if( single ){
 						listContext.dispatch([ "select", { token: token, value: value, chain: chain } ]);
-					}else{
-				 		setExpanded( !expanded )
+					}else if( expandable ){
+				 		setExpanded( !expandedValue )
 					};
 
 				}}
@@ -88,10 +86,10 @@ export const ListLeaf = ( props ) => {
 					: 
 					(<Text q transition>{ title }</Text>)			
 				}
-				{ single ? null : <Icons.expand transition reverse={ !expanded }/> }
+				{ single ? null : <Icons.expand transition reverse={ !expandedValue }/> }
 			</div>
 			<div
-				className={ Props.classNameEx( "list-item", "list-item-children", { expanded: expanded, reduced: !expanded } ) }
+				className={ Props.classNameEx( "list-item", "list-item-children", { expanded: expandedValue, reduced: !expandedValue } ) }
 				ref={ childrenElem }
 			>
 			<ListContext.Provider

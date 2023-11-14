@@ -44,7 +44,7 @@ const ListReducer = ( state, [ type, params ] ) => {
 				chain: params.chain,
 				value: params.value,
 				token: params.token,
-				it: state.selection.it + 1
+				it: params.preventEvent ? (state.selection.it) : (state.selection.it + 1)
 			}
 		};
 	}else if( type == "children" ){
@@ -73,15 +73,16 @@ const ListReducer = ( state, [ type, params ] ) => {
 };
 
 export const List = ( props ) => {
-	let { className, children, style, load, data, value, padding, ...rest } = props;
+	let { className, children, style, load, data, value, padding, onChange, ...rest } = props;
 	let inlineStyle = { ...style };
 	let [ state, dispatch ] = useReducer( ListReducer, {
 		list: [],
 		padding: Props.parseVec4( padding || [ 8, 10, 8, 20 ] ),
 		selection: {
+			it: 0,
 			chain: [],
 			value: value 
-		},
+		}
 	});
 
 	useEffect(() => {
@@ -89,7 +90,18 @@ export const List = ( props ) => {
 	}, [ children ]);	
 	useEffect(() => {
 		dispatch([ "data", data ]);
-	}, [ data ]);	
+	}, [ data ]);		
+	useEffect(() => {
+		dispatch([ "value", { chain: [], value: value, token: "", preventEvent: true } ]);
+	}, [ value ]);		
+	useEffect(() => {
+
+			if( !onChange || state.selection.it == 0 )
+				return;
+
+			onChange({ value: state.selection.value });	
+		
+	}, [ state.selection.it ]);	
 
 	return useMemo(() =>
 	<div
