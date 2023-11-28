@@ -28,6 +28,7 @@ import { InputRoute } from "../examples//routes/input";
 import { LangRoute } from "../examples//routes/lang.route";
 import { LoadingRoute } from "../examples//routes/loading.route";
 import { AutoCompleteRoute } from "../examples//routes/autocomplete";
+import { CalendarRoute } from "../examples//routes/celendar.route";
 
 const Header = Row, Wrap = Row, Footer = Row;
 const Body = Column, Content = Column, Side = Column;
@@ -64,6 +65,7 @@ export const Example = ( props ) => {
 					<List.Item icon={<Icons.quill/>} title="Inputs">
 						<List.Item value="/autocomplete">AutoComplete</List.Item>
 						<List.Item value="/input">Input</List.Item>
+						<List.Item value="/calendar">Calendar</List.Item>
 					</List.Item>					
 					<List.Item icon={<Icons.calendar/>} title="Navigation Tree">
 						<List.Item value="/9">Option 9</List.Item>
@@ -84,6 +86,7 @@ export const Example = ( props ) => {
 					<Route path="icons" element={ <IconsRoute/> } />
 					<Route path="lang" element={ <LangRoute/> } />
 					<Route path="loading" element={ <LoadingRoute/> } />
+					<Route path="calendar" element={ <CalendarRoute/> } />
 					<Route path="overlay" element={ <OverlayRoute/> } />
 					<Route path="input" element={ <InputRoute/> } />
 					<Route path="autocomplete" element={ <AutoCompleteRoute/> } />

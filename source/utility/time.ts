@@ -25,6 +25,12 @@ export class Time{
 	};
 	public static get year() : number{
 		return new Date().getFullYear();
+	};	
+	public static get month() : number{
+		return new Date().getMonth();
+	};	
+	public static get day() : number{
+		return new Date().getDate();
 	};
 	public static toNumber( value: string ) : number{
 		let array = Common.string( value ).split( /[ :]/ ) || [];

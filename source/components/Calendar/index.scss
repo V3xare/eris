@@ -1,0 +1,112 @@
+.calendar{
+	background: #f7f6f7;
+	float: left;
+	width: 238px;
+	padding: 7px 7px;
+	margin: 10px;
+	border-radius: 6px;
+	box-shadow: 0px 14px 20px -14px #0000005c;
+	user-select: none;
+
+	&-month{
+		font-size: 14px;
+		float: left;
+		border: none;
+		width: 65%;
+		padding: 4px;
+		outline: none;
+		letter-spacing: 0.01em;
+		color: #838383;
+
+		&-value{
+		}
+
+	}
+	&-month:focus{
+		border: none;
+	}
+
+	&-year{
+		font-size: 14px;
+		float: left;
+		border: none;
+		width: 30%;
+		margin-left: 10px;
+		padding: 4px;
+		outline: none;
+		letter-spacing: 0.01em;
+		color: #838383;
+
+		&-value{
+
+		}
+
+	}
+	&-year:focus{
+		border: none;
+	}
+	
+	&-week{
+		float: left;
+
+		&-value{
+			float: left;
+			width: 30px;
+			height: 26px;
+			margin: 2px;
+			line-height: 2.0;
+			text-align: center;
+			//cursor: pointer;
+			/* font-weight: bold; */
+			color: #aaaaaa;
+			margin-top: 5px;
+		}
+
+	}
+
+	&-days{
+		float: left;
+		border-radius: 6px;
+
+		&-value{
+			background: #fff;
+			margin: 2px;
+			border-radius: 3px;
+			color: #606060;
+			//color: #7d7d7d;
+			float: left;
+			width: 30px;
+			height: 28px;
+			line-height: 1.9;
+			font-size: 16px;
+			text-align: center;
+			cursor: pointer;
+			//box-shadow: 0px 0px 6px #f1f1f1;
+
+			&:hover{
+
+			}
+
+		}
+
+		&-hidden{
+			color: #d2d2d2;
+			cursor: default;
+			background: transparent;
+
+			&:hover{
+
+			}
+
+		}
+
+		&-selected{
+			border-radius: 3px;
+			background: #58afff;
+			color: #ffffff;
+			box-shadow: 0px 0px 6px #58afff;
+		}
+
+	}
+
+}
