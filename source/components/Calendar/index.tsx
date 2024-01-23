@@ -272,6 +272,10 @@ export const Calendar = ( props ) => {
 						hidden: item.hidden, 
 						selected: !item.hidden && item.key == state.selected.value  
 					} ) } onClick={() => { 
+
+						if( item.hidden )
+							return;
+
 						dispatch([ "set", {
 							year: state.selected.year,
 							month: state.selected.month,

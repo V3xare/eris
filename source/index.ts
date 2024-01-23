@@ -43,6 +43,9 @@ export { Flex };
 import { Icons, Icon } from "./components/Icons"
 export { Icons, Icon };
 
+import { Calendar } from "./components/Calendar"
+export { Calendar };
+
 import { Loading } from "./components/Loading"
 export { Loading };
 import { Lang, LangContext } from "./components/Lang"
