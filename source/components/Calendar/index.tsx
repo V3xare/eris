@@ -199,7 +199,7 @@ const CalendarReducer = ( state, [ type, data, data2 ] ) => {
 	return state;
 };
 
-export const Calendar = ( props ) => {
+export const Calendar = React.forwardRef(( props, ref ) => {
 	const { className, year, month, day, style, onChange, ...rest } = props;
 	const lang = useContext( LangContext );
 	let [ state, dispatch ] = useReducer( CalendarReducer, {
@@ -235,6 +235,7 @@ export const Calendar = ( props ) => {
 				borderless: props.borderless
 			})
 		}
+		ref={ ref }		
 		style={ style }
 	>
 		<Loading status={ !state.list.days.length }>
@@ -286,4 +287,4 @@ export const Calendar = ( props ) => {
 			</div>
 		</Loading>
 	</div>);
-};
+});
