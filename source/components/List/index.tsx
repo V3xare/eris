@@ -92,7 +92,7 @@ export const List = ( props ) => {
 		dispatch([ "data", data ]);
 	}, [ data ]);		
 	useEffect(() => {
-		dispatch([ "value", { chain: [], value: value, token: "", preventEvent: true } ]);
+		dispatch([ "select", { chain: [], value: value, token: "", preventEvent: true } ]);
 	}, [ value ]);		
 	useEffect(() => {
 

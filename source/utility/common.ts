@@ -113,6 +113,49 @@ export default class Common{
 			return def;
 		};
 	};
+	public static path( value: string, detect?: boolean ) : any{
+
+		let file = true;
+		let path = decodeURIComponent( value || "" ).replace( /\\/g, "/" );
+		let slash = true; 
+		let object: any = { 
+			original: value, 
+			pathname: "/", 
+			dir: "/" 
+		};		
+
+		if( path[ path.length - 1 ] == "/" ){
+			file = false;
+		}else
+			slash = false;
+
+		if( path[ 0 ] != "/" )
+			path = "/" + path;
+
+		let pathArray = path.match( /\/([^\>\<\|\?\*\/\\\:\"\n\r\x00]{0,256}[^\.\/\\])/gi );					
+		 
+		if( !pathArray || pathArray.length < 1 )
+			return object;
+
+		
+		let filename = !file ? "" : pathArray[ pathArray.length - 1 ]
+						.match( /(?:\/([^\>\<\|\?\*\/\\\:\"\n\r\x00]{1,256})\.([a-zA-Z0-9]{1,12})*?)+$/i );
+
+		object.pathname = pathArray.join( "" );		
+		pathArray.splice( pathArray.length - 1, 1 );	
+		object.dir = pathArray.join( "" ) + "/";		
+					
+		if( filename ){
+			
+			object.filename = filename[ 1 ] + "." + filename[ 2 ];
+			object.name = filename[ 1 ];
+			object.mime = filename[ 2 ];
+			
+		}else if( slash )
+			object.pathname += "/";
+		
+		return object;		
+	};
 
 	public static equal( array1: any[], array2: any[] ) : boolean{
 

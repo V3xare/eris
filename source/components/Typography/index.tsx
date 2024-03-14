@@ -7,7 +7,7 @@ import "./index.scss"
 
 export const Text = forwardRef(( props, ref ) => {
 
-	const { className, children, preserveNL, editable, italic, strong, link, q, transition, ...rest } = props;
+	const { className, children, preserveNL, editable, italic, strong, link, success, alert, q, transition, ...rest } = props;
 
 	return (<div
 		className={
@@ -16,6 +16,8 @@ export const Text = forwardRef(( props, ref ) => {
 				italic: italic,
 				strong: strong,
 				link: link,
+				alert: alert,
+				success: success,
 				q: q,
 				transition: transition
 			})

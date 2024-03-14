@@ -18,6 +18,12 @@
 .typography-strong{
 	font-weight: bold;
 }
+.typography-alert{
+	color: #ff3535;
+}
+.typography-success{
+	color: #61d727;
+}
 .typography-link, .typography-link > a{
 	font-weight: bold;
 	color: $link;
