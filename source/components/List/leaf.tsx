@@ -15,7 +15,8 @@ export const ListLeaf = ( props ) => {
 	const parent = listContext.parent;
 	const level = listContext.level;
 
-	let { className, children, style, title, icon, expandable, expanded, tooltip, value, content, ...rest } = props;
+	let { className, children, style, title, icon, expandable, expanded, padding, tooltip, value, content, ...rest } = props;
+	padding = padding ? Props.parseVec4( padding ) : null;
 	let inlineStyle = { ...style };
 	let single = typeof children == "string" || typeof children == "number" || !!content || (Array.isArray( children ) && !children.length);
 	expandable = expandable !== false && !single;
@@ -24,30 +25,39 @@ export const ListLeaf = ( props ) => {
 	let chain = [ ...listContext.chain, token ];
 	let selectedChained = listContext.state.selection.chain.indexOf( token ) > -1;
 	let selected = value && value === listContext.state.selection.value;
-
 	title = single ? ((content && typeof content !== "boolean" ? content : (title || children))) : title;
 
 	useEffect(() => {
 		if( selected )
 			listContext.dispatch([ "select", { token: token, value: value, chain: chain, preventEvent: true } ]);
-	}, [ selected ]);
+	}, [ selected, listContext.state.selection.seek ]);
 
-	const [ expandedValue, setExpanded ] = useState( expandable ? false : true );
-	
+	const [ expandedValue, setExpanded ] = useState( level > -1 ? false : true );
+
 	useEffect(() => {
+
 		if( !selectedChained || !expandable )
 			return;
 		setExpanded( true );
 	}, [ selectedChained ]);	
+
 	useEffect(() => {
+
+		if( !listContext.singleType || selectedChained || !expandedValue || selected || !listContext.state.selection.chain.length )
+			return;
+
+		setExpanded( false );
+	}, [ selectedChained, listContext.singleType, expandedValue, selected, listContext.state.selection.chain ]);	
+	
+	useEffect(() => {
+
 		if( expanded === undefined )
 			return;
 		setExpanded( !!expanded );
 	}, [ expanded ]);
 
-	const childrenElem = useAnimation.Expand( expandedValue );
-
-	//console.log( single ? null : (content && typeof content !== "boolean" ? content : children) );
+	const childrenElem = useAnimation.Expand( expandable ? expandedValue : true );
+	//console.log( children, title, single, expandedValue, expandable, selected, selectedChained, listContext.state.selection.seek );
 
 	return (
 		<div
@@ -64,14 +74,14 @@ export const ListLeaf = ( props ) => {
 		>
 			<div className={ "list-item-title" + (!expandable && !(title) ? " hidden" : "") }
 				style={{ 
-					paddingTop: listContext.state.padding[ 0 ], 
-					paddingRight: listContext.state.padding[ 1 ],
-					paddingBottom: listContext.state.padding[ 2 ] ,
-					paddingLeft: (level * listContext.state.padding[ 3 ])
+					paddingTop: padding ? padding[ 0 ] : listContext.state.padding[ 0 ], 
+					paddingRight: padding ? padding[ 1 ] : listContext.state.padding[ 1 ],
+					paddingBottom: padding ? padding[ 2 ] : listContext.state.padding[ 2 ] ,
+					paddingLeft: padding ? padding[ 3 ] : ((level + 1) * listContext.state.padding[ 3 ])
 				}}
 				onClick={() => {
 
-					if( single ){
+					if( single || listContext.singleType ){
 						listContext.dispatch([ "select", { token: token, value: value, chain: chain } ]);
 					}else if( expandable ){
 				 		setExpanded( !expandedValue )

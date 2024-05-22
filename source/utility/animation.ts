@@ -11,16 +11,6 @@ export namespace useAnimation{
 		//const computed = getComputedStyle( elem.current );		
 		//console.log( computed.overflowY );	
 
-		useEffect(() => {
-
-			if( !elem.current )
-				return;
-
-			elem.current.style.height = "0px";
-			elem.current.style.overflowY = "hidden";
-
-		}, []);
-
 		const transition = ( e ) => {
 
 			if( !elem.current )
@@ -36,6 +26,10 @@ export namespace useAnimation{
 
 			elem.current.removeEventListener( "transitionend", transition );
 		};
+
+		useEffect(() => {
+			transition({});
+		}, []);
 
 		useEffect(() => {
 

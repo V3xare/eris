@@ -30,17 +30,44 @@ const DynamicListRoute = ( props ) => {
 export const ListRoute = ( props ) => {
 
 	const [ title, setTitle ] = useState( "Navigation" );
+	const [ selected, setSeected ] = useState( "/7" );
+	const [ list, setList ] = useState([]);
+
+	let elements = useMemo(() => {
+
+		return list.map(( item ) => {
+			return (
+				<List.Item 
+					padding={[ 8, 0 ]} 
+					expanded={ true }
+				>
+
+					<List.Item padding={[ 0, 8 ]} content value={ item.name }>
+						{ item.name }
+					</List.Item>
+
+				</List.Item>
+			);
+		});
+
+	}, [ list ]);
 
 	useEffect(() => {
-		
-		let timeout = setTimeout(() => {
-			setTitle( Common.token() );
-		}, 1000 );
-		
-		return () => {
-			clearTimeout( timeout );
-		};
-	}, [ title ]);
+		setTimeout(() => {
+			setList([{ name: "new item" }]);
+		}, 2000 );
+	}, []);
+
+//	useEffect(() => {
+//		
+//		let timeout = setTimeout(() => {
+//			setTitle( Common.token() );
+//		}, 1000 );
+//		
+//		return () => {
+//			clearTimeout( timeout );
+//		};
+//	}, [ title ]);
 
 	return (
 		<Card borderless padding={ 0 }>
@@ -49,16 +76,16 @@ export const ListRoute = ( props ) => {
 
 				<Divider>Static List</Divider>
 
-				<List value={ "/7" } onChange={( event ) => { console.log( 123, event.value ); }}>
+				<List value={ selected } onChange={( event ) => { setSeected( event.value ); }}>
 					<List.Item icon={<Icons.pencil/>} title="Navigation One" expanded={ true }>
 						<List.Item value={ "/1" }>title</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.pencil/>} title="Navigation Two">
-						<List.Item value="/5">Option 5</List.Item>
-						<List.Item value="/6">Option 6</List.Item>
+						<List.Item value="/5">Option 555</List.Item>
+						<List.Item value="/6">Option 666</List.Item>
 						<List.Item title="Submenu" expandable={ false }>
-							<List.Item value="/7">Option 7</List.Item>
-							<List.Item value="/8">Option 8</List.Item>
+							<List.Item value="/7">Option 777</List.Item>
+							<List.Item value="/8">Option 888</List.Item>
 						</List.Item>
 					</List.Item>
 					<List.Item icon={<Icons.pencil/>} title="Navigation Three">
@@ -75,8 +102,6 @@ export const ListRoute = ( props ) => {
 				<Divider>Dynamic List</Divider>
 				<DynamicListRoute/>
 			</Card>			
-
-
 
 			<Card>
 
@@ -105,6 +130,38 @@ export const ListRoute = ( props ) => {
 						</List.Item>
 					</List.Item>	
 
+				</List>
+
+			</Card>
+
+			<Card>
+				<Divider>Single List</Divider>
+
+				<List value="table" padding={ 10 } singleType>
+
+					<List.Item icon={<Icons.pencil/>} title="Navigation Two">
+						<List.Item value="/5">Option 5</List.Item>
+						<List.Item value="/6">Option 6</List.Item>
+						<List.Item title="Submenu" expandable={ false }>
+							<List.Item value="/7">Option 7</List.Item>
+							<List.Item value="/8">Option 8</List.Item>
+						</List.Item>
+					</List.Item>
+					<List.Item icon={<Icons.pencil/>} title="Navigation Three">
+						<List.Item value="/9">Option 9</List.Item>
+						<List.Item value="/10">Option 10</List.Item>
+						<List.Item value="/11">Option 11</List.Item>
+						<List.Item value="/12">Option 12</List.Item>
+					</List.Item>
+
+				</List>
+			</Card>
+
+			<Card>
+				<Divider>Delayed List</Divider>
+
+				<List value="">
+					{ elements }
 				</List>
 
 			</Card>

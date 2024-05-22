@@ -44,6 +44,7 @@ const ListReducer = ( state, [ type, params ] ) => {
 				chain: params.chain,
 				value: params.value,
 				token: params.token,
+				seek: params.seek || false,
 				it: params.preventEvent ? (state.selection.it) : (state.selection.it + 1)
 			}
 		};
@@ -73,7 +74,7 @@ const ListReducer = ( state, [ type, params ] ) => {
 };
 
 export const List = ( props ) => {
-	let { className, children, style, load, data, value, padding, onChange, ...rest } = props;
+	let { className, children, style, load, data, value, padding, onChange, singleType, ...rest } = props;
 	let inlineStyle = { ...style };
 	let [ state, dispatch ] = useReducer( ListReducer, {
 		list: [],
@@ -92,7 +93,7 @@ export const List = ( props ) => {
 		dispatch([ "data", data ]);
 	}, [ data ]);		
 	useEffect(() => {
-		dispatch([ "select", { chain: [], value: value, token: "", preventEvent: true } ]);
+		dispatch([ "select", { chain: [], value: value, token: "", preventEvent: true, seek: true } ]);
 	}, [ value ]);		
 	useEffect(() => {
 
@@ -112,12 +113,12 @@ export const List = ( props ) => {
 		{ ...rest }
 	>{
 		<ListContext.Provider
-			value={{ state: state, dispatch: dispatch, level: -1, parent: 0, chain: [] }}
+			value={{ state: state, dispatch: dispatch, level: -1, parent: 0, chain: [], singleType: singleType }}
 		>
 			{
 				<ListLeaf expandable={ false }>{ state.list }</ListLeaf>
 			}
 		</ListContext.Provider>
-	}</div>, [ state.selection, state.list ]);
+	}</div>, [ state.selection, state.selection.chain, state.list ]);
 };
 List.Item = ListLeaf;
