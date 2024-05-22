@@ -47,7 +47,7 @@ export namespace useAnimation{
 					elem.current.style.height = "0px";
 					elem.current.style.overflowY = null;
 				}else{
-					elem.current.style.height = elem.current.scrollHeight + "px";
+					elem.current.style.height = (elem.current.scrollHeight || 1) + "px";
 					elem.current.style.overflowY = "hidden";
 				};
 
@@ -60,7 +60,7 @@ export namespace useAnimation{
 						elem.current.style.height = "0px";
 						elem.current.style.overflowY = null;
 					}else{
-						elem.current.style.height = elem.current.scrollHeight + "px";
+						elem.current.style.height = (elem.current.scrollHeight || 1) + "px";
 						elem.current.style.overflowY = "hidden";
 					};						
 
