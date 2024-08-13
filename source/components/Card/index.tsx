@@ -5,7 +5,7 @@ import { Props } from "../../utility/props";
 import "./index.scss"
 
 export const Card = ( props ) => {
-	const { className, children, style, margin, padding, ...rest } = props;
+	const { className, children, style, margin, padding, header, ...rest } = props;
 	let wrapStyle = style || {};
 	let bodyStyle = {};
 
@@ -22,6 +22,15 @@ export const Card = ( props ) => {
 		}
 		style={ wrapStyle }
 	>
+		{
+			header ? (
+				<div className={ "card-header" }>{ header }</div>
+			)
+			:
+			(
+				<div></div>
+			)
+		}
 		<div className={ "card-body" } style={ bodyStyle }>{ children }</div>
 	</div>);
 };
