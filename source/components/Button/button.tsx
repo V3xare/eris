@@ -27,6 +27,6 @@ export const Button = ( props ) => {
 				onClick({ event: e });
 
 		}}
-	>{ title || value || "" }</div>
+	>{ title || props.children || value || "" }</div>
 	);
 };
