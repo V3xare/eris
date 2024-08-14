@@ -29,6 +29,8 @@ import { LangRoute } from "../examples//routes/lang.route";
 import { LoadingRoute } from "../examples//routes/loading.route";
 import { AutoCompleteRoute } from "../examples//routes/autocomplete";
 import { CalendarRoute } from "../examples//routes/celendar.route";
+import { ToggleRoute } from "../examples//routes/toggle.example";
+import { ButtonRoute } from "../examples//routes/button.route";
 
 const Header = Row, Wrap = Row, Footer = Row;
 const Body = Column, Content = Column, Side = Column;
@@ -64,6 +66,8 @@ export const Example = ( props ) => {
 					</List.Item>
 					<List.Item icon={<Icons.quill/>} title="Inputs">
 						<List.Item value="/autocomplete">AutoComplete</List.Item>
+						<List.Item value="/toggle">Toggle</List.Item>
+						<List.Item value="/button">Button</List.Item>
 						<List.Item value="/input">Input</List.Item>
 						<List.Item value="/calendar">Calendar</List.Item>
 					</List.Item>					
@@ -84,6 +88,8 @@ export const Example = ( props ) => {
 					<Route path="typography" element={ <TypographyRoute/> } />
 					<Route path="list" element={ <ListRoute/> } />
 					<Route path="icons" element={ <IconsRoute/> } />
+					<Route path="toggle" element={ <ToggleRoute/> } />
+					<Route path="button" element={ <ButtonRoute/> } />
 					<Route path="lang" element={ <LangRoute/> } />
 					<Route path="loading" element={ <LoadingRoute/> } />
 					<Route path="calendar" element={ <CalendarRoute/> } />

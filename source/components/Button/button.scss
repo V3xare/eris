@@ -1,0 +1,18 @@
+.button{
+    background-color: #82c5ff;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    user-select: none;
+    padding: 5px 10px 5px 10px;
+    border-radius: 6px;
+    position: relative;
+    margin: 4px 8px;
+
+	&-disabled{
+		position: relative;
+		background-color: #deefff;
+		cursor: default;
+	}
+
+}

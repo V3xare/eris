@@ -1,0 +1,34 @@
+.toggle{
+	position: relative;
+    width: 40px;
+    height: 21px;
+    margin-left: 6px;
+    box-sizing: border-box;
+    background: #cdd1e2;
+    border-radius: 4px;
+    padding: 4px;
+    flex-shrink: 0;
+    transition: 160ms ease-in-out;
+	user-select: none;
+    cursor: pointer;
+
+	&-active{
+		position: relative;
+		background-color: #82c5ff;
+	}
+
+	& > div{
+		position: relative;
+		background-color: #fff;
+		width: 50%;
+		height: 100%;
+		border-radius: 3px;
+		left: 0%;
+		transition: 160ms ease-in-out;		
+	}
+	&-active > div{
+		position: relative;
+		left: 50%;
+	}
+
+}

@@ -38,6 +38,7 @@ export const ListRoute = ( props ) => {
 		return list.map(( item ) => {
 			return (
 				<List.Item 
+					key={ item.name }
 					padding={[ 8, 0 ]} 
 					expanded={ true }
 				>
@@ -160,7 +161,7 @@ export const ListRoute = ( props ) => {
 			<Card>
 				<Divider>Delayed List</Divider>
 
-				<List value="">
+				<List>
 					{ elements }
 				</List>
 

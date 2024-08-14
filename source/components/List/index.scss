@@ -16,9 +16,10 @@
 	z-index: 0;
 
 	&-title{
-		background-color: #fff;
-		//padding: 9px 0px;
-		//padding-right: 10px;
+		//background-color: #fff;
+		background: #fdfdfd;
+		border: 1px solid #f9f9f9;
+		border-right: 2px solid transparent;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
@@ -40,8 +41,7 @@
 	}
 	&-expandable > &-title > .icon:last-child{
 		display: block;
-	}
-
+	}	
 	&-title:hover{
 		color: #1890ff;
 	}
