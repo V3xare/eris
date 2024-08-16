@@ -129,7 +129,7 @@ export const useSubscription = ( mutable: typeof CreateMutable, keys?: string[] 
 	return { state: mutable.state, dispatch: mutable.update( keys ) };
 };
 
-function useAsyncReducer( state, [ type, append, data ] ){
+function useAsyncReducer( state: any, [ type, append, data ]: any ){
 
 	if( type == "load" || type == "fetch" ){
 		return {
@@ -142,6 +142,11 @@ function useAsyncReducer( state, [ type, append, data ] ){
 				["data"]: (data || {})
 			}]
 		};
+	}else if( type == "update-fetch" ){
+		return {
+			...state,
+			["waitList"]: [ ...append ]
+		};		
 	};
 
 	return state;
@@ -156,14 +161,14 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 		//failure: () => {},
 		//append: {}
 	});
-	const [ completeList, setCompleteList ] = useState([]);
+	const [ completeList, setCompleteList ] = useState<any[]>([]);
 	const [ data, setData ] = useState({});
 	const [ error, setError ] = useState();
 	const [ loading, setLoading ] = useState( false );
 	let isMounted: any = useRef( true );
 	let fetchTimeout: any = useRef( null );
 
-	const fetch = ( fn: Function ) => {
+	const onResponse = ( fnSuccess: Function, fnError?: Function ) => {
 
 		clearTimeout( fetchTimeout.current );
 		fetchTimeout.current = setTimeout(() => {
@@ -171,12 +176,15 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 			if( !completeList.length )
 				return;
 
-			for( let item of completeList ){
-				fn( item.data, item.error );
-				if( item.error )
+			for( const item of completeList ){
+				if( item.error ){
+					if( fnError )
+						fnError( item.data, item.error );
 					item.failure();
-				else
+				}else{
+					fnSuccess( item.data, item.error );
 					item.success();
+				};
 			};
 			setCompleteList([]);
 
@@ -201,16 +209,21 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 			if( config.auto )
 				dispatch([ "fetch" ]);
 
-			return;
+			return () => {};
 		};
 
 		if( loading )
-			return;
+			return () => {};
 
-		let requestParams: any = state.waitList.shift();//Mutation test
+		let waitList: any = [ ...state.waitList ];
+		let requestParams: any = waitList.shift();
 
 		if( !requestParams )
-			return;
+			return () => {};
+
+		console.log( waitList, requestParams );
+
+		dispatch([ "update-fetch", waitList ]);
 
 		setLoading( true );
 
@@ -226,31 +239,6 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 			paramsParsed[ key ] = params[ key ]( paramsParsed, requestParams );
 		};
 
-		/*
-		for( let key in requestParams.append ){
-
-			if( !paramsParsed[ key ] )
-				continue;
-
-			if(
-				Array.isArray( requestParams.append[ key ] )
-				&& Array.isArray( paramsParsed[ key ] )
-			){
-				paramsParsed[ key ] = [ ...paramsParsed[ key ], ...requestParams.append[ key ] ];
-			}else if(
-				requestParams.append[ key ] && typeof requestParams.append[ key ] == "object"
-				&&
-				paramsParsed[ key ] && typeof paramsParsed[ key ] == "object"
-			){
-				paramsParsed[ key ] = { ...paramsParsed[ key ], ...requestParams.append[ key ] };
-			}else if( Array.isArray( paramsParsed[ key ] ) ){
-				paramsParsed[ key ] = [ ...paramsParsed[ key ], requestParams.append[ key ] ];
-			}else if( paramsParsed[ key ] && typeof paramsParsed[ key ] == "object" ){
-				paramsParsed[ key ] = { ...paramsParsed[ key ], [key]: requestParams.append[ key ] };
-			};
-
-		};
-		 */
 		for( let key in requestParams.append ){
 			paramsParsed[ key ] = requestParams.append[ key ];
 		};
@@ -291,11 +279,21 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 				return;
 
 			if( !Request.isCancel( e ) ){
+
+				let data = {};
+
+				try{
+					data = JSON.parse( e.response.data );
+				}catch( s ){
+					data = e.response.data;
+				};
+
+				setData( data );
 				setError( e );
 				setCompleteList([
 					...completeList,
 					{
-						data: {},
+						data: { ...data },
 						error: e,
 						success: requestParams.success,
 						failure: requestParams.failure
@@ -320,5 +318,5 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 		};
 	}, Array.isArray( keys ) ? [ state.index, ...keys ] : [ state.index ] );
 
-	return { data, error, loading, state, dispatch, flush, fetch, ["params"]: params };
+	return { data, error, loading, state, dispatch, flush, onResponse, fetch: ( append?, data? ) => dispatch([ "fetch", append, data ]), ["params"]: params };
 };

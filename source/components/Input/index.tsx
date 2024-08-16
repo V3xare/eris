@@ -111,6 +111,7 @@ export const Input = ( props ) => {
 	>
 		<span className={ "input-left" }>{ toolsLeft }</span>
 		<input
+			{ ...rest }
 			placeholder={ placeholder }
 			value={ value || "" }
 			className={ "typography" }

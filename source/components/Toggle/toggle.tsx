@@ -9,10 +9,13 @@ import "./toggle.scss"
 export const Toggle = ( props ) => {
 	let { 
 		className, children, propValue, style, margin, padding, 
+		value,
 		active,
 		onChange,
 		...rest 
 	} = props;
+
+	active = active === undefined ? (value === undefined ? (!!children) : (!!value)) : (!!active);
 
 	return (
 	<div 
