@@ -31,6 +31,7 @@ import { AutoCompleteRoute } from "../examples//routes/autocomplete";
 import { CalendarRoute } from "../examples//routes/celendar.route";
 import { ToggleRoute } from "../examples//routes/toggle.example";
 import { ButtonRoute } from "../examples//routes/button.route";
+import { MultiSelectRoute } from "../examples//routes/multiselect.route";
 
 const Header = Row, Wrap = Row, Footer = Row;
 const Body = Column, Content = Column, Side = Column;
@@ -68,6 +69,7 @@ export const Example = ( props ) => {
 						<List.Item value="/autocomplete">AutoComplete</List.Item>
 						<List.Item value="/toggle">Toggle</List.Item>
 						<List.Item value="/button">Button</List.Item>
+						<List.Item value="/multiselect">Multi Select</List.Item>
 						<List.Item value="/input">Input</List.Item>
 						<List.Item value="/calendar">Calendar</List.Item>
 					</List.Item>					
@@ -90,6 +92,7 @@ export const Example = ( props ) => {
 					<Route path="icons" element={ <IconsRoute/> } />
 					<Route path="toggle" element={ <ToggleRoute/> } />
 					<Route path="button" element={ <ButtonRoute/> } />
+					<Route path="multiselect" element={ <MultiSelectRoute/> } />
 					<Route path="lang" element={ <LangRoute/> } />
 					<Route path="loading" element={ <LoadingRoute/> } />
 					<Route path="calendar" element={ <CalendarRoute/> } />

@@ -70,5 +70,7 @@ export { Toggle };
 
 import { Button } from "./components/Button/button"
 export { Button };
+import { MultiSelect } from "./components/MultiSelect/multiselect"
+export { MultiSelect };
 import { AutoComplete } from "./components/AutoComplete"
 export { AutoComplete };
