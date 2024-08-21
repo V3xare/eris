@@ -10,6 +10,7 @@ export const MultiSelect = ( props ) => {
 		className, children, propValue, style, margin, padding, 
 		title, value,
 		disabled,
+		placeholder,
 		onChange,
 		suggestions,
 		...rest 
@@ -47,6 +48,9 @@ export const MultiSelect = ( props ) => {
 		});
 	};
 
+	if( !onChange )
+		onChange = () => {};
+
 	const childrenElem = useAnimation.Expand( isActive );
 
 	return (
@@ -63,13 +67,18 @@ export const MultiSelect = ( props ) => {
 					return <div key={ item.value } className={ "multiselect-header-item" }>
 						{ item.icon }<Text>{ item.title }</Text>
 						<span className={ "multiselect-header-item-remove" } 
-							onClick={() => setList( list.filter(( f ) => f != item.value ) ) }
+							onClick={() => { 
+								let result = list.filter(( f ) => f != item.value );
+								setList( result );
+								onChange({ value: result });
+							}}
 						>x</span>
 					</div>
 				}) }
 			</div>
 			<input className={ "multiselect-header-input" } 
 				value={ filter }
+				placeholder={ placeholder || "" }
 				onFocus={() => setIsActive( true ) }
 				onBlur={() => setIsActive( false ) }
 				onChange={( e ) => { setListIndex( 0 ); setFilter( e.target.value || "" ); }} 
@@ -100,7 +109,9 @@ export const MultiSelect = ( props ) => {
 					if( !item )
 						return;
 					
-					setList( item.selected ? list.filter(( f ) => f != item.value ) : [ ...list, item.value ] );
+					let result = item.selected ? list.filter(( f ) => f != item.value ) : [ ...list, item.value ];
+					setList( result );
+					onChange({ value: result });
 
 					if( !filter )
 						return;
@@ -115,7 +126,11 @@ export const MultiSelect = ( props ) => {
 					return <div 
 						key={ item.value } 
 						className={ Props.className( "multiselect-suggestions-item", { selected: item.selected, focused: listIndex == index } ) }
-						onMouseDown={() => setList( item.selected ? list.filter(( f ) => f != item.value ) : [ ...list, item.value ] ) }
+						onMouseDown={() => { 
+							let result = item.selected ? list.filter(( f ) => f != item.value ) : [ ...list, item.value ];
+							setList( result );
+							onChange({ value: result });
+						}}
 						><span className={ "multiselect-suggestions-item-checkbox" }></span>{ item.icon }<Text>{ item.title }</Text></div>
 				}) }
 		</div>		
