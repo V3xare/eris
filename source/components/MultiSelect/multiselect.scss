@@ -4,6 +4,7 @@
 	min-width: 240px;
     position: relative;
     width: fit-content;
+	box-sizing: border-box;
 
 	&-header{
 		display: flex;
@@ -107,18 +108,15 @@
 			cursor: pointer;
 
 			&-checkbox{
-				width: 14px;
-				height: 14px;
+				width: 16px;
+				height: 16px;
 				position: relative;
 				border: 1px solid #52b9ff;
 				display: inline-block;
-				top: 1px;
+				top: 2px;
 				margin-right: 5px;
 				color: transparent;
-			}
-			&-checkbox:before{
 				font-family: icomoon;
-				color: inherit;
 				font-style: normal;
 				line-height: 1.0;
 				text-align: center;
@@ -126,12 +124,15 @@
 				text-rendering: optimizeLegibility;
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
+				font-size: 16px;	
+			}
+			&-checkbox:before{
 				content: "\ea10";
 				width: 12px;
 				height: 12px;
-				position: relative;
-				display: inline-block;
-				top: -1px;
+				position: absolute;
+				color: inherit;
+				top: 2px;
 				left: 1px;
 				font-size: 11px;
 			}	
