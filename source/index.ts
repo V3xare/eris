@@ -72,5 +72,7 @@ import { Button } from "./components/Button/button"
 export { Button };
 import { MultiSelect } from "./components/MultiSelect/multiselect"
 export { MultiSelect };
+import { Space } from "./components/Space/space"
+export { Space };
 import { AutoComplete } from "./components/AutoComplete"
 export { AutoComplete };
