@@ -4,7 +4,6 @@
 	min-width: 240px;
     position: relative;
     width: fit-content;
-	background: white;
 
 	&-header{
 		display: flex;
@@ -13,6 +12,7 @@
 		border: 1px solid #dcdcdc;
 		transition: all 0.15s ease-in-out;
 		border-radius: 5px;
+		background: white;
 
 		&-tags{
 			display: flex;
