@@ -4,6 +4,7 @@
 	min-width: 240px;
     position: relative;
     width: fit-content;
+	background: white;
 
 	&-header{
 		display: flex;
@@ -90,6 +91,7 @@
 		border: 1px solid #00000005;
 		border-top: 0px solid #f9f9f9;
 		display: none;
+		color: #000;
 
 		&-expanded{
 			display: flex;
