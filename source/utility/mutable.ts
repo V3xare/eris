@@ -221,8 +221,6 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 		if( !requestParams )
 			return () => {};
 
-		console.log( waitList, requestParams );
-
 		dispatch([ "update-fetch", waitList ]);
 
 		setLoading( true );
