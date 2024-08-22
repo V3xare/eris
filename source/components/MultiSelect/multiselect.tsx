@@ -1,7 +1,9 @@
-import React, { forwardRef, useState, useEffect, useContext, useMemo } from "react";
+import React, { forwardRef, useState, useEffect, useContext, useMemo, useRef } from "react";
 import { Props } from "../../utility/props";
 import { Text } from "../../components/Typography";
 import { useAnimation } from "../../utility/animation";
+import Common from "../../utility/common";
+import { Toggle } from "../../components/Toggle/toggle";
 
 import "./multiselect.scss"
 
@@ -12,12 +14,16 @@ export const MultiSelect = ( props ) => {
 		disabled,
 		placeholder,
 		onChange,
+		preset,
 		suggestions,
 		...rest 
 	} = props;
 
+	const wrapRef = useRef( null );
+
 	const [ filter, setFilter ] = useState( "" );
 	const [ list, setList ] = useState([]);
+	const [ presetTable, setPresetTable] = useState({});
 	const [ listIndex, setListIndex ] = useState( 0 );
 	const [ isActive, setIsActive ] = useState( false );
 
@@ -27,6 +33,27 @@ export const MultiSelect = ( props ) => {
 	useEffect(() => {
 		setList( Array.isArray( value ) ? value : [] );
 	}, [ value ]);
+	useEffect(() => {
+		setPresetTable( preset || {} );
+	}, [ preset ]);
+
+	let clickOutside = ( e ) => {
+
+		if( !wrapRef.current )
+			return;
+
+		if( Common.inside( e.target, wrapRef.current ) )
+			return;
+
+		setIsActive( false );
+	};
+	
+	useEffect(() => {
+		window.document.addEventListener( "mousedown", clickOutside );
+		return () => {
+			window.document.removeEventListener("mousedown", clickOutside );
+		}
+	}, []);
 
 	let sgList: any[] = [];
 	let filterLower = (filter || "").toLowerCase();
@@ -44,6 +71,9 @@ export const MultiSelect = ( props ) => {
 			value: item.value || item.title || "",
 			lower: titleLower,
 			icon: item.icon,
+			min: item.min,
+			max: item.max,
+			type: item.type || "text",
 			selected: list.find(( f ) => f == (item.value || item.title) )
 		});
 	};
@@ -52,6 +82,7 @@ export const MultiSelect = ( props ) => {
 		onChange = () => {};
 
 	const childrenElem = useAnimation.Expand( isActive );
+	const inputRef = useRef( null );
 
 	return (
 	<div 
@@ -59,6 +90,7 @@ export const MultiSelect = ( props ) => {
 			Props.className( "multiselect", className, { disabled: disabled } ) 
 		}
 		style={ style }
+		ref={ wrapRef }
 	>
 		<div className={ Props.className( "multiselect-header", { active: isActive } ) }>
 			<div className={ "multiselect-header-tags" }>{ 
@@ -70,7 +102,7 @@ export const MultiSelect = ( props ) => {
 							onClick={() => { 
 								let result = list.filter(( f ) => f != item.value );
 								setList( result );
-								onChange({ value: result });
+								onChange({ value: result, preset: { ...presetTable } });
 							}}
 						>x</span>
 					</div>
@@ -79,8 +111,8 @@ export const MultiSelect = ( props ) => {
 			<input className={ "multiselect-header-input" } 
 				value={ filter }
 				placeholder={ placeholder || "" }
+				ref={ inputRef }
 				onFocus={() => setIsActive( true ) }
-				onBlur={() => setIsActive( false ) }
 				onChange={( e ) => { setListIndex( 0 ); setFilter( e.target.value || "" ); }} 
 				onKeyDown={( e ) => {
 
@@ -111,7 +143,7 @@ export const MultiSelect = ( props ) => {
 					
 					let result = item.selected ? list.filter(( f ) => f != item.value ) : [ ...list, item.value ];
 					setList( result );
-					onChange({ value: result });
+					onChange({ value: result, preset: { ...presetTable } });
 
 					if( !filter )
 						return;
@@ -126,12 +158,63 @@ export const MultiSelect = ( props ) => {
 					return <div 
 						key={ item.value } 
 						className={ Props.className( "multiselect-suggestions-item", { selected: item.selected, focused: listIndex == index } ) }
-						onMouseDown={() => { 
+						onMouseUp={( e ) => {
+							e.preventDefault();
+							e.stopPropagation();				
+						}}
+						onMouseDown={( e ) => { 
+							e.preventDefault();
+							e.stopPropagation();
 							let result = item.selected ? list.filter(( f ) => f != item.value ) : [ ...list, item.value ];
 							setList( result );
-							onChange({ value: result });
+							onChange({ value: result, preset: { ...presetTable } });
 						}}
-						><span className={ "multiselect-suggestions-item-checkbox" }></span>{ item.icon }<Text>{ item.title }</Text></div>
+						><span className={ "multiselect-suggestions-item-checkbox" }></span>{ item.icon }<Text>{ item.title }</Text>
+							{
+								preset ? (
+									item.type == "checkbox" ? (
+										<Toggle 
+											onMouseUp={( e ) => {
+												e.stopPropagation();				
+											}}										
+											onMouseDown={( e ) => {
+												e.stopPropagation();
+											}}			
+											onChange={( e ) => { 
+												let table = { ...presetTable };
+												table[ item.value ] = e.value;
+												onChange({ value: [ ...list ], preset: table });
+											}} 																		
+											value={ (presetTable[ item.value ] === undefined ? item.preset : presetTable[ item.value ]) || "" 
+										}/>
+									) : (
+										<input 
+											onMouseUp={( e ) => {
+												e.stopPropagation();				
+											}}										
+											onMouseDown={( e ) => {
+												e.stopPropagation();
+											}}
+											onChange={( e ) => { 
+												let table = { ...presetTable };
+
+												if( item.type == "number" ){
+													table[ item.value ] = Common.int( e.target.value );											
+												}else
+													table[ item.value ] = e.target.value;
+
+												onChange({ value: [ ...list ], preset: table });
+											}} 
+											type={ item.type } 
+											min={ item.min }
+											max={ item.max }
+											value={ (presetTable[ item.value ] === undefined ? item.preset : presetTable[ item.value ]) || "" }
+										/>
+									)
+
+								) : (null)
+							}
+						</div>
 				}) }
 		</div>		
 	</div>

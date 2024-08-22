@@ -18,7 +18,7 @@
 		&-tags{
 			display: flex;
 			flex-direction: row;
-			flex-wrap: nowrap;	
+			flex-wrap: wrap;	
 			min-height: 35px;
 		}
 		&-item{
@@ -66,6 +66,7 @@
 			min-width: 0;
 			flex: 1;
 			width: 60px;
+			min-width: 60px;
 		}
 
 		&-active{
@@ -104,7 +105,7 @@
 			position: relative;
 			border-radius: 4px;
 			display: flex;
-			align-items: baseline;
+			align-items: flex-start;
 			transition: all 0.15s ease-in-out;
 			cursor: pointer;
 
@@ -137,6 +138,21 @@
 				left: 1px;
 				font-size: 11px;
 			}	
+
+			& .typography{
+				flex-grow: 10;
+			}			
+			& input{
+				width: 64px;
+				position: relative;
+				border: 1px solid #dcdcdc;
+				padding: 1px 7px;
+				color: #373737;
+				border-radius: 2px;
+			}
+			& input:focus{
+				outline: none;
+			}
 
 		}
 		&-item-selected > &-item-checkbox{

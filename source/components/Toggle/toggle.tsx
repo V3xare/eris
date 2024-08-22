@@ -29,6 +29,7 @@ export const Toggle = ( props ) => {
 				onChange({ value: !active, event: e });
 
 		}}
+		{ ...rest }
 	>
 		<div></div>
 	</div>
