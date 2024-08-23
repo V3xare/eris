@@ -68,6 +68,9 @@ export { Input };
 import { Toggle } from "./components/Toggle/toggle"
 export { Toggle };
 
+import { Modal } from "./components/Modal/modal"
+export { Modal };
+
 import { Button } from "./components/Button/button"
 export { Button };
 import { MultiSelect } from "./components/MultiSelect/multiselect"

@@ -77,7 +77,10 @@ export const Tooltip = ( props ) => {
 
 		let interval = setInterval(() => {
 
-			if( !element.current || !target ){
+			if( !element.current )
+				return;
+
+			if( !target ){
 				element.current.classList.remove( "tooltip-active" );
 				return;
 			};
@@ -96,9 +99,14 @@ export const Tooltip = ( props ) => {
 		}, 8 );
 
 		return () => {
+
+			clearInterval( interval );
+
+			if( !element.current )
+				return;
+
 			element.current.classList.remove( "tooltip-active" );
 			element.current.classList.add( "tooltip-hidden" );
-			clearInterval( interval );
 		};
 	}, [ target ]);
 

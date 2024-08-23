@@ -5,7 +5,7 @@ import { Props } from "../../utility/props";
 import "./index.scss"
 
 export const Card = ( props ) => {
-	const { className, children, style, margin, padding, header, ...rest } = props;
+	const { className, children, style, margin, padding, header, borderless, small, ...rest } = props;
 	let wrapStyle = style || {};
 	let bodyStyle = {};
 
@@ -17,7 +17,8 @@ export const Card = ( props ) => {
 	return (<div
 		className={
 			Props.className( "card", className, {
-				borderless: props.borderless
+				small: small,
+				borderless: borderless
 			})
 		}
 		style={ wrapStyle }
