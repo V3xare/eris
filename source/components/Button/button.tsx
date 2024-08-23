@@ -5,6 +5,7 @@ import { Text } from "../../components/Typography";
 import { Icons } from "../../components/Icons";
 import Common from "../../utility/common";
 import { Press } from "../../utility/uses";
+import { ModalContext } from "../../components/Modal/modal";
 
 import "./button.scss"
 
@@ -28,6 +29,7 @@ export const Button = ( props ) => {
 	else
 		confirm = 0;
 
+	const modalContext = useContext( ModalContext );
 	const [ iteration, setIteration ] = useState( "" );
 	const [ pressed, setPressed ] = useState( false );
 	const list = useRef([]);
@@ -65,7 +67,8 @@ export const Button = ( props ) => {
 		};
 
 		if( onClick && !disabled )
-			onClick({ event: e });
+			onClick({ event: e, modal: modalContext });
+
 	};
 
 	return (

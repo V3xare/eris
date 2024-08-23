@@ -6,11 +6,7 @@ import Common from "../../utility/common";
 
 import "./modal.scss"
 
-export const ModalContext = React.createContext({
-	get: ( arg1: string, arg2?: string ) => { 
-		return ""; 
-	}, 
-});
+export const ModalContext = React.createContext({});
 
 
 const ModalCalcPosition = ( target ) => {
@@ -29,11 +25,15 @@ const ModalCalcPosition = ( target ) => {
 };
 
 export const Modal = ( props ) => {
-	let { className, children, style, active, onClose, ...rest } = props;
+	let { className, children, style, active, onClose, trigger, ...rest } = props;
 	const element = useRef( null );
+	let [ triggerActive, setTriggerActive ] = useState( false );
 
 	if( !onClose )
 		onClose = () => {};
+
+	if( trigger )
+		active = triggerActive;
 
 	let clickOutside = ( e ) => {
 
@@ -44,6 +44,10 @@ export const Modal = ( props ) => {
 			return;
 
 		onClose();
+
+		if( trigger )
+			setTriggerActive( false );
+
 	};
 	
 	useEffect(() => {
@@ -52,7 +56,6 @@ export const Modal = ( props ) => {
 			window.document.removeEventListener("mousedown", clickOutside );
 		}
 	}, []);
-
 
 	useEffect(() => {
 
@@ -82,6 +85,7 @@ export const Modal = ( props ) => {
 	}, [ active ]);
 
 	return <React.Fragment>
+		<ModalContext.Provider value={{ close: () => setTriggerActive( false ) }}>
 		{
 			active ? (createPortal(
 				(<div
@@ -94,5 +98,16 @@ export const Modal = ( props ) => {
 				document.body
 			)) : null
 		}
+		{
+			trigger ?
+			(React.cloneElement( trigger, {
+				onClick: ( e ) => {
+					setTriggerActive( true );
+				},
+			}))		
+			: 
+			null
+		}		
+		</ModalContext.Provider>
 	</React.Fragment>
 };

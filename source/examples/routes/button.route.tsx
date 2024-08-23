@@ -9,7 +9,7 @@ import { Modal } from "../../components/Modal/modal";
 
 export const ButtonRoute = ( props ) => {
 
-	let [ modalActive, setModalActive ] = useState( true );
+	let [ modalActive, setModalActive ] = useState( false );
 
 	return (
 		<Card borderless padding={ 0 }>
@@ -47,6 +47,22 @@ export const ButtonRoute = ( props ) => {
 					</Card>
 
 				</Modal>
+
+				<Space/>
+				<Space/>
+				
+				<Modal active={ modalActive } trigger={ <Button value={ "Trigger" }/> }>
+
+					<Card header={ "User removing" } small borderless>
+						<Text>Removing of user is permanent, do you wish to remove anyway?</Text>
+						<Divider></Divider>
+						<Button value={ "Danger" } danger confirm onClick={( e ) => console.log( e ) }/>
+						<Space/>
+						<Space/>						
+						<Button value={ "Close" } onClick={( e ) => e.modal.close() }/>
+					</Card>
+
+				</Modal>				
 
 			</Card>
 
