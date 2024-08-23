@@ -34,10 +34,10 @@ export const MultiSelectRoute = ( props ) => {
 					value={ list2 } 
 					preset={ listPreset2 }
 					suggestions={[
-						{ value: "stringV", title: "Value 1", preset: "String Value", type: "text" },
-						{ value: "numberV", title: "Value 2", preset: 3, type: "number", min: 0, max: 10 },
-						{ value: "checkboxV", title: "Value 3", preset: false, type: "checkbox" },
-						{ value: "stringV2", title: "Value 4", preset: "String Value", type: "text" },
+						{ value: "stringV", title: "Value 1", type: "text" },
+						{ value: "numberV", title: "Value 2", type: "number", min: 0, max: 10 },
+						{ value: "checkboxV", title: "Value 3", type: "checkbox" },
+						{ value: "stringV2", title: "Value 4" },
 					]} 
 					placeholder={ "Start typying here" }
 					onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); }}

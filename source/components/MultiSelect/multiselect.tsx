@@ -73,7 +73,7 @@ export const MultiSelect = ( props ) => {
 			icon: item.icon,
 			min: item.min,
 			max: item.max,
-			type: item.type || "text",
+			type: item.type,
 			selected: list.find(( f ) => f == (item.value || item.title) )
 		});
 	};
@@ -171,7 +171,7 @@ export const MultiSelect = ( props ) => {
 						}}
 						><span className={ "multiselect-suggestions-item-checkbox" }></span>{ item.icon }<Text>{ item.title }</Text>
 							{
-								preset ? (
+								preset && item.type !== undefined  ? (
 									item.type == "checkbox" ? (
 										<Toggle 
 											onMouseUp={( e ) => {

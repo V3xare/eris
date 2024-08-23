@@ -1,18 +1,96 @@
-.button{
-    background-color: #82c5ff;
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-    user-select: none;
-    padding: 5px 10px 5px 10px;
-    border-radius: 6px;
-    position: relative;
-    margin: 4px 8px;
+@keyframes ButtonAnimation{
+	from {
+		left: 0px;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		opacity: 0.7;
+	}
+	to {
+	    left: -8px;
+	    top: -8px;
+	    right: -8px;
+	    bottom: -8px;		
+		opacity: 0.0;
+	}
+}
+@keyframes ButtonConfirmAnimation{
+	from {
+		
+	}
+	to {
 
-	&-disabled{
+	}
+}
+
+.button{
+    user-select: none;
+    border-radius: 5px;
+    position: relative;
+    //margin: 4px 8px;
+	font-size: 16px;
+	display: inline-block;
+
+    & > .button-wrap{
+		cursor: pointer;
+	    background-color: #82c5ff;
+		color: white;
+		display: inline-block;
+		user-select: none;
+		padding: 5px 10px 5px 10px;
+		border-radius: inherit;
 		position: relative;
+	}
+
+    &:hover > .button-wrap{
+        opacity: 0.8;
+    }	
+
+	&-title{
+		z-index: 1;
+		position: relative;
+	}
+
+	&-disabled > .button-wrap{
 		background-color: #deefff;
 		cursor: default;
+	}	
+	&-warning > .button-wrap{
+		background-color: #ffd959;
+	}	
+	&-danger > .button-wrap{
+		background-color: #ff6a6a;
+	}
+
+    &-animation{
+        left: -8px;
+        top: -8px;
+        right: -8px;
+        bottom: -8px;
+        opacity: 0;
+        position: absolute;
+        background-color: inherit;
+        z-index: 2;
+        border-radius: 5px;
+		animation-name: ButtonAnimation;
+		animation-duration: 300ms;
+    }
+
+	&-confirm{
+        left: -8px;
+        top: -8px;
+        right: -8px;
+        bottom: -8px;
+        opacity: 0.0;
+        position: absolute;
+       // background-color: #82c5ff;
+        z-index: 0;
+        border-radius: 5px;
+		background-color: inherit;
+	}
+
+	&-confirm-pressed{
+		position: absolute;
 	}
 
 }
