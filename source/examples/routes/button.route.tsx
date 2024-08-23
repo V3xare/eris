@@ -51,7 +51,7 @@ export const ButtonRoute = ( props ) => {
 				<Space/>
 				<Space/>
 				
-				<Modal active={ modalActive } trigger={ <Button value={ "Trigger" }/> }>
+				<Modal trigger={ <Button value={ "Trigger" }/> }>
 
 					<Card header={ "User removing" } small borderless>
 						<Text>Removing of user is permanent, do you wish to remove anyway?</Text>
