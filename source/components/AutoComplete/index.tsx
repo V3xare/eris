@@ -71,7 +71,7 @@ export const AutoComplete = ( props ) => {
 				}}	
 				onMouseDown={() => {
 					setSelected( s );
-					onSelect( item.value, () => {
+					onSelect( item, () => {
 						setForcedValue( item.value );
 					});
 				}}	
@@ -104,9 +104,9 @@ export const AutoComplete = ( props ) => {
 			value: forcedValue,
 			select: () => {
 				if( list && list[ selected ] ){
-					const v = list[ selected ].value;
+					const v = list[ selected ];
 					onSelect( v, () => {
-						setForcedValue( v );
+						setForcedValue( v.value );
 					});
 				};				
 			},
@@ -155,9 +155,9 @@ export const AutoComplete = ( props ) => {
 					e.event.preventDefault();
 
 					if( list && list[ selected ] ){
-						const v = list[ selected ].value;
+						const v = list[ selected ];
 						onSelect( v, () => {
-							setForcedValue( v );
+							setForcedValue( v.value );
 							e.event.target.blur();
 						});
 					};

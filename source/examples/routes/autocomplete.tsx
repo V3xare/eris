@@ -24,7 +24,12 @@ export const AutoCompleteRoute = ( props ) => {
 						{ icon: <Icons.camera/>, value: value + " title3" },
 						{ icon: <Icons.dice/>, value: value + " title4" },
 						{ icon: <Icons.podcast/>, value: value + " title5" }
-					])}>
+					])}
+						onSelect={( value, callback ) => {
+							console.log( value );
+							callback();
+						}}
+					>
 						<Input>Hello</Input>
 					</AutoComplete>
 
