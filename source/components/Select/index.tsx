@@ -1,55 +1,66 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { Props } from "../../utility/props";
 import { Input } from "../../components/Input";
 import { Row } from "../../components/Row";
 import { Text } from "../../components/Typography";
+import { AutoCompleteContext } from "../../components/AutoComplete";
 
 import "./index.scss"
 import { useAnimation } from "../../utility/animation";
 
-export const AutoCompleteContext = React.createContext({
-	value: null,
-	onKeyDown: ( e ) => {},
-	onKeyUp: ( e ) => {},
-	onChange: ( e ) => {},
-	onFocus: ( e ) => {},
-	onBlur: ( e ) => {}	
-});
-
-export const AutoComplete = ( props ) => {
-	let { className, children, onChange, onSelect, margin, padding, label, larger, value, ...rest } = props;
+export const Select = ( props ) => {
+	let { className, children, onChange, onSelect, margin, padding, label, icon, larger, value, list, ...rest } = props;
 	const [ expanded, setExpanded ] = useState( false );
-	const [ search, setSearch ] = useState( "" );
-	const [ list, setList ] = useState([]);
 	const [ hovered, setHovered ] = useState( 0 );
-	const [ forcedValue, setForcedValue ] = useState( null );
+	let [ forcedValue, setForcedValue ] = useState( value );
 	const [ delayedExpand, setDelayedExpand ] = useState( 0 );
 	const childrenElem = useAnimation.Expand( expanded );
+	const [ width, setWidth ] = useState( 0 );
 
 	if( !onChange )
-		onChange = ( value, callback ) => {
-			callback([]);
-		};
+		onChange = ( value ) => {};
 	if( !onSelect )
-		onSelect = ( value, callback ) => {
-			callback();
-		};		
+		onSelect = ( value ) => {};		
+	if( !Array.isArray( list ) )
+		list = [];
+
+	if( !list.find(( f ) => f.value == forcedValue ) )
+		forcedValue = list[ 0 ] ? list[ 0 ].value : "";
 
 	useEffect(() => {
 
-		if( !value )
+		if( !childrenElem.current )
 			return;
 
-		setList( value );
+		let timeout = setTimeout(() => {
 
-	}, [ value ]);		
+			let rect = childrenElem.current.getClientRects();
+
+			if( !rect[ 0 ] )
+				return;
+
+			let w = rect[ 0 ].width;
+			
+			if( w < width )
+				return;
+
+			setWidth( w );
+
+		}, 10 );
+		
+		return () => {
+			clearTimeout( timeout );
+		};
+	}, [ expanded ]);
 
 	useEffect(() => {
 
 		if( !delayedExpand )
 			return;
 
-		setHovered( 0 );
+		let index = list.findIndex(( f ) => f.value == forcedValue );
+
+		setHovered( index > -1 ? index : 0 );
 		setExpanded( true );
 
 	}, [ delayedExpand ]);
@@ -64,16 +75,16 @@ export const AutoComplete = ( props ) => {
 
 			result.push(
 				<Row className={ 
-					Props.classNameEx( "autocomplete", "autocomplete-item", { hovered: hovered == s }) 
+					Props.classNameEx( "autocomplete", "autocomplete-item", { hovered: hovered == s, selected: item.value == forcedValue }) 
 				} key={ item.id || item.value } 
 				onMouseOver={() => {
 					setHovered( s );
 				}}	
 				onMouseDown={() => {
 					setHovered( s );
-					onSelect( item, () => {
-						setForcedValue( item.value );
-					});
+					setForcedValue( item.value );
+					onSelect( item );
+					onChange( item );
 				}}	
 				>{
 
@@ -93,11 +104,11 @@ export const AutoComplete = ( props ) => {
 		};
 
 		return result;
-	}, [ list, hovered ]);
+	}, [ list, hovered, forcedValue ]);
 
 	return (<div
 		className={
-			Props.className( "autocomplete", className, { expanded: expanded, larger: larger } )
+			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger } )
 		}
 	>
 		<AutoCompleteContext.Provider value={{
@@ -105,23 +116,14 @@ export const AutoComplete = ( props ) => {
 			select: () => {
 				if( list && list[ hovered ] ){
 					const v = list[ hovered ];
-					onSelect( v, () => {
-						setForcedValue( v.value );
-					});
+					setForcedValue( v.value );
+					onSelect( v );
+					onChange( v );
 				};				
 			},
-			onChange: ( e ) => {
-				onChange( e.value, ( resultList ) => {
-					setSearch( e.value );
-					setList( resultList );
-				});
-			},
+			onChange: ( e ) => {},
 			onFocus: ( e ) => {
-				onChange( e.value, ( resultList ) => {
-					setSearch( e.value );
-					setList( resultList );
-					setDelayedExpand( delayedExpand + 1 );
-				});
+				setDelayedExpand( delayedExpand + 1 );
 			},
 			onBlur: ( e ) => {
 				setExpanded( false );
@@ -129,12 +131,12 @@ export const AutoComplete = ( props ) => {
 			onKeyUp: ( e ) => {},
 			onKeyDown: ( e ) => {
 
+				e.event.preventDefault();
+
 				if( !suggestions.length )
 					return;
 
 				if( e.event.which == 38 ){
-
-					e.event.preventDefault();
 
 					if( hovered < 1 )
 						setHovered( suggestions.length - 1 );
@@ -143,8 +145,6 @@ export const AutoComplete = ( props ) => {
 
 				}else if( e.event.which == 40 ){
 
-					e.event.preventDefault();
-
 					if( hovered >= (suggestions.length - 1) )
 						setHovered( 0 );
 					else
@@ -152,20 +152,20 @@ export const AutoComplete = ( props ) => {
 
 				}else if( e.event.which == 13 ){
 
-					e.event.preventDefault();
-
 					if( list && list[ hovered ] ){
 						const v = list[ hovered ];
-						onSelect( v, () => {
-							setForcedValue( v.value );
-							e.event.target.blur();
-						});
+						setForcedValue( v.value );
+						e.event.target.blur();
+						onSelect( v );
+						onChange( v );
 					};
+
 				};
 
 			}			
-		}}>
-			{ children }
+		}}>		
+			<Input { ...rest }></Input>
+			<div className={ "select-overlay input" } style={{ width: expanded ? (width || "auto") : "auto" }}>{ icon }{ forcedValue }</div>
 		</AutoCompleteContext.Provider>
 		<div className={ 
 			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 

@@ -7,6 +7,7 @@ import { Input } from "../../components/Input";
 import { Icons } from "../../components/Icons";
 import { Row } from "../../components/Row";
 import { Text } from "../../components/Typography";
+import { Select } from "../../components/Select";
 
 export const AutoCompleteRoute = ( props ) => {
 
@@ -17,6 +18,15 @@ export const AutoCompleteRoute = ( props ) => {
 				<Divider>AutoComplete</Divider>	
 
 				<Row gap={ true }>
+
+					<Select value={ "title277" } onSelect={( v ) => console.log( v ) } list={[
+						{ icon: <Icons.blog/>, value: "title1", title: "title 1" },
+						{ icon: <Icons.image/>, value: "title2", title: "title 2" },
+						{ icon: <Icons.camera/>, value: "title3", title: "title 3" },
+						{ icon: <Icons.dice/>, value: "title4", title: "title 4" },
+						{ icon: <Icons.podcast/>, value: "title5", title: "title 5" }						
+					]}/>
+
 
 					<AutoComplete onChange={( value, callback ) => callback([ 
 						{ icon: <Icons.blog/>, value: value + " title1" },

@@ -65,6 +65,8 @@ import { Overlay } from "./components/Overlay"
 export { Overlay };
 import { Input } from "./components/Input"
 export { Input };
+import { Select } from "./components/Select"
+export { Select };
 import { Toggle } from "./components/Toggle/toggle"
 export { Toggle };
 

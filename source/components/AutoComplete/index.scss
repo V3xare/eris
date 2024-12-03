@@ -4,6 +4,7 @@
 	position: relative;
 	display: inline-block;
 	align-self: flex-start;
+	user-select: none;
 
 	&-shadowfix{
 		left: 0px;
@@ -53,9 +54,15 @@
 		color: $icons-accent;
 	}
 
-	&-selected{
+	&-hovered{
 		background-color: #f4f4f4;
+	}	
+	&-selected{
+		background-color: #e1ecff;
 	}
+	&-selected.autocomplete-hovered{
+		background-color: #f2f6ff;
+	}	
 
 	&-expanded > &-suggestions &-item{
 		opacity: 1;

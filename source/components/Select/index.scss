@@ -1,0 +1,41 @@
+.select{
+
+	position: relative;
+
+	& .input{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		padding: 0px;
+		top: 0px;
+		left: 0px;
+		opacity: 0;
+		z-index: 1;
+		transition: all 240ms;
+	}
+	.select-overlay{
+		position: relative;
+		padding: 7px 9px;
+		top: 0px;
+		left: 0px;
+		opacity: 1;
+		z-index: 0;
+	}
+	.select-overlay.input{
+		opacity: 1;
+	}
+	& input{
+		cursor: default;
+	}
+	& .input-left{
+		display: none;
+	}		
+	& .input-right{
+		display: none;
+	}
+	& .autocomplete-suggestions{
+		width: max-content;
+		max-width: max-content;
+	}
+
+}

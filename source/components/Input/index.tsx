@@ -9,7 +9,7 @@ import "./index.scss"
 export const Input = ( props ) => {
 	let { 
 		className, children, propValue, style, margin, padding, 
-		placeholder, tools,
+		placeholder, tools, injection,
 		onChange, onFocus, onBlur, onKeyDown, onKeyUp, onClear, larger,
 		...rest 
 	} = props;
@@ -110,6 +110,7 @@ export const Input = ( props ) => {
 		style={ style }
 	>
 		<span className={ "input-left" }>{ toolsLeft }</span>
+		{ injection ? injection : null }
 		<input
 			{ ...rest }
 			placeholder={ placeholder }
