@@ -19,15 +19,6 @@ export const AutoCompleteRoute = ( props ) => {
 
 				<Row gap={ true }>
 
-					<Select value={ "title277" } onSelect={( v ) => console.log( v ) } list={[
-						{ icon: <Icons.blog/>, value: "title1", title: "title 1" },
-						{ icon: <Icons.image/>, value: "title2", title: "title 27777777777" },
-						{ icon: <Icons.camera/>, value: "title3", title: "title 3" },
-						{ icon: <Icons.dice/>, value: "title4", title: "title 4" },
-						{ icon: <Icons.podcast/>, value: "title5", title: "title 5" }						
-					]}/>
-
-
 					<AutoComplete onChange={( value, callback ) => callback([ 
 						{ icon: <Icons.blog/>, value: value + " title1" },
 						{ icon: <Icons.image/>, value: value + " title2" },

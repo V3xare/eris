@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect, useContext, useMemo } from "react";
+import React, { forwardRef, useState, useEffect, useContext, useMemo, useRef } from "react";
 import { Props } from "../../utility/props";
 import { AutoCompleteContext } from "../../components/AutoComplete";
 import { Text } from "../../components/Typography";
@@ -10,12 +10,14 @@ export const Input = ( props ) => {
 	let { 
 		className, children, propValue, style, margin, padding, 
 		placeholder, tools, injection,
+		size,
 		onChange, onFocus, onBlur, onKeyDown, onKeyUp, onClear, larger,
 		...rest 
 	} = props;
 	const [ value, setValue ] = useState( children );
 	const [ isFocused, setIsFocused ] = useState( false );
 	const autocomplete = useContext( AutoCompleteContext );
+	const elemWrap = useRef( null );
 
 	useEffect(() => {
 		setValue( propValue !== undefined ? propValue : children );
@@ -154,14 +156,18 @@ export const Input = ( props ) => {
 			}}	
 			onChange={( e ) => {
 
-				setValue( e.target.value );
+				let v = e.target.value;
 
-				autocomplete.onChange({ value: e.target.value, event: e });
+				autocomplete.onChange({ value: e.target.value, event: e, ref: elemWrap.current, rewrite: ( newV ) => v = newV });
 
 				if( onChange )
-					onChange({ value: e.target.value, event: e });
+					onChange({ value: e.target.value, event: e, ref: elemWrap.current, rewrite: ( newV ) => v = newV });
+
+				setValue( v );
 
 			}}
+			size={ size }
+			ref={ elemWrap }
 		/>
 		<span className={ "input-right" }>{ toolsRight }</span>
 	</span>

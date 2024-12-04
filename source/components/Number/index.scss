@@ -1,0 +1,13 @@
+.number{
+
+	position: relative;
+
+	&.input{
+		width: max-content;
+	}
+	& input{
+		flex-basis: auto;
+		text-align: center;
+	}
+
+}
