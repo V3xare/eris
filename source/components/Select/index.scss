@@ -12,6 +12,7 @@
 		opacity: 0;
 		z-index: 1;
 		transition: all 240ms;
+		overflow: hidden;
 	}
 	.select-overlay{
 		position: relative;
