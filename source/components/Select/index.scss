@@ -23,6 +23,7 @@
 	}
 	.select-overlay.input{
 		opacity: 1;
+		justify-content: space-between;
 	}
 	& input{
 		cursor: default;
@@ -37,5 +38,16 @@
 		width: max-content;
 		max-width: max-content;
 	}
+	& .autocomplete-item{
+		white-space: nowrap;
+	}
 
+	.select-overlay .icon{
+		margin: 0px 4px;
+	}
+
+}
+
+.autocomplete-expanded .select-overlay .icon{
+	color: #1890ff;
 }

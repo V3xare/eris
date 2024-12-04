@@ -3,6 +3,7 @@ import { Props } from "../../utility/props";
 import { Input } from "../../components/Input";
 import { Row } from "../../components/Row";
 import { Text } from "../../components/Typography";
+import { Icons } from "../../components/Icons";
 import { AutoCompleteContext } from "../../components/AutoComplete";
 
 import "./index.scss"
@@ -15,6 +16,7 @@ export const Select = ( props ) => {
 	let [ forcedValue, setForcedValue ] = useState( value );
 	const [ delayedExpand, setDelayedExpand ] = useState( 0 );
 	const childrenElem = useAnimation.Expand( expanded );
+	const overlayElem = useRef( null );
 	const [ width, setWidth ] = useState( 0 );
 
 	if( !onChange )
@@ -27,24 +29,28 @@ export const Select = ( props ) => {
 	if( !list.find(( f ) => f.value == forcedValue ) )
 		forcedValue = list[ 0 ] ? list[ 0 ].value : "";
 
+	let title = (list.find(( f ) => f.value == forcedValue ) || {}).title || " ";
+
 	useEffect(() => {
 
-		if( !childrenElem.current )
+		if( !childrenElem.current || !overlayElem.current )
 			return;
 
 		let timeout = setTimeout(() => {
 
-			let rect = childrenElem.current.getClientRects();
+			let rect1 = childrenElem.current.getClientRects();
+			let rect2 = childrenElem.current.getClientRects();
 
-			if( !rect[ 0 ] )
+			if( !rect1[ 0 ] || !rect2[ 0 ] )
 				return;
 
-			let w = rect[ 0 ].width;
+			let w1 = rect1[ 0 ].width;
+			let w2 = rect2[ 0 ].width;
 			
-			if( w < width )
+			if( w1 < width && w2 < width )
 				return;
 
-			setWidth( w );
+			setWidth( w1 > w2 ? w1 : w2 );
 
 		}, 10 );
 		
@@ -91,7 +97,7 @@ export const Select = ( props ) => {
 					(item.label ? item.label : (
 						<React.Fragment>
 							 { item.icon }
-							 <div className={ "autocomplete-value" }><Text>{ item.value }</Text></div>
+							 <div className={ "autocomplete-value" }><Text>{ item.title }</Text></div>
 						</React.Fragment>
 					))
 
@@ -165,7 +171,7 @@ export const Select = ( props ) => {
 			}			
 		}}>		
 			<Input { ...rest }></Input>
-			<div className={ "select-overlay input" } style={{ width: expanded ? (width || "auto") : "auto" }}>{ icon }{ forcedValue }</div>
+			<div className={ "select-overlay input" } style={{ width: expanded ? (width || "auto") : "auto" }} ref={ overlayElem }>{ icon }{ forcedValue }<Icons.expand transition reverse={ !expanded }/></div>
 		</AutoCompleteContext.Provider>
 		<div className={ 
 			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 
@@ -173,7 +179,7 @@ export const Select = ( props ) => {
 		<div className={ 
 			Props.className( "autocomplete-suggestions" ) 
 		}
-			style={ props.style }
+			style={{ width: expanded ? (width || "auto") : "auto" }}
 			ref={ childrenElem }
 		>
 			{ suggestions }
