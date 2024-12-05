@@ -171,7 +171,7 @@ export const Select = ( props ) => {
 			}			
 		}}>		
 			<Input { ...rest }></Input>
-			<div className={ "select-overlay input" } style={{ width: expanded ? (width || "auto") : "auto" }} ref={ overlayElem }>{ icon }{ forcedValue }<Icons.expand transition reverse={ !expanded }/></div>
+			<div className={ "select-overlay input" } style={{ width: expanded ? (width || "auto") : "auto" }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
 		</AutoCompleteContext.Provider>
 		<div className={ 
 			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 
