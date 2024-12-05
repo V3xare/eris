@@ -10,7 +10,7 @@ import "./index.scss"
 import { useAnimation } from "../../utility/animation";
 
 export const Select = ( props ) => {
-	let { className, children, onChange, onSelect, margin, padding, label, icon, larger, value, list, ...rest } = props;
+	let { className, children, onChange, onSelect, margin, padding, label, stretch, icon, larger, value, list, ...rest } = props;
 	const [ expanded, setExpanded ] = useState( false );
 	const [ hovered, setHovered ] = useState( 0 );
 	let [ forcedValue, setForcedValue ] = useState( value );
@@ -114,7 +114,7 @@ export const Select = ( props ) => {
 
 	return (<div
 		className={
-			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger } )
+			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger, stretch: stretch } )
 		}
 	>
 		<AutoCompleteContext.Provider value={{
@@ -171,7 +171,7 @@ export const Select = ( props ) => {
 			}			
 		}}>		
 			<Input { ...rest }></Input>
-			<div className={ "select-overlay input" } style={{ width: expanded ? (width || "auto") : "auto" }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
+			<div className={ "select-overlay input" } style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
 		</AutoCompleteContext.Provider>
 		<div className={ 
 			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 
@@ -179,7 +179,7 @@ export const Select = ( props ) => {
 		<div className={ 
 			Props.className( "autocomplete-suggestions" ) 
 		}
-			style={{ width: expanded ? (width || "auto") : "auto" }}
+			style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }}
 			ref={ childrenElem }
 		>
 			{ suggestions }

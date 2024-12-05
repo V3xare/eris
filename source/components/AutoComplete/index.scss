@@ -6,6 +6,14 @@
 	align-self: flex-start;
 	user-select: none;
 
+	&-stretch{
+		width: 100%;
+	}
+	&-stretch &-suggestions{
+		width: 100%;
+		max-width: 100%;
+	}
+
 	&-shadowfix{
 		left: 0px;
 		right: 0px;
