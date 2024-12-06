@@ -32,6 +32,10 @@ export const Select = ( props ) => {
 	let title = (list.find(( f ) => f.value == forcedValue ) || {}).title || " ";
 
 	useEffect(() => {
+		setForcedValue( value );
+	}, [ value ]);
+
+	useEffect(() => {
 
 		if( !childrenElem.current || !overlayElem.current )
 			return;
