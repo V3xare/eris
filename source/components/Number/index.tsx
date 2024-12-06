@@ -11,6 +11,7 @@ export const Number = ( props ) => {
 	min = Common.int( min ) || 0;
 	max = Common.int( max ) || 999999999999;
 	step = Common.int( step ) || 1;
+	value = Common.int( step ) || 0;
 
 	const sterilize = ( v ) => {
 		return v > max ? max : (v < min ? min : v);
@@ -20,6 +21,10 @@ export const Number = ( props ) => {
 
 	const [ size, setSize ] = useState( value.length );
 	const [ forcedValue, setForcedValue ] = useState( value );
+
+	useEffect(() => {
+		setForcedValue( value );
+	}, [ value ]);
 
 	const minusEq = ( e ) => {
 		let v = sterilize( Common.int( e.value ) - step );
