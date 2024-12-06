@@ -11,7 +11,7 @@ export const Number = ( props ) => {
 	min = Common.int( min ) || 0;
 	max = Common.int( max ) || 999999999999;
 	step = Common.int( step ) || 1;
-	value = Common.int( step ) || 0;
+	value = Common.int( value ) || 0;
 
 	const sterilize = ( v ) => {
 		return v > max ? max : (v < min ? min : v);
