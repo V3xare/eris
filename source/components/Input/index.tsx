@@ -98,11 +98,11 @@ export const Input = ( props ) => {
 
 	const toolsLeft = useMemo(() => {
 		return parseTools( tools, -1 );
-	}, [ tools, autocomplete ] );
+	}, [ tools, autocomplete, value ] );
 
 	const toolsRight = useMemo(() => {
 		return parseTools( tools, 1 );
-	}, [ tools, autocomplete ] );	
+	}, [ tools, autocomplete, value ] );	
 
 	return (
 	<span 
