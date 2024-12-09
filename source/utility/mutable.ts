@@ -167,8 +167,9 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 	const [ loading, setLoading ] = useState( false );
 	let isMounted: any = useRef( true );
 	let fetchTimeout: any = useRef( null );
+	let onResponseList: any[] = [];
 
-	const onResponse = ( fnSuccess: Function, fnError?: Function ) => {
+	const onSystemResponse = () => {
 
 		clearTimeout( fetchTimeout.current );
 		fetchTimeout.current = setTimeout(() => {
@@ -176,21 +177,40 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 			if( !completeList.length )
 				return;
 
+			for( const listener of onResponseList ){
+
+				let fnSuccess = listener.fnSuccess;
+				let fnError = listener.fnError;
+
+				for( const item of completeList ){
+					if( item.error ){
+						if( fnError )
+							fnError( item.data, item.error );
+					}else{
+						fnSuccess( item.data, item.error );
+					};
+				};
+
+			};
+
 			for( const item of completeList ){
 				if( item.error ){
-					if( fnError )
-						fnError( item.data, item.error );
-					item.failure();
+					item.failure( item.data, item.error );
 				}else{
-					fnSuccess( item.data, item.error );
-					item.success();
+					item.success( item.data, item.error );
 				};
-			};
+			};			
+
 			setCompleteList([]);
 
 		}, 1 );
 
 	};
+	const onResponse = ( fnSuccess: Function, fnError?: Function ) => {
+		onResponseList.push({ fnSuccess: fnSuccess, fnError: fnError });
+	};
+	onSystemResponse();
+
 	const flush = () => {
 
 		if( !completeList.length )
