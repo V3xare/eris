@@ -139,7 +139,7 @@ function useAsyncReducer( state: any, [ type, append, data ]: any ){
 				["append"] : append && typeof append == "object" ? append : {},
 				["success"]: (data && typeof data.success == "function" ? data.success : (() => {})),
 				["failure"]: (data && typeof data.failure == "function" ? data.failure : (() => {})),
-				["ignore"]: data.ignore !== undefined ? (!!data.ignore) : false,
+				["ignore"]: data && data.ignore !== undefined ? (!!data.ignore) : false,
 				["data"]: (data || {})
 			}]
 		};
