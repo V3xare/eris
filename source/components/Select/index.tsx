@@ -10,7 +10,7 @@ import "./index.scss"
 import { useAnimation } from "../../utility/animation";
 
 export const Select = ( props ) => {
-	let { className, children, onChange, onSelect, margin, padding, label, stretch, icon, larger, value, list, ...rest } = props;
+	let { className, children, onChange, onSelect, margin, disabled, padding, label, stretch, icon, larger, value, list, ...rest } = props;
 	const [ expanded, setExpanded ] = useState( false );
 	const [ hovered, setHovered ] = useState( 0 );
 	let [ forcedValue, setForcedValue ] = useState( value );
@@ -118,7 +118,7 @@ export const Select = ( props ) => {
 
 	return (<div
 		className={
-			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger, stretch: stretch } )
+			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger, stretch: stretch, disabled: disabled } )
 		}
 	>
 		<AutoCompleteContext.Provider value={{
