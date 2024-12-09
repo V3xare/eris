@@ -292,6 +292,7 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 				{
 					data: { ...data },
 					error: false,
+					ignore: requestParams.ignore,
 					success: requestParams.success,
 					failure: requestParams.failure
 				}
@@ -318,6 +319,7 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 					{
 						data: { ...data },
 						error: e,
+						ignore: requestParams.ignore,
 						success: requestParams.success,
 						failure: requestParams.failure
 					}
