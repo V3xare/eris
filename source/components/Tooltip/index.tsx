@@ -64,6 +64,7 @@ export const Tooltip = ( props ) => {
 	const [ created, setCreated ] = useState( false );
 	const element = useRef( null );
 	const mouse = useRef({ clientX: 0, clientY: 0 });
+	const smoothOutTimer = useRef( null );
 
 	let inlineStyle = { ...style };
 
@@ -110,6 +111,22 @@ export const Tooltip = ( props ) => {
 		};
 	}, [ target ]);
 
+	let mouseOver = ( e ) => {
+		clearTimeout( smoothOutTimer.current );
+		setCreated( true );
+		setTarget( e.currentTarget );
+	};	
+	let mouseOut = ( e ) => {
+		clearTimeout( smoothOutTimer.current );
+		smoothOutTimer.current = setTimeout(() => {
+			setTarget( null );
+			if( element.current ){
+				element.current.classList.remove( "tooltip-active" );
+				element.current.classList.add( "tooltip-hidden" );
+			}	
+		}, 24 );
+	};
+
 	return <React.Fragment>
 		{
 			created ? (createPortal(
@@ -141,15 +158,10 @@ export const Tooltip = ( props ) => {
 					mouse.current = { clientX: e.clientX, clientY: e.clientY }
 				},
 				onMouseOver: ( e ) => {
-					setCreated( true );
-					setTarget( e.currentTarget );
+					mouseOver( e );
 				},
 				onMouseOut: ( e ) => {
-					setTarget( null );
-					if( element.current ){
-						element.current.classList.remove( "tooltip-active" );
-						element.current.classList.add( "tooltip-hidden" );
-					}
+					mouseOut( e );
 				}
 			})) : null
 		}
