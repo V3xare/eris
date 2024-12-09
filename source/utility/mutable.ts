@@ -139,6 +139,7 @@ function useAsyncReducer( state: any, [ type, append, data ]: any ){
 				["append"] : append && typeof append == "object" ? append : {},
 				["success"]: (data && typeof data.success == "function" ? data.success : (() => {})),
 				["failure"]: (data && typeof data.failure == "function" ? data.failure : (() => {})),
+				["ignore"]: data.ignore !== undefined ? (!!data.ignore) : false,
 				["data"]: (data || {})
 			}]
 		};
@@ -183,6 +184,10 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 				let fnError = listener.fnError;
 
 				for( const item of completeList ){
+
+					if( item.ignore )
+						continue;
+
 					if( item.error ){
 						if( fnError )
 							fnError( item.data, item.error );
