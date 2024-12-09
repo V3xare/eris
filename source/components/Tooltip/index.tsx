@@ -11,7 +11,7 @@ const TooltipCalcPosition = ( event, tooltip, target ) => {
 
 	let e = { x: event.clientX, y: event.clientY };
 	let margin = 10;
-	let marginFixed = 11;
+	let marginFixed = 20;
 	let padding = 10;
 
 	//let aabb = tooltip.getBoundingClientRect();
