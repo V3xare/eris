@@ -6,10 +6,10 @@ import { Props } from "../../utility/props";
 import "./index.scss"
 import Common from "../../utility/common";
 import { Text } from "../../components/Typography";
-
 const TooltipCalcPosition = ( event, tooltip, target ) => {
 
 	let e = { x: event.clientX, y: event.clientY };
+	let isReversed = tooltip.classList.contains( "tooltip-reverseY" );
 	let margin = 10;
 	let marginFixed = 12;
 	let padding = 10;
@@ -28,7 +28,7 @@ const TooltipCalcPosition = ( event, tooltip, target ) => {
 	let b = target.getBoundingClientRect();
 
 	if( b.x <= marginFixed || b.y <= marginFixed )
-	return { x: (-10000) + "px", y: (-10000) + "px", reverseY: false };
+		return { x: (-10000) + "px", y: (-10000) + "px", reverseY: false };
 
 	//e.x = b.left + b.width / 2;
 	let p = { x: b.x, y: b.y };
@@ -50,7 +50,7 @@ const TooltipCalcPosition = ( event, tooltip, target ) => {
 		position.x -= offsetXL;
 	if( offsetXR > screenWidth )
 		position.x += screenWidth - offsetXR;
-	if( offsetYT < 0 ){
+	if( offsetYT < 0 || isReversed ){
 		position.y = (p.y + s.y) + margin * 2;
 		reverseY = true;
 	};
@@ -65,6 +65,7 @@ export const Tooltip = ( props ) => {
 	const element = useRef( null );
 	const mouse = useRef({ clientX: 0, clientY: 0 });
 	const smoothOutTimer = useRef( null );
+	const smoothReverse = useRef( 0 );
 
 	let inlineStyle = { ...style };
 
@@ -88,6 +89,13 @@ export const Tooltip = ( props ) => {
 
 			element.current.classList.add( "tooltip-active" );
 			element.current.classList.remove( "tooltip-hidden" );
+			smoothReverse.current += 8;
+
+			if( smoothReverse.current > 500 ){
+				smoothReverse.current = 0;
+				element.current.classList.remove( "tooltip-reverseY" );	
+			};
+
 			let position = TooltipCalcPosition( mouse.current, element.current, target );
 
 			if( position.reverseY )
