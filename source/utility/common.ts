@@ -1,3 +1,6 @@
+import QueryString from "qs";
+import { Location } from "react-router-dom";
+
 export default class Common{
 
 	static  _chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -340,6 +343,37 @@ export default class Common{
 	public static token() : string{
 		return Common.sid( 32 );
 	};
+	public static parseQuery( location: Location<any> ){
+		return QueryString.parse( location.search, { ignoreQueryPrefix: true });
+	};
+	public static setQuery( location: Location<any>, value, clear? ){
+	
+		let result: string = "";
+	
+		if( !value )
+			return result;
+	
+		let qs: any = clear ? {} : QueryString.parse( location.search, { ignoreQueryPrefix: true });
+	
+		for( const key in value ){
+			qs[ key ] = value[ key ];
+		};
+	
+		let n = 0;
+	
+		for( const key in qs ){
+	
+			if( n > 0 )
+				result += "&"
+			else
+				result += "?";
+	
+			result += key + "=" + encodeURIComponent( Common.string( qs[ key ] ) );
+			n++;
+		};
+	
+		return result;
+	};	
 	public static offset( target: HTMLElement ) : { x: number, y: number }{
 
 		if( !target )
