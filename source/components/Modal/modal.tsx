@@ -89,7 +89,7 @@ export const Modal = ( props ) => {
 		{
 			active ? (createPortal(
 				(<div
-					className={ "modal" }
+					className={ Props.className( "modal", className ) }
 					ref={ element }
 					{ ...rest }
 				>
