@@ -9,10 +9,15 @@ import { Tooltip } from "../../components/Tooltip";
 
 export function Editable( props ){
 
-	let { className, children, ...rest } = props;
-	const [ text, setText ] = useState( children || "" );
+	let { className, value, onChange, ...rest } = props;
 	const [ height, setHeight ] = useState( 0 );
 	const [ focus, setFocus ] = useState( false );
+
+	const [ forcedValue, setForcedValue ] = useState( value );
+
+	useEffect(() => {
+		setForcedValue( value );
+	}, [ value ]);
 
 	const area = useRef( null );
 	const textElem = useRef( null );
@@ -24,14 +29,11 @@ export function Editable( props ){
 		}) }
 	>
 		<Text
-			className={
-				(className || "")
-			}
 			{ ...rest }
 			preserveNL={ true }
 			ref={ textElem }
 		>
-			{ text || " " }
+			{ forcedValue || " " }
 		</Text>
 
 		<Tooltip content={ "Edit" }>
@@ -59,7 +61,7 @@ export function Editable( props ){
 
 		<textarea
 			ref={ area }
-			className={ Props.className( "typography", className, (!focus ? "hidden" : "") ) }
+			className={ Props.className( "typography", "", (!focus ? "hidden" : "") ) }
 			onChange={( e ) => {
 
 				textElem.current.innerHTML = e.target.value;
@@ -68,7 +70,10 @@ export function Editable( props ){
 				area.current.scrollTop = 0 + "px";
 				setHeight( area.current.scrollHeight );
 				area.current.style.height = height + "px";
-				setText( e.target.value );
+				setForcedValue( e.target.value );
+
+				if( onChange )
+					onChange({ ...e, value: e.target.value });
 
 			}}
 			onFocus={( e ) => {
@@ -80,7 +85,7 @@ export function Editable( props ){
 				e.target.scrollTop = 0 + "px";
 				setHeight( e.target.scrollHeight );
 				e.target.style.height = height + "px";
-				setText( e.target.value );
+				setForcedValue( e.target.value );
 
 			}}
 			onBlur={( e ) => {
@@ -99,7 +104,7 @@ export function Editable( props ){
 
 			}}
 			style={{ height: (height ? (height + "px") : "") }}
-			value={ text }
+			value={ forcedValue }
 			rows={ 1 }
 		/>
 
