@@ -25,9 +25,9 @@ const LangApp = ( props ) => {
 
 	return (<Column>
 		<Text>{ lang.get( "hello" ) }</Text>
-		<Text>{ lang.get( "hello", "ru" ) }</Text>
+		<Text>{ lang.get( "hello", [], { locale: "ru" }) }</Text>
 		<Text>{ lang.get( "bye" ) }</Text>
-		<Text>{ lang.get( "bye", "ru" ) }</Text>
+		<Text>{ lang.get( "bye", [], { locale: "ru" }) }</Text>
 	</Column>);
 };
 

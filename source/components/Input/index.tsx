@@ -5,12 +5,14 @@ import { Text } from "../../components/Typography";
 import { Icons } from "../../components/Icons";
 
 import "./index.scss"
+import { Tooltip } from "@components/Tooltip";
 
 export const Input = ( props ) => {
 	let { 
 		className, children, propValue, style, margin, padding, 
 		placeholder, tools, injection,
 		size,
+		alert, notice,
 		onChange, onFocus, onBlur, onKeyDown, onKeyUp, onClear, larger,
 		...rest 
 	} = props;
@@ -22,6 +24,22 @@ export const Input = ( props ) => {
 	useEffect(() => {
 		setValue( propValue !== undefined ? propValue : children );
 	}, [ children, propValue ]);
+
+	let noticeList = useMemo(() => {
+		
+		if( !Array.isArray( notice ) )
+			return [];
+
+		return notice.map(( item, index ) => {
+			return (
+				<div key={ index }>
+					{ item }
+				</div>
+			)
+		})
+	}, [ notice ]);
+
+	let visible = ((Array.isArray( notice ) && notice.length > 0) || notice === true);
 
 	useEffect(() => {
 
@@ -105,9 +123,10 @@ export const Input = ( props ) => {
 	}, [ tools, autocomplete, value ] );	
 
 	return (
+	<Tooltip content={ noticeList } hidden={ !visible } alert={ alert }>
 	<span 
 		className={ 
-			Props.className( "input", className, { focus: isFocused, larger: larger } ) 
+			Props.className( "input", className, { focus: isFocused, larger: larger, alert: alert } ) 
 		}
 		style={ style }
 	>
@@ -171,5 +190,6 @@ export const Input = ( props ) => {
 		/>
 		<span className={ "input-right" }>{ toolsRight }</span>
 	</span>
+	</Tooltip>
 	);
 };
