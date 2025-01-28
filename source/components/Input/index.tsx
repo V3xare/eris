@@ -12,7 +12,7 @@ export const Input = ( props ) => {
 		className, children, propValue, style, margin, padding, 
 		placeholder, tools, injection,
 		size,
-		alert, notice, conditions,
+		alert, notice, conditions, tooltipClassName,
 		onChange, onFocus, onBlur, onKeyDown, onKeyUp, onClear, larger,
 		...rest 
 	} = props;
@@ -159,7 +159,7 @@ export const Input = ( props ) => {
 	}, [ tools, autocomplete, value ] );	
 
 	return (
-	<Tooltip content={ noticeList.list } hidden={ !visible } alert={ alert || !noticeList.success } paddingLess={ Array.isArray( conditions ) }>
+	<Tooltip className={ tooltipClassName } content={ noticeList.list } hidden={ !visible } alert={ alert || !noticeList.success } paddingLess={ Array.isArray( conditions ) }>
 	<span 
 		className={ 
 			Props.className( "input", className, { focus: isFocused, larger: larger, alert: (alert || !noticeList.success) } ) 

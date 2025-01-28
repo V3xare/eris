@@ -6,6 +6,7 @@ import { Props } from "../../utility/props";
 import "./index.scss"
 import Common from "../../utility/common";
 import { Text } from "../../components/Typography";
+
 const TooltipCalcPosition = ( event, tooltip, target ) => {
 
 	let e = { x: event.clientX, y: event.clientY };
@@ -131,7 +132,7 @@ export const Tooltip = ( props ) => {
 			if( element.current ){
 				element.current.classList.remove( "tooltip-active" );
 				element.current.classList.add( "tooltip-hidden" );
-			}	
+			};
 		}, 24 );
 	};
 
