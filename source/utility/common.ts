@@ -222,6 +222,9 @@ export default class Common{
 		value = parseInt( value ) || 0;
 
 		return value > 0 ? value : 0;
+	};	
+	public static type( value: any ) : string{
+		return (Object.prototype.toString.call( value ) || "[object Undefined]").replace( /\[|object|\]| /g, "" ).toLowerCase();
 	};
 	public static unsigned( value: any ) : number{
 		return Common.uint( value );
