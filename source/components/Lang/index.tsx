@@ -48,7 +48,7 @@ export const Lang = ( props ) => {
 				let value = params && params.locale ?
 					state.table[ params.locale ][ key ]
 						:
-					(state.table[ state.current ][ key ] === undefined ? (state.table[ "en" ][ key ] || "") : state.table[ state.current ][ key ]);
+					(state.table[ state.current ][ key ] === undefined ? (state.table[ "en" ][ key ] || key) : state.table[ state.current ][ key ]);
 
 				if( Array.isArray( args ) ){
 
