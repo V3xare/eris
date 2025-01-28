@@ -5,7 +5,7 @@ import { Text } from "../../components/Typography";
 import { Icons } from "../../components/Icons";
 
 import "./index.scss"
-import { Tooltip } from "@components/Tooltip";
+import { Tooltip } from "../../components/Tooltip";
 
 export const Input = ( props ) => {
 	let { 
