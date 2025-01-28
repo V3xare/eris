@@ -59,7 +59,7 @@ const TooltipCalcPosition = ( event, tooltip, target ) => {
 };
 
 export const Tooltip = ( props ) => {
-	let { className, children, style, content, hidden, bg, alert, ...rest } = props;
+	let { className, children, style, content, hidden, paddingLess, bg, alert, ...rest } = props;
 	const [ target, setTarget ] = useState( null );
 	const [ created, setCreated ] = useState( false );
 	const element = useRef( null );
@@ -143,6 +143,7 @@ export const Tooltip = ( props ) => {
 						Props.className( "tooltip", className, {
 							active: false,
 							alert: alert,
+							paddingLess: paddingLess,
 							empty: hidden
 						})
 					}

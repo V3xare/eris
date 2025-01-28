@@ -59,6 +59,43 @@
 		border-color: #ff3535;
 	}
 
+	&-conditions{
+		padding: 6px 0px;
+	}
+	&-condition{
+		display: flex;
+		padding: 5px 13px;
+		line-height: 1.2;
+
+		&-verified{
+			position: relative;
+			width: 20px;
+			flex-shrink: 0;
+			align-self: center;
+		}		
+		&-desc{
+			position: relative;
+			padding: 0px 0px 0px 8px;
+		}
+		&-code{
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+		}
+
+	}
+	&-condition-failed &-condition-verified{
+		color: rgb(229, 67, 67);
+	}	
+	&-condition-success{
+		color: rgb(42, 193, 42);
+	}
+	&-condition:hover{
+		background: radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.06) 0%, rgba(3, 0, 20, 0.0) 100%);
+	}
+
 }
 .input-larger{
 	padding: 7px 9px;

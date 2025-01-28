@@ -36,6 +36,9 @@
 	top: -7px;
 }
 
+.tooltip-paddingLess{
+	padding: 0px 0px;
+}
 .tooltip-active{
 	transform: scale(1.0);
 	max-height: 99999px;
@@ -51,6 +54,7 @@
 	transition: all .2s;
 	max-height: 0;
 	overflow: hidden;
+	border-radius: inherit;
 }
 .tooltip-active > div{
 	max-height: 99999px;

@@ -12,7 +12,7 @@ export const Input = ( props ) => {
 		className, children, propValue, style, margin, padding, 
 		placeholder, tools, injection,
 		size,
-		alert, notice,
+		alert, notice, conditions,
 		onChange, onFocus, onBlur, onKeyDown, onKeyUp, onClear, larger,
 		...rest 
 	} = props;
@@ -20,26 +20,14 @@ export const Input = ( props ) => {
 	const [ isFocused, setIsFocused ] = useState( false );
 	const autocomplete = useContext( AutoCompleteContext );
 	const elemWrap = useRef( null );
+	let visible = 
+		((Array.isArray( notice ) && notice.length > 0) || notice === true) 
+		|| 
+		((Array.isArray( conditions ) && conditions.length > 0));
 
 	useEffect(() => {
 		setValue( propValue !== undefined ? propValue : children );
 	}, [ children, propValue ]);
-
-	let noticeList = useMemo(() => {
-		
-		if( !Array.isArray( notice ) )
-			return [];
-
-		return notice.map(( item, index ) => {
-			return (
-				<div key={ index }>
-					{ item }
-				</div>
-			)
-		})
-	}, [ notice ]);
-
-	let visible = ((Array.isArray( notice ) && notice.length > 0) || notice === true);
 
 	useEffect(() => {
 
@@ -49,6 +37,54 @@ export const Input = ( props ) => {
 		setValue( autocomplete.value );
 
 	}, [ autocomplete.value ]);
+
+	let noticeList = useMemo(() => {
+		
+		if( !Array.isArray( notice ) && !Array.isArray( conditions ) )
+			return { success: true, list: [] };
+
+		if( conditions ){
+
+			let success = true;
+			let list: any[] = [];
+			let lineSuccess = false;
+			let index = 0;
+
+			for( let item of conditions ){
+
+				index++;
+				lineSuccess = (value || "").match( item.condition );
+
+				if( !lineSuccess )
+					success = false;
+
+				list.push(
+					<div className={ Props.className( "input-condition", { failed: !lineSuccess, success: lineSuccess }) } key={ index }>
+						<div className={ "input-condition-verified" }>{ lineSuccess ? <Icons.checkmark/> : <Icons.cancelcircle/> }</div>
+						<div className={ "input-condition-desc" }>{ item.desc }</div>
+					</div>
+				);
+
+			};
+
+			return { 
+				success: success, 
+				list: <div className={ "input-conditions" }>{ list }</div>
+			}	
+		}else{
+			return { 
+				success: true, 
+				list: notice.map(( item, index ) => {
+					return (
+						<div key={ index }>
+							{ item }
+						</div>
+					)
+				})
+			}	
+		};
+
+	}, [ notice, conditions, value ]);
 
 	const parseTools = ( list, direction ) => {
 
@@ -123,10 +159,10 @@ export const Input = ( props ) => {
 	}, [ tools, autocomplete, value ] );	
 
 	return (
-	<Tooltip content={ noticeList } hidden={ !visible } alert={ alert }>
+	<Tooltip content={ noticeList.list } hidden={ !visible } alert={ alert || !noticeList.success } paddingLess={ Array.isArray( conditions ) }>
 	<span 
 		className={ 
-			Props.className( "input", className, { focus: isFocused, larger: larger, alert: alert } ) 
+			Props.className( "input", className, { focus: isFocused, larger: larger, alert: (alert || !noticeList.success) } ) 
 		}
 		style={ style }
 	>
