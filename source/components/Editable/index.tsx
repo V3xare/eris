@@ -32,6 +32,21 @@ export function Editable( props ){
 			{ ...rest }
 			preserveNL={ true }
 			ref={ textElem }
+			onMouseDown={() => {
+				setFocus( true );
+				setTimeout(() => {
+
+					if( !area.current )
+						return;
+
+					area.current.focus();
+					area.current.setSelectionRange(
+						area.current.value.length,
+						area.current.value.length
+					);
+
+				});				
+			}}
 		>
 			{ forcedValue || " " }
 		</Text>

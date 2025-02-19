@@ -16,10 +16,10 @@ export const TypographyRoute = ( props ) => {
 					</Tooltip>
 
 			<Column>
-				<Row>Name: <Editable>Alex</Editable></Row>
-				<Row>Age: <Editable>18</Editable></Row>
-				<Row>Name: <Editable>Alex</Editable></Row>
-				<Row>Name: <Editable>Alex</Editable></Row>
+				<Row>Name: <Editable value={ "Alex" }/></Row>
+				<Row>Age: <Editable value={ "18" }/></Row>
+				<Row>Name: <Editable value={ "Alex" }/></Row>
+				<Row>Name: <Editable value={ "Alex" }/></Row>
 			</Column>
 
 
