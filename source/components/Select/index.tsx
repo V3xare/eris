@@ -54,7 +54,7 @@ export const Select = ( props ) => {
 			if( w1 < width && w2 < width )
 				return;
 
-			setWidth( (w1 > w2 ? w1 : w2) + 10 );
+			setWidth( w1 > w2 ? w1 : w2 );
 
 		}, 10 );
 		
