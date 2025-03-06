@@ -26,6 +26,8 @@ export const Select = ( props ) => {
 	if( !Array.isArray( list ) )
 		list = [];
 
+	list = list.filter(( f ) => f );
+
 	if( !list.find(( f ) => f.value == forcedValue ) )
 		forcedValue = list[ 0 ] ? list[ 0 ].value : "";
 
