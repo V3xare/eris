@@ -10,8 +10,8 @@ import "./index.scss"
 import { useAnimation } from "../../utility/animation";
 
 export const Select = ( props ) => {
-	let { className, children, onChange, onSelect, margin, disabled, padding, label, stretch, icon, larger, value, list, ...rest } = props;
-	const [ expanded, setExpanded ] = useState( false );
+	let { className, children, onChange, onSelect, margin, disabled, padding, label, stretch, icon, larger, value, headerless, list, ...rest } = props;
+	const [ expanded, setExpanded ] = useState( headerless ? true : false );
 	const [ hovered, setHovered ] = useState( 0 );
 	let [ forcedValue, setForcedValue ] = useState( value );
 	const [ delayedExpand, setDelayedExpand ] = useState( 0 );
@@ -35,7 +35,15 @@ export const Select = ( props ) => {
 
 	useEffect(() => {
 		setForcedValue( value );
-	}, [ value ]);
+	}, [ value ]);	
+	useEffect(() => {
+
+		if( headerless && !expanded )
+			setExpanded( true );
+		else if( !headerless && expanded )
+			setExpanded( false );
+
+	}, [ headerless ]);
 
 	useEffect(() => {
 
@@ -138,6 +146,8 @@ export const Select = ( props ) => {
 				setDelayedExpand( delayedExpand + 1 );
 			},
 			onBlur: ( e ) => {
+				if( headerless )
+					return;
 				setExpanded( false );
 			},
 			onKeyUp: ( e ) => {},
@@ -176,8 +186,8 @@ export const Select = ( props ) => {
 
 			}			
 		}}>		
-			<Input { ...rest }></Input>
-			<div className={ "select-overlay input" } style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
+			<Input { ...rest } className={ headerless ? "hidden" : "" }></Input>
+			<div className={ "select-overlay input" + (headerless ? " hidden" : "") } style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
 		</AutoCompleteContext.Provider>
 		<div className={ 
 			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 
