@@ -55,4 +55,13 @@
 .select.autocomplete-stretch .autocomplete-suggestions{
 	width: 100%;
 	max-width: 100%;
-}	
+}
+.autocomplete-headerless .autocomplete-suggestions{
+    position: relative;
+    height: auto !important;
+    display: block !important;
+	border-radius: 4px;
+}
+.autocomplete-headerless .input{
+    display: none;
+}

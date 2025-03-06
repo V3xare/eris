@@ -128,7 +128,7 @@ export const Select = ( props ) => {
 
 	return (<div
 		className={
-			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger, stretch: stretch, disabled: disabled } )
+			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger, stretch: stretch, disabled: disabled, headerless: headerless } )
 		}
 	>
 		<AutoCompleteContext.Provider value={{
@@ -186,8 +186,8 @@ export const Select = ( props ) => {
 
 			}			
 		}}>		
-			<Input { ...rest } className={ headerless ? "hidden" : "" }></Input>
-			<div className={ "select-overlay input" + (headerless ? " hidden" : "") } style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
+			<Input { ...rest }></Input>
+			<div className={ "select-overlay input" } style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
 		</AutoCompleteContext.Provider>
 		<div className={ 
 			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 
