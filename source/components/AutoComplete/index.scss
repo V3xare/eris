@@ -48,7 +48,8 @@
 		display: none;
 	}
 	&-expanded > &-suggestions{
-		display: block;
+		display: flex;
+		flex-direction: column;
 	}
 
 	&-item{

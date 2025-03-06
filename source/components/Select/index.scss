@@ -59,7 +59,7 @@
 .autocomplete-headerless .autocomplete-suggestions{
     position: relative;
     height: auto !important;
-    display: block !important;
+    display: flex !important;
 	border-radius: 4px;
 }
 .autocomplete-headerless .input{
