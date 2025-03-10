@@ -12,6 +12,7 @@ export const Row = ( props ) => {
 		flex,
 		gap,
 		stretch,
+		reverse,
 		...rest
 	} = props;
 
@@ -28,7 +29,7 @@ export const Row = ( props ) => {
 
 	return (<div
 		className={
-			Props.className( "row", className )
+			Props.className( "row", className, { reverse: true } )
 		}
 		style={ inlineStyle }
 		{ ...rest }

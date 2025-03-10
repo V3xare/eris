@@ -5,7 +5,7 @@ import { Props } from "../../utility/props";
 import "./index.scss"
 
 export const Column = ( props ) => {
-	let { className, children, style, flex, stretch, gap, ...rest } = props;
+	let { className, children, style, flex, stretch, reverse, gap, ...rest } = props;
 
 	let inlineStyle = { ...style };
 
@@ -20,7 +20,7 @@ export const Column = ( props ) => {
 
 	return (<div
 		className={
-			Props.className( "column", className )
+			Props.className( "column", className, { reverse: true } )
 		}
 		style={ inlineStyle }
 		{ ...rest }
