@@ -20,7 +20,7 @@ export const Column = ( props ) => {
 
 	return (<div
 		className={
-			Props.className( "column", className, { reverse: true } )
+			Props.className( "column", className, { reverse: reverse } )
 		}
 		style={ inlineStyle }
 		{ ...rest }

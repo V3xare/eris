@@ -29,7 +29,7 @@ export const Row = ( props ) => {
 
 	return (<div
 		className={
-			Props.className( "row", className, { reverse: true } )
+			Props.className( "row", className, { reverse: reverse } )
 		}
 		style={ inlineStyle }
 		{ ...rest }
