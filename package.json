@@ -32,7 +32,7 @@
   ],
   "exports": {
     ".": {
-      "sass": "./assets/styles/functions.scss"
+      "sass": "../assets/styles/functions.scss"
     }
   },
   "imports": {
