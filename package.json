@@ -30,6 +30,11 @@
     "release/*",
     "types/*"
   ],
+  "exports": {
+    ".": {
+      "sass": "./assets/styles/functions.scss"
+    }
+  },
   "imports": {
     "@assets/*": "../assets/*",
     "@styles/*": "../assets/styles/*",

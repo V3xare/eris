@@ -1,0 +1,134 @@
+@function mix( $a, $b, $percent: 0, $opacity: 100 ){	
+	$opacity: unquote( ($opacity) );
+	$percent: unquote( ($percent) );
+	@return color-mix( in srgb, #{'rgb(from ' + $a + ' r g b / ' + $opacity + ')'}, #{'rgb(from ' + $b + ' r g b / ' + $opacity + ')'} $percent );
+}
+@function color( $color, $opacity ){	
+	@return #{'rgb(from ' + $color + ' r g b / ' + $opacity + '%)'};
+}
+
+
+$themes: (
+    white: (
+        "bg": rgb(244, 244, 244),
+        "bg-overlay": transparent,
+        "gloss": radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%),
+
+        "element-bg": rgb(244, 244, 244),
+        "element-overlay": rgb(21, 18, 38),
+        "element-shadow": rgb(124, 124, 124),
+        "element-accent": rgb(119, 136, 150),
+        "element-accent2": rgb(255, 166, 0),
+        "element-success": rgb(70, 161, 50),
+        "element-text": rgb(83, 83, 83),
+        "element-text-flat": rgb(19, 19, 19),
+        "element-alert": rgb(255, 53, 79),
+        "element-alert-color": rgb(168, 168, 168),
+
+        "element-text-multi-main": 1.0,
+        "element-text-multi-sub": 1.0,
+        "element-text-multi-text": 1.0,
+        "element-text-multi-shadow": 1.0,  
+        "header-multi-shadow": 1.0,         
+    ),     
+    cold: (
+		"bg": rgb(8, 7, 19),
+		"bg-overlay": transparent,
+        "gloss": radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%),
+
+        "element-bg": rgb(37, 33, 59), 
+        "element-overlay": rgb(21, 18, 38), 
+        "element-shadow":rgb(0, 0, 0), 
+        "element-accent": rgb(195, 187, 255), 
+        "element-accent2": rgb(255, 166, 0), 
+        "element-success":rgb(106, 251, 73), 
+        "element-text": rgb(133, 114, 252), 
+        "element-text-flat": rgb(239, 237, 253), 
+        "element-alert": rgb(199, 39, 39), 
+        "element-alert-color": rgb(168, 168, 168), 
+
+        "element-text-multi-main": 1.0, 
+        "element-text-multi-sub": 1.0, 
+        "element-text-multi-text": 1.0,         
+        "element-text-multi-shadow": 1.0,         
+        "header-multi-shadow": 4.0,         
+    ), 
+    purple: ( 
+		"bg": rgb(3, 0, 20),
+		"bg-overlay": radial-gradient(
+			96.87% 167.08% at 50% 0%,
+			rgba(5, 5, 30, 0) 0%, 
+			rgba(92, 73, 144, .04) 33.33%, 
+			rgba(254, 139, 187, .08) 66.67%, 
+			rgba(255, 189, 122, .12) 99.99%,
+			rgba(255, 189, 122, 0) 100%
+		),
+        "gloss": radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%),
+
+        "element-bg": rgb(37, 33, 59), 
+        "element-overlay": rgb(21, 18, 38), 
+        "element-shadow":rgb(0, 0, 0), 
+        "element-accent": rgb(195, 187, 255), 
+        "element-accent2": rgb(255, 166, 0), 
+        "element-success":rgb(106, 251, 73), 
+        "element-text": rgb(132, 113, 255), 
+        "element-text-flat": rgb(239, 237, 253), 
+        "element-alert": rgb(199, 39, 39), 
+        "element-alert-color": rgb(168, 168, 168), 
+
+        "element-text-multi-main": 1.0, 
+        "element-text-multi-sub": 1.0, 
+        "element-text-multi-text": 1.0,         
+        "element-text-multi-shadow": 1.0,         
+        "header-multi-shadow": 4.0,         
+    ), 
+	default: ( 
+		"bg": rgb(17, 17, 17),
+		"bg-overlay": transparent,
+		"gloss": radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%),
+
+        "element-bg": rgb(46, 45, 53), 
+        "element-overlay": rgb(21, 18, 38), 
+		"element-shadow":rgb(0, 0, 0), 
+        "element-accent": rgb(195, 187, 255), 
+        "element-accent2": rgb(255, 166, 0), 
+        "element-success":rgb(106, 251, 73), 
+        "element-text": rgb(135, 117, 255), 
+        "element-text-flat": rgb(239, 237, 253), 
+        "element-alert": rgb(199, 39, 39), 
+        "element-alert-color": rgb(168, 168, 168), 
+
+        "element-text-multi-main": 1.0, 
+        "element-text-multi-sub": 1.0, 
+        "element-text-multi-text": 1.0,         
+        "element-text-multi-shadow": 1.0,         
+        "header-multi-shadow": 4.0,         
+    )
+);
+
+@mixin addThemes( $arg ){
+	@each $theme, $map in $arg {
+		@if $theme == "default" {
+			:root {
+				@each $key, $value in $map {
+					--#{$key}: #{$value};
+				}
+			}
+		} @else {
+			[data-theme="#{$theme}"] {
+				@each $key, $value in $map {
+					--#{$key}: #{$value};
+				}
+			}
+		}
+	}
+}
+
+@include addThemes( $themes );
+
+
+@include addThemes((
+    ert: (
+		"bg": rgb(3, 0, 20),    
+    ),      
+));
