@@ -40,6 +40,16 @@ export const InputRoute = ( props ) => {
 						{ icon: <Icons.podcast/>, value: "title5", title: "title 5" }						
 				]}/>
 
+				<Divider>Select Span</Divider>	
+
+				<Select span value={ "title277" } onSelect={( v ) => console.log( v ) } list={[
+						{ icon: <Icons.blog/>, value: "title1", title: "title 1" },
+						{ icon: <Icons.image/>, value: "title2", title: "title 27777777777" },
+						{ icon: <Icons.camera/>, value: "title3", title: "title 3" },
+						{ icon: <Icons.dice/>, value: "title4", title: "title 4" },
+						{ icon: <Icons.podcast/>, value: "title5", title: "title 5" }						
+				]}/>
+
 				<Divider>Select Stretch</Divider>	
 
 				<Select value={ "title277" } stretch onSelect={( v ) => console.log( v ) } list={[
