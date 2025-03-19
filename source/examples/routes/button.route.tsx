@@ -6,16 +6,17 @@ import { Divider } from "../../components/Divider";
 import { Button } from "../../components/Button/button";
 import { Space } from "../../components/Space/space";
 import { Modal } from "../../components/Modal/modal";
+import { Column } from "../../components/Column";
+import { Row } from "../../components/Row";
 
 export const ButtonRoute = ( props ) => {
 
 	let [ modalActive, setModalActive ] = useState( false );
 
 	return (
-		<Card borderless padding={ 0 }>
-			<Divider>Overlay</Divider>		
+		<Card header={ "Buttons" }>
 
-			<Card>
+			<Card header={ "Static" }>
 				<Button value={ "Button" } onClick={( e ) => console.log( e ) }/>
 				<Space/>
 				<Space/>
@@ -31,20 +32,24 @@ export const ButtonRoute = ( props ) => {
 				<Button value={ "Danger" } danger confirm onClick={( e ) => console.log( e ) }/>
 			</Card>
 
-			<Card>
+			<Card header={ "Dynamic" }>
 
 				<Button value={ "Modal" } onClick={( e ) => setModalActive( true ) }/>
 				
 				<Modal active={ modalActive } onClose={( e ) => setModalActive( false ) }>
 
-					<Card header={ "User removing" } small borderless>
-						<Text>Removing of user is permanent, do you wish to remove anyway?</Text>
-						<Divider></Divider>
-						<Button value={ "Danger" } danger confirm onClick={( e ) => console.log( e ) }/>
-						<Space/>
-						<Space/>						
-						<Button value={ "Close" } onClick={( e ) => setModalActive( false ) }/>
-					</Card>
+					<Column>
+						<Row>
+							<Text>Removing of user is permanent, do you wish to remove anyway?</Text>
+						</Row>
+						<br/>
+						<Row>
+							<Button value={ "Danger" } danger confirm onClick={( e ) => console.log( e ) }/>
+							<Space/>
+							<Space/>						
+							<Button value={ "Close" } onClick={( e ) => e.modal.close() }/>
+						</Row>
+					</Column>
 
 				</Modal>
 
@@ -53,14 +58,18 @@ export const ButtonRoute = ( props ) => {
 				
 				<Modal trigger={ <Button value={ "Trigger" }/> }>
 
-					<Card header={ "User removing" } small borderless>
-						<Text>Removing of user is permanent, do you wish to remove anyway?</Text>
-						<Divider></Divider>
-						<Button value={ "Danger" } danger confirm onClick={( e ) => console.log( e ) }/>
-						<Space/>
-						<Space/>						
-						<Button value={ "Close" } onClick={( e ) => e.modal.close() }/>
-					</Card>
+					<Column>
+						<Row>
+							<Text>Removing of user is permanent, do you wish to remove anyway?</Text>
+						</Row>
+						<br/>
+						<Row>
+							<Button value={ "Danger" } danger confirm onClick={( e ) => console.log( e ) }/>
+							<Space/>
+							<Space/>						
+							<Button value={ "Close" } onClick={( e ) => e.modal.close() }/>
+						</Row>
+					</Column>
 
 				</Modal>				
 

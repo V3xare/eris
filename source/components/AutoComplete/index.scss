@@ -1,4 +1,4 @@
-@import "../../../assets/styles/preset";
+@import "../../../assets/styles/functions.scss";
 
 .autocomplete{
 	position: relative;
@@ -39,13 +39,14 @@
 		box-shadow: 0px 14px 20px -14px #0000005c;
 		transition: all 240ms;
 		max-height: 200px;
+		min-width: 240px;
 		border-radius: 0px 0px 4px 4px;
 		border-color: transparent;
 		//border-top: 1px solid #f9f9f9;
 		z-index: 2;
-		border: 1px solid #00000005;
-		border-top: 0px solid #f9f9f9;
 		display: none;
+		background-color: mix( var( --element-bg ), var( --element-accent ), 0% );
+		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 	}
 	&-expanded > &-suggestions{
 		display: flex;
@@ -53,24 +54,26 @@
 	}
 
 	&-item{
-		padding: 7px 9px;
 		position: relative;
 		transition: all 240ms;
 		border-radius: 4px;
 		align-items: baseline;
+		white-space: nowrap;
+		padding: 5px 9px;
+		cursor: pointer;		
 	}	
 	&-item .icon{
-		color: $icons-accent;
+		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 	}
 
 	&-hovered{
-		background-color: #f4f4f4;
+		background-color: inherit;
 	}	
 	&-selected{
-		background-color: #e1ecff;
+		background-color: mix( var( --element-bg ), var( --element-accent ), calc(5% * var(--element-text-multi-sub)) );
 	}
 	&-selected.autocomplete-hovered{
-		background-color: #f2f6ff;
+		//background-color: #f2f6ff;
 	}	
 
 	&-expanded > &-suggestions &-item{

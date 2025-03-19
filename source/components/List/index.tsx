@@ -73,12 +73,13 @@ const ListReducer = ( state, [ type, params ] ) => {
 	return state;
 };
 
+export const ListPadding = [ 3, 6, 3, 8 ];
 export const List = ( props ) => {
 	let { className, children, style, load, data, value, padding, onChange, singleType, ...rest } = props;
 	let inlineStyle = { ...style };
 	let [ state, dispatch ] = useReducer( ListReducer, {
 		list: [],
-		padding: Props.parseVec4( padding || [ 5, 8, 5, 8 ] ),
+		padding: Props.parseVec4( padding || ListPadding ),
 		selection: {
 			it: 0,
 			chain: [],

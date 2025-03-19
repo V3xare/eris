@@ -110,6 +110,11 @@ export const AutoComplete = ( props ) => {
 					});
 				};				
 			},
+			clear: () => {
+				onSelect({ value: "" }, () => {
+					setForcedValue( "" );
+				});				
+			},
 			onChange: ( e ) => {
 				onChange( e.value, ( resultList ) => {
 					setSearch( e.value );

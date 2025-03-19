@@ -77,7 +77,7 @@ export const ListLeaf = ( props ) => {
 					paddingTop: padding ? padding[ 0 ] : listContext.state.padding[ 0 ], 
 					paddingRight: padding ? padding[ 1 ] : listContext.state.padding[ 1 ],
 					paddingBottom: padding ? padding[ 2 ] : listContext.state.padding[ 2 ] ,
-					paddingLeft: padding ? padding[ 3 ] : ((level + 1) * listContext.state.padding[ 3 ])
+					paddingLeft: padding ? padding[ 3 ] : ((level + (icon || level < 0 ? 1 : 2)) * listContext.state.padding[ 3 ])
 				}}
 				onClick={() => {
 
@@ -103,7 +103,7 @@ export const ListLeaf = ( props ) => {
 				ref={ childrenElem }
 			>
 			<ListContext.Provider
-				value={{ ...listContext, ["chain"]: chain, parent: token, level: level + 1 }}
+				value={{ ...listContext, ["chain"]: chain, parent: token, level: level + (icon || level < 0 ? 1 : 2) }}
 			>
 			{
 				single ? null : children

@@ -1,5 +1,9 @@
 
 //#Utility
+
+import "../assets/styles/functions.scss"
+import "../assets/styles/themes.scss"
+
 import { useAnimation } from "./utility/animation"
 export { useAnimation };
 import Common from "./utility/common"
@@ -55,8 +59,8 @@ import { List } from "./components/List"
 export { List };
 import { Row } from "./components/Row"
 export { Row };
-import { ThemeContext } from "./components/Theme"
-export { ThemeContext };
+import { Theme } from "./components/Theme"
+export { Theme };
 import { Tooltip } from "./components/Tooltip"
 export { Tooltip };
 import { Text } from "./components/Typography"

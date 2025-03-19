@@ -1,9 +1,11 @@
+@import "../../../assets/styles/functions.scss";
+
 .toggle{
 	position: relative;
     width: 40px;
     height: 21px;
     box-sizing: border-box;
-    background: #cdd1e2;
+	background: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 14% );
     border-radius: 4px;
     padding: 4px;
     flex-shrink: 0;
@@ -13,12 +15,12 @@
 
 	&-active{
 		position: relative;
-		background-color: #82c5ff;
+		background: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 20% );
 	}
 
 	& > div{
 		position: relative;
-		background-color: #fff;
+		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 14% );
 		width: 50%;
 		height: 100%;
 		border-radius: 3px;
@@ -28,6 +30,7 @@
 	&-active > div{
 		position: relative;
 		left: 50%;
+		background: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 80% );
 	}
 
 }

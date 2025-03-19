@@ -1,3 +1,5 @@
+@import "../../../assets/styles/functions.scss";
+
 .select{
 
 	position: relative;
@@ -13,6 +15,10 @@
 		z-index: 1;
 		transition: all 240ms;
 		overflow: hidden;
+		border: none;
+		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+		outline: none;		
 	}
 	.select-overlay{
 		position: relative;
@@ -20,12 +26,16 @@
 		top: 0px;
 		left: 0px;
 		opacity: 1;
+		border: 0;
 		z-index: 0;
 	}
 	.select-overlay.input{
 		opacity: 1;
 		justify-content: space-between;
 	}
+	.select-overlay .icon{
+		color: inherit;
+	}	
 	& input{
 		cursor: default;
 	}
@@ -36,7 +46,7 @@
 		display: none;
 	}
 	& .autocomplete-suggestions{
-		width: max-content;
+		//min-width: 240px;
 		//max-width: max-content;
 	}
 	& .autocomplete-item{
@@ -50,7 +60,7 @@
 }
 
 .autocomplete-expanded .select-overlay .icon{
-	color: #1890ff;
+	//color: #1890ff;
 }
 .select.autocomplete-stretch .autocomplete-suggestions{
 	width: 100%;

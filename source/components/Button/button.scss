@@ -1,3 +1,5 @@
+@import "../../../assets/styles/functions.scss";
+
 @keyframes ButtonAnimation{
 	from {
 		left: 0px;
@@ -25,21 +27,24 @@
 
 .button{
     user-select: none;
-    border-radius: 5px;
+	border-radius: 4px;
     position: relative;
     //margin: 4px 8px;
 	font-size: 16px;
 	display: inline-block;
+	line-height: 1.1;
 
     & > .button-wrap{
 		cursor: pointer;
-	    background-color: #82c5ff;
-		color: white;
 		display: inline-block;
 		user-select: none;
 		padding: 5px 10px 5px 10px;
 		border-radius: inherit;
 		position: relative;
+		border-radius: inherit;
+		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
+		border: 1px solid mix( var( --element-bg ), var( --element-accent ), calc(30% * var(--element-text-multi-sub)), 10% );		
 	}
 
     &:hover > .button-wrap{
@@ -52,14 +57,20 @@
 	}
 
 	&-disabled > .button-wrap{
-		background-color: #deefff;
+		background-color: mix( var( --bg ), var( --element-bg ), calc(30% * var(--element-text-multi-main)), 100% );
+		color: mix( var( --bg ), var( --element-text ), calc(50% * var(--element-text-multi-text)), 100% );
 		cursor: default;
 	}	
+	&-disabled:hover > .button-wrap{
+		opacity: 1;
+	}
 	&-warning > .button-wrap{
-		background-color: #ffd959;
+		background-color: mix( var( --element-bg ), var( --element-warning ), calc(35% * var(--element-text-multi-main)), 100% );
+		color: mix( var( --element-accent ), var( --element-warning ), calc(50% * var(--element-text-multi-text)), 100% );
 	}	
 	&-danger > .button-wrap{
-		background-color: #ff6a6a;
+		background-color: mix( var( --element-bg ), var( --element-alert ), calc(35% * var(--element-text-multi-main)), 100% );
+		color: mix( var( --element-accent ), var( --element-alert ), calc(50% * var(--element-text-multi-text)), 100% );
 	}
 
     &-animation{

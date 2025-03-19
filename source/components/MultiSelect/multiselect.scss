@@ -1,4 +1,4 @@
-@import "../../../assets/styles/preset";
+@import "../../../assets/styles/functions.scss";
 
 .multiselect{
 	min-width: 240px;
@@ -10,27 +10,27 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
-		border: 1px solid #dcdcdc;
-		transition: all 0.15s ease-in-out;
-		border-radius: 5px;
-		background: white;
+		border: none;
+		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+		border-radius: 4px;
+		transition: none;		
 
 		&-tags{
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;	
-			min-height: 35px;
+			min-height: 30px;			
 		}
 		&-item{
 			display: flex;
 			flex-direction: row;
 			flex-wrap: nowrap;
-			background: #52b9ff;
-			color: white;
-			border-radius: 3px;
-			padding: 4px 5px 4px 6px;
-			margin: 4px 0px 4px 4px;
 			align-items: center;
+			background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
+			color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+			border-radius: 3px;
+			padding: 2px 4px 2px 6px;
+			margin: 4px 0px 4px 4px;			
 
 			& .icon{
 				margin-right: 3px;
@@ -41,16 +41,16 @@
 				line-height: 1.4;
 			}		
 			&-remove{
-				padding: 0px 4px 1px 3px;
 				margin-left: 2px;
 				font-weight: bold;
-				top: -1px;
 				position: relative;
 				cursor: pointer;
 				transition: all 0.15s ease-in-out;
+				top: 0px;
+				padding: 0px 4px 2px 4px;
 
 				&:hover{
-					background-color: #77c9ff;
+					background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 15% );
 				}
 
 			}	
@@ -63,14 +63,18 @@
 			outline: none;
 			box-sizing: border-box;
 			background: transparent;
-			min-width: 0;
 			flex: 1;
 			width: 60px;
 			min-width: 60px;
+			color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+			min-height: 32px;			
 		}
+		&-input::placeholder{
+			color: mix( var( --element-text ), var( --element-text-flat ), calc(80% * var(--element-text-multi-text)), 50% );
+		}	
 
 		&-active{
-			border: 1px solid #52b9ff;
+			border-radius: 4px 4px 0px 0px;
 		}
 
 	}	
@@ -81,7 +85,6 @@
 		flex-wrap: nowrap;
 		position: absolute;
 		padding: 4px 4px;
-		background: #ffffff;
 		width: 100%;
 		overflow-y: auto;
 		box-sizing: border-box;
@@ -91,32 +94,31 @@
 		border-radius: 0px 0px 4px 4px;
 		border-color: transparent;
 		z-index: 2;
-		border: 1px solid #00000005;
-		border-top: 0px solid #f9f9f9;
 		display: none;
-		color: #000;
-
+		background-color: mix( var( --element-bg ), var( --element-accent ), 0% );
+		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+	
 		&-expanded{
 			display: flex;
 		}
 
 		&-item{
-			padding: 3px 7px 3px 7px;
+			padding: 3px 7px 4px;
 			position: relative;
 			border-radius: 4px;
 			display: flex;
-			align-items: flex-start;
+			align-items: baseline;
 			transition: all 0.15s ease-in-out;
 			cursor: pointer;
 
 			&-checkbox{
-				width: 16px;
-				height: 16px;
+				box-sizing: border-box;
+				width: 18px;
+				height: 18px;
 				position: relative;
-				border: 1px solid #52b9ff;
+				border: 1px solid;
 				display: inline-block;
-				top: 2px;
-				margin-right: 5px;
+				top: 3px;
 				color: transparent;
 				font-family: icomoon;
 				font-style: normal;
@@ -127,6 +129,8 @@
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
 				font-size: 16px;	
+				border-color: mix( var( --element-bg ), var( --element-accent ), calc(14% * var(--element-text-multi-main)), 15% );
+				margin-right: 8px;
 			}
 			&-checkbox:before{
 				content: "\ea10";
@@ -134,8 +138,8 @@
 				height: 12px;
 				position: absolute;
 				color: inherit;
-				top: 2px;
-				left: 1px;
+				left: 2px;
+				top: 3px;
 				font-size: 11px;
 			}	
 
@@ -145,32 +149,30 @@
 			& input{
 				width: 64px;
 				position: relative;
-				border: 1px solid #dcdcdc;
 				padding: 1px 7px;
-				color: #373737;
 				border-radius: 2px;
-			}
+			}		
 			& input:focus{
 				outline: none;
 			}
 
 		}
 		&-item-selected > &-item-checkbox{
-			background: #52b9ff;
-			color: #f4f4f4;
+			background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 15% );
+			color: mix( var( --element-text ), var( --element-accent ), calc(60% * var(--element-text-multi-main)), 100% );
 		}					
 		&-item:hover{
 			//background-color: #f4f4f4;
 		}
 		&-item-focused{
-			background-color: #f4f4f4;
+			background-color: mix( var( --element-bg ), var( --element-accent ), calc(5% * var(--element-text-multi-sub)) );
 		}		
 		&-item .icon{
-			color: $icons-accent;
+			//color: $icons-accent;
 			padding-right: 4px;
 		}		
 		&-selected{
-			background-color: #f4f4f4;
+			//background-color: #f4f4f4;
 		}
 
 	}

@@ -4,6 +4,7 @@
 
 	&.input{
 		width: max-content;
+		min-width: max-content;
 		align-items: stretch;
 		padding: 0px;
 	}
@@ -19,15 +20,21 @@
 	}
 	& .input-left{
 		border-radius: inherit;
-		border-bottom-right-radius: 0;
-		border-top-right-radius: 0;
 		padding: 0px;		
 	}
 	& .input-right{
 		border-radius: inherit;
+		padding: 0px;
+	}
+	& .input-left > .input-tool{
+		border-radius: inherit;
+		border-bottom-right-radius: 0;
+		border-top-right-radius: 0;		
+	}
+	& .input-right > .input-tool{
+		border-radius: inherit;
 		border-bottom-left-radius: 0;
 		border-top-left-radius: 0;
-		padding: 0px;
 	}
 
 }

@@ -1,3 +1,5 @@
+@import "../../../assets/styles/functions.scss";
+
 .modal{
 	position: fixed;
 	opacity: 0;
@@ -7,10 +9,11 @@
 	transition: all 240ms 0.05s ease-in-out, left 0s, top 0s, height 0s;
 	transform: scale(0.7);
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.22);
-	background: white;
 	z-index: 21;
 	top: 0px;
 	left: 0px;
+	background-color: mix( var( --element-bg ), var( --element-accent ), 5% );
+	color: mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 100% );
 }
 
 .modal-active{
@@ -27,4 +30,8 @@
 
 .modal-active > *{
 	max-height: 99999px;
-};
+}
+
+.modal-content{
+    padding: 13px 13px;
+}

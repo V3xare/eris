@@ -57,7 +57,13 @@ export const AutoCompleteRoute = ( props ) => {
 						{ label: (<Text>custom { value } label</Text>), value: " title3" },
 						{ icon: <Icons.dice/>, value: value + " title4" },
 						{ icon: <Icons.podcast/>, value: value + " title5" }
-					])}>
+						
+					])}
+					onSelect={( value, callback ) => {
+						console.log( value );
+						callback();
+					}}							
+					>
 						<Input 
 							style={{ width: "300px" }} 
 							larger
@@ -67,6 +73,7 @@ export const AutoCompleteRoute = ( props ) => {
 								}},
 								"clear",
 							]}
+					
 							placeholder={ "What would you like to find?" }
 						></Input>
 					</AutoComplete>

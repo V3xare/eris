@@ -1,3 +1,5 @@
+@import "../../../assets/styles/functions.scss";
+
 .card{
 	padding: 0px;
 	margin: 0px;
@@ -5,20 +7,41 @@
     list-style: none;
     position: relative;
     border-radius: 2px;
-    background: #fff;
-	border: 1px solid #f0f0f0;
-	margin: 16px;
+	background: var( --gloss );
+	border: 0px;
+	margin: 8px 8px 0px 8px;
+	box-shadow: 0 0 10px mix( var( --element-shadow ), var( --element-accent ), calc(0% * var(--element-text-multi-shadow)), 14% );
+
 
 	&-header{
-		padding: 18px;
-		background: #f7f7f7;
-		color: #959595;		
+		padding: 14px 11px 0px 11px;
+		color: mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 100% );
+		background: transparent;
 	}	
 	&-body{
-		padding: 18px;
+		padding: 6px 11px;
+		color: mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 70% );
 	}
 
 }
+.card .card{
+	background: transparent;
+	box-shadow: none;
+	margin: 4px 0px;
+	border-bottom: 0px;
+	border-top: 0px;	
+}
+
+.card  .card-body > .row{
+	line-height: 2;
+	font-size: 14px;
+}
+
+.card .card .row{
+	align-items: center;
+	white-space: pre-line;
+}
+
 .card-borderless{
 	border: 1px solid transparent;
 }
@@ -26,7 +49,6 @@
 .card-small{
 	margin: 8px;
 }
-
 
 .card-small .card-header{
 	padding: 9px 10px 6px;

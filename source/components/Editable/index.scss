@@ -1,43 +1,59 @@
+@import "../../../assets/styles/functions.scss";
+
 .typography-editable{
 	position: relative;
+    outline: none;
+    box-sizing: border-box;
+    width: 240px;
+    min-width: 240px;
+    border: none;
+    background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+    color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+    border-radius: 4px;
+    min-height: 28px;	
 }
 .typography-editable > div:first-child{
 	position: relative;
 	padding: 0px;
 	display: inline-block;
     white-space: pre-wrap;
-	margin-right: 6px;
+	margin: 3px 4px 5px 8px;
+    width: calc(100% - 12px);
+    cursor: text;
 }
 .typography-editable > .icon{
-	top: -4px;
-};
+    top: 7px;
+    position: absolute;
+    right: -21px;
+    color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 60% );
+}
 .typography-editable > textarea{
 	position: absolute;
 	left: 0px;
 	top: 0px;
 	margin: 0px;
 	resize: none;
-	padding: 3px 11px 3px 11px;
-	margin: -4px -12px -9px -12px;
 	box-sizing: border-box;
 	list-style: none;
 	display: inline-block;
-	width: calc( 100% + 6px );
 	min-width: 0;
-	color: #000000d9;
 	font-size: 14px;
 	line-height: 1.56;
-	background-color: #fff;
 	background-image: none;
-	border: 1px solid #d9d9d9;
-	border-radius: 2px;
 	overflow: hidden;
 	transition: all .3s, height 0s;
 	z-index: 2;
+	padding: 3px 4px 5px 8px;
+    margin: 0px 0px 0px 0px;
+    width: calc(100% + 0px);
+    background-color: transparent;
+    color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+    border: 0px solid transparent;
+    border-radius: 4px;	
 }
 .typography-editable > textarea:focus{
-	border-color: #40a9ff;
-	box-shadow: 0 0 0 2px #40a9ff;
-	border-right-width: 1px!important;
+	border-color: transparent;
+	box-shadow: 0 0 0 1px mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-sub)), 50% );
+	border-right-width: 0px !important;
 	outline: 0;
 }

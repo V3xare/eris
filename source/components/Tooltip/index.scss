@@ -1,14 +1,16 @@
+@import "../../../assets/styles/functions.scss";
+
 .tooltip{
 	position: fixed;
-	padding: 4px 8px;
 	opacity: 0;
-	border-radius: 4px;
 	max-height: 0;
 	max-width: 256px;
 	transition: all .2s 0.05s ease-in-out, left 0s, top 0s, height 0s;
 	transform: scale(0.7);
-	background: #424242;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.22);
+	background-color: mix( var( --element-bg ), var( --element-accent ), 0% );
+	padding: 6px 8px;
+	border-radius: 8px;	
 	z-index: 99;
 
 	&-arrow{
@@ -28,28 +30,51 @@
 		display: none !important;
 	}
 
-}
+	& > div > .typography{
+		color: mix( var( --element-text-flat ), var( --element-accent ), calc(60% * var(--element-text-multi-text)), 80% );
+	}	
+	& .input-condition-success{
+		color: mix( var( --element-text-flat ), var( --element-success ), calc(100% * var(--element-text-multi-text)), 80% );
+	}
 
-.tooltip-reverseY > div > .tooltip-arrow{
-	border-top: 0px solid #424242;
-	border-bottom: 7px solid #424242;
-	top: -7px;
+	& .tooltip-arrow{
+		border-top-color: mix( var( --element-bg ), var( --element-accent ), 0% );
+	}
+	&.tooltip-reverseY .tooltip-arrow{
+		border-top: 0px solid transparent;
+		top: -7px;		
+		border-bottom-color: mix( var( --element-bg ), var( --element-accent ), 0% );
+	}
+	&.tooltip-hidden{
+		padding: 0px;
+	}
+	& .typography > div {
+		margin: 3px 0px;
+	}
+	
+	& .input-conditions{
+		padding: 0px;
+	}	
+	& .input-conditions{
+		padding: 0px;
+		margin: 0px !important;
+	}	
+	& .input-condition{
+		background: radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(3, 0, 20, 0) 100%);
+		line-height: 1.5;
+	}
+
 }
 
 .tooltip-paddingLess{
-	padding: 0px 0px;
+	padding: 0px;
 }
 .tooltip-active{
 	transform: scale(1.0);
 	max-height: 99999px;
 	opacity: 1;
 }
-.tooltip-hidden{
-	padding: 0px;
-}
-.tooltip-hidden .tooltip-arrow{
-	//transform: scaleY(0.0);
-}
+
 .tooltip > div{
 	transition: all .2s;
 	max-height: 0;
@@ -59,6 +84,3 @@
 .tooltip-active > div{
 	max-height: 99999px;
 };
-.tooltip > div > .typography{
-	color: #f4f4f4;
-}

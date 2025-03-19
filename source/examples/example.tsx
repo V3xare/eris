@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
+import "../../assets/styles/main.scss"
+import "../../assets/styles/core.scss"
 
 import {
 	BrowserRouter,
@@ -17,6 +19,7 @@ import { Icons } from "../components//Icons";
 import { Row } from "../components//Row";
 import { List } from "../components//List";
 import { Column } from "../components//Column";
+import { Select } from "../components//Select";
 import { Divider } from "../components//Divider";
 import { Card } from "../components//Card";
 import { Tooltip } from "../components//Tooltip";
@@ -32,27 +35,50 @@ import { CalendarRoute } from "../examples//routes/celendar.route";
 import { ToggleRoute } from "../examples//routes/toggle.example";
 import { ButtonRoute } from "../examples//routes/button.route";
 import { MultiSelectRoute } from "../examples//routes/multiselect.route";
+import { Theme } from "../components/Theme";
+import { Storage } from "../utility/storage";
 
 const Header = Row, Wrap = Row, Footer = Row;
-const Body = Column, Content = Column, Side = Column;
+const Body = Row, Content = Column, Side = Column;
 
 export const Example = ( props ) => {
 
 	const nav = useNavigate();
 	const location = useLocation();
+	const [ theme, setTheme ] = useState( "default" );
+
+	useEffect(() => {
+		setTheme( Storage.get( "theme" ) || "default" );
+	}, []);
+
+	useEffect(() => {
+		document.body.dataset.theme = theme;
+	}, [ theme ]);
 
 	return (
-	<Body>
-
-		<Header flex={ "0px" }></Header>
-
+	<Body className={ "core" }>
+		<Theme/>
 		<Wrap flex={ 9 }>
 
-			<Side flex={ "0 0 256px" }>
-				<Divider style={{ color: "red" }}>Tools</Divider>
+			<div className={ "core-theme-switcher" }>
+				<Select
+					value={ theme } 
+					onChange={( event ) => {
+						Storage.set( "theme", event.value );
+						setTheme( event.value );
+					}}
+					list={[
+						{ value: "default", title: "default( white )" },
+						{ value: "dark", title: "dark" },
+						{ value: "purple", title: "purple" },
+						{ value: "cold", title: "cold" }
+					]}				
+				/>
+			</div>
 
+			<div className={ "core-sidebar" }>
 				<List value={ location.pathname } onChange={( event ) => nav( event.value ) }>
-					<List.Item icon={<Icons.pencil/>} title="General" expandable={ false }>
+					<List.Item icon={<Icons.pencil/>} title="General">
 						<List.Item value={ "/typography" }>Typography</List.Item>
 						<List.Item value={ "/icons" }>Icons</List.Item>
 						<List.Item value={ "/lang" }>Lang</List.Item>
@@ -81,9 +107,9 @@ export const Example = ( props ) => {
 					</List.Item>
 				</List>
 
-			</Side>
+			</div>
 
-			<Content flex={ 9 }>
+			<div className={ "core-content" }>
 
 				<Routes>
 					<Route path="/" element={ <TypographyRoute/> } />
@@ -101,7 +127,7 @@ export const Example = ( props ) => {
 					<Route path="autocomplete" element={ <AutoCompleteRoute/> } />
 				</Routes>
 
-			</Content>
+			</div>
 
 		</Wrap>
 

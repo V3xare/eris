@@ -105,7 +105,7 @@ export const Input = ( props ) => {
 					}};
 				}else if( item == "clear" ){
 					item = { icon: <Icons.cross active style={{ fontSize: "70%" }}/>, direction: 1, onClick: ( event ) => {
-						event.setValue( "" );
+						event.autocomplete.clear();
 					}};
 				}else 
 					continue;

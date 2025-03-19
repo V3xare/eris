@@ -17,7 +17,7 @@ import {
 //
 console.log( "eris" );
 //
-import "../assets/styles/main.scss"
+
 import { Example } from "./examples/example";
 //
 

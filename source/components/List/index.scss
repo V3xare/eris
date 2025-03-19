@@ -1,3 +1,5 @@
+@import "../../../assets/styles/functions.scss";
+
 .list{
 	display: flex;
 	flex-direction: column;
@@ -5,9 +7,11 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	//border-right: 1px solid #f0f0f0;
 	user-select: none;
 	padding-left: 0px;
+    border-right: 0px;
+	padding-top: 8px;
+    color: mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 70% );
 }
 .list-item{
 	display: flex;
@@ -17,15 +21,15 @@
 
 	&-title{
 		//background-color: #fff;
-		background: #fdfdfd;
-		border: 1px solid #f9f9f9;
 		border-right: 2px solid transparent;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
-		align-items: center;
 		justify-content: flex-start;
 		cursor: pointer;
+		background: transparent;
+		border: 1px solid transparent;
+		align-items: baseline;		
 	}
 	&-children{
 		position: relative;
@@ -34,24 +38,26 @@
 	}
 	&-title > .icon{
 		margin-right: 10px;
+		margin-left: 6px;
 	}
 	&-title > .icon:last-child{
 		margin-left: auto;
 		display: none;
+		align-self: center;
 	}
 	&-expandable > &-title > .icon:last-child{
 		display: block;
 	}	
 	&-title:hover{
-		color: #1890ff;
+		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% ) !important;
 	}
 	&-chain > &-title{
-		color: #1890ff;
+		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% ) !important;
 	}
 	&-selected > &-title{
-		color: #1890ff !important;
-		background-color: #e6f7ff !important;
-		border-right: 2px solid #1890ff !important;		
+		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% ) !important;
+		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% ) !important;
+		border-right: 2px solid mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-sub)), 40% ) !important;
 	}
 
 	&-content > &-title{

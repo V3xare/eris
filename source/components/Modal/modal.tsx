@@ -93,7 +93,7 @@ export const Modal = ( props ) => {
 					ref={ element }
 					{ ...rest }
 				>
-					{ props.children }
+					<div className={ "modal-content" }>{ props.children }</div>
 				</div>),
 				document.body
 			)) : null

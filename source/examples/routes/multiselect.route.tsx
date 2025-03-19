@@ -12,10 +12,9 @@ export const MultiSelectRoute = ( props ) => {
 	let [ listPreset2, setListPreset2 ] = useState({ numberV: 5, checkboxV: true });
 
 	return (
-		<Card borderless padding={ 0 }>
-			<Divider>Overlay</Divider>		
+		<Card header={ "MultiSelect" }>
 
-			<Card>
+			<Card header={ "Simple" }>
 				<MultiSelect 
 					value={ list } 				
 					suggestions={[
@@ -24,12 +23,11 @@ export const MultiSelectRoute = ( props ) => {
 						{ value: "ch", title: "Chinese" },
 						{ value: "de", title: "German" },
 					]} 
-					placeholder={ "Start typying here" }
 					onChange={( e ) => setList( e.value ) }
 				/>
 			</Card>
 
-			<Card>
+			<Card header={ "Preset" }>
 				<MultiSelect 
 					value={ list2 } 
 					preset={ listPreset2 }
