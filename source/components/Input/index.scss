@@ -10,7 +10,7 @@
     //background: #fff;
     position: relative;
 	width: 240px;
-    min-width: 240px;
+    //min-width: 240px;
 	z-index: 1;
     box-shadow: none;
 	border: none;
@@ -116,4 +116,7 @@
 .input-larger{
 	padding: 7px 9px;
 	border-radius: 8px;
+}
+.input-span{
+	background-color: transparent;
 }

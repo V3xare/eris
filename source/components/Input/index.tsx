@@ -12,6 +12,7 @@ export const Input = ( props ) => {
 		className, children, propValue, style, margin, padding, 
 		placeholder, tools, injection,
 		size,
+		span,
 		alert, notice, conditions, tooltipClassName,
 		onChange, onFocus, onBlur, onKeyDown, onKeyUp, onClear, larger,
 		...rest 
@@ -162,7 +163,7 @@ export const Input = ( props ) => {
 	<Tooltip className={ tooltipClassName } content={ noticeList.list } hidden={ !visible } alert={ alert || !noticeList.success } paddingLess={ Array.isArray( conditions ) }>
 	<span 
 		className={ 
-			Props.className( "input", className, { focus: isFocused, larger: larger, alert: (alert || !noticeList.success) } ) 
+			Props.className( "input", className, { focus: isFocused, larger: larger, span: span, alert: (alert || !noticeList.success) } ) 
 		}
 		style={ style }
 	>

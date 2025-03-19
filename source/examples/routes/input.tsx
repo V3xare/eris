@@ -14,7 +14,9 @@ export const InputRoute = ( props ) => {
 
 			<Card>
 				<Divider>Input</Divider>	
-				<Input onChange={( e ) => console.log( e.value ) }>{ "Hello World" }</Input>	
+				<Input onChange={( e ) => console.log( e.value ) }>{ "Hello World" }</Input>					
+				<Divider>Span</Divider>	
+				<Input span onChange={( e ) => console.log( e.value ) }>{ "Hello World( span )" }</Input>	
 				<Divider>Notice/Alert</Divider>				
 				<Input onChange={( e ) => console.log( e.value ) } alert={ true } notice={[
 					(<div>Name length can't be lower than 3</div>),
