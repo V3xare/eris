@@ -201,6 +201,12 @@ export const Select = ( props ) => {
 						<React.Fragment>
 							 { item.icon }
 							 <div className={ "autocomplete-value" }><Text>{ item.title }</Text></div>
+							 { 
+							 	(item.length || (item.length === 0 || item.length === "0")) ? 
+									(<span className={ "autocomplete-value-length" }>{ Common.uint( item.length ) }</span>)
+									:
+									(null)
+							}
 						</React.Fragment>
 					))
 

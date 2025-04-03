@@ -110,17 +110,17 @@ export const InputRoute = ( props ) => {
 				</Card>					
 				
 				<Card>
-					<Row>{ "Headerless Row Stretch, max-width: 400px" }</Row>
+					<Row>{ "Headerless Row Stretch, Length, max-width: 400px" }</Row>
 					<Row>
 						<Select stretch headerless row style={{ maxWidth: 400 }}  value={ "title277" } onSelect={( v ) => console.log( v ) } list={[
-							{ icon: <Icons.blog/>, value: "title1", title: "title 1" },
-							{ icon: <Icons.image/>, value: "title2", title: "title 27777777777" },
-							{ icon: <Icons.camera/>, value: "title3", title: "title 3" },
-							{ icon: <Icons.dice/>, value: "title4", title: "title 4" },
-							{ icon: <Icons.podcast/>, value: "title5", title: "title 5" },
-							{ icon: <Icons.share/>, value: "title6", title: "title 6" },
-							{ icon: <Icons.accessibility/>, value: "title7", title: "title 7" },
-							{ icon: <Icons.shield/>, value: "title8", title: "title 8" },
+							{ icon: <Icons.blog/>, value: "title1", title: "title 1", length: "" },
+							{ icon: <Icons.image/>, value: "title2", title: "title 27777777777", length: "" },
+							{ icon: <Icons.camera/>, value: "title3", title: "title 3", length: "24" },
+							{ icon: <Icons.dice/>, value: "title4", title: "title 4", length: "" },
+							{ icon: <Icons.podcast/>, value: "title5", title: "title 5", length: "4" },
+							{ icon: <Icons.share/>, value: "title6", title: "title 6", length: "" },
+							{ icon: <Icons.accessibility/>, value: "title7", title: "title 7", length: "" },
+							{ icon: <Icons.shield/>, value: "title8", title: "title 8", length: "" },
 						]}/>
 					</Row>									
 				</Card>				
