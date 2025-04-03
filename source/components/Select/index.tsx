@@ -8,9 +8,26 @@ import { AutoCompleteContext } from "../../components/AutoComplete";
 
 import "./index.scss"
 import { useAnimation } from "../../utility/animation";
+import VMath from "../../utility/vmath";
+import Common from "../../utility/common";
+
+const FindIndex = ( parent: any, offset: number ) : number => {
+	
+	let index = 0;
+
+	for( const item of parent.childNodes ){
+
+		if( item.offsetLeft >= offset )
+			break;
+
+		index++;
+	};
+
+	return index;
+};
 
 export const Select = ( props ) => {
-	let { className, children, onChange, onSelect, margin, disabled, padding, label, stretch, icon, larger, value, headerless, list, ...rest } = props;
+	let { className, children, onChange, onSelect, margin, disabled, padding, row, label, stretch, icon, larger, value, headerless, style, list, ...rest } = props;
 	const [ expanded, setExpanded ] = useState( headerless ? true : false );
 	const [ hovered, setHovered ] = useState( 0 );
 	let [ forcedValue, setForcedValue ] = useState( value );
@@ -44,6 +61,78 @@ export const Select = ( props ) => {
 			setExpanded( false );
 
 	}, [ headerless ]);
+
+	const getPaddingLeft = () : number => {
+
+		if( !childrenElem.current )
+			return 0;
+
+		let p: any = window.getComputedStyle( childrenElem.current ).getPropertyValue( "padding-left" );
+		p = Common.uint( p );
+	
+		return p;
+	};
+
+//	const scrollShiftLeft = () => {
+//
+//		if( !childrenElem.current || !childrenElem.current.childNodes.length )
+//			return;
+//		
+//		let offset = childrenElem.current.scrollLeft - 80;
+//		let cellWidth = 0;
+//		let maxWidth = childrenElem.current.scrollWidth - childrenElem.current.parentElement.clientWidth;
+//
+//		if( (offset + cellWidth) > maxWidth )
+//			offset = maxWidth;
+//				
+//		childrenElem.current.scrollLeft = offset;
+//	};
+//	const scrollShiftRight = () => {
+//
+//		if( !childrenElem.current || !childrenElem.current.childNodes.length )
+//			return;
+//		
+//		let offset = childrenElem.current.scrollLeft + 80;
+//		let cellWidth = 0;
+//		let maxWidth = childrenElem.current.scrollWidth - childrenElem.current.parentElement.clientWidth;
+//
+//		if( (offset + cellWidth) > maxWidth )
+//			offset = maxWidth;
+//
+//		childrenElem.current.scrollLeft = offset;
+//	};
+	const scrollPrev = () => {
+
+		if( !childrenElem.current || !childrenElem.current.childNodes.length )
+			return;
+			
+		let index = FindIndex( childrenElem.current, childrenElem.current.scrollLeft );
+		index = VMath.clamp( index - 1, 0, childrenElem.current.childNodes.length - 1 );
+		let offset = childrenElem.current.childNodes[ index ].offsetLeft - getPaddingLeft();
+		let cellWidth = 0;
+		let maxWidth = childrenElem.current.scrollWidth - childrenElem.current.parentElement.clientWidth;
+
+		if( (offset + cellWidth) > maxWidth )
+			offset = maxWidth;
+
+		childrenElem.current.scrollLeft = offset;
+	};
+	const scrollNext = () => {
+
+		if( !childrenElem.current || !childrenElem.current.childNodes.length )
+			return;
+
+		let index = FindIndex( childrenElem.current, childrenElem.current.scrollLeft );
+		index = VMath.clamp( index + 1, 0, childrenElem.current.childNodes.length - 1 );
+		let offset = childrenElem.current.childNodes[ index ].offsetLeft - getPaddingLeft();
+		let cellWidth = 0;
+		let maxWidth = childrenElem.current.scrollWidth - childrenElem.current.parentElement.clientWidth;
+
+		if( (offset + cellWidth) > maxWidth )
+			offset = maxWidth;
+
+		childrenElem.current.scrollLeft = offset;
+	};
 
 	useEffect(() => {
 
@@ -126,10 +215,30 @@ export const Select = ( props ) => {
 		return result;
 	}, [ list, hovered, forcedValue ]);
 
+	useEffect(() => {
+
+		if( !row || !childrenElem.current.childNodes.length )
+			return;
+
+		//Focus Scroll on element
+		let index = list.findIndex(( f ) => f.value == forcedValue );
+		index = VMath.clamp( index - 1, 0, childrenElem.current.childNodes.length - 1 );
+		let offset = childrenElem.current.childNodes[ index ].offsetLeft - getPaddingLeft();
+		let cellWidth = 0;
+		let maxWidth = childrenElem.current.scrollWidth - childrenElem.current.parentElement.clientWidth;
+
+		if( (offset + cellWidth) > maxWidth )
+			offset = maxWidth;
+
+		childrenElem.current.scrollLeft = offset;		
+
+	}, [ forcedValue ]);
+
 	return (<div
 		className={
-			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger, stretch: stretch, disabled: disabled, headerless: headerless } )
+			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger, row: row, stretch: stretch, disabled: disabled, headerless: headerless } )
 		}
+		style={ style }
 	>
 		<AutoCompleteContext.Provider value={{
 			value: forcedValue,
@@ -192,10 +301,18 @@ export const Select = ( props ) => {
 		<div className={ 
 			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 
 		}></div>		
+		<span className={ "autocomplete-scrollLeft" }></span>
+		<span className={ "autocomplete-scrollRight" }></span>		
 		<div className={ 
 			Props.className( "autocomplete-suggestions" ) 
 		}
 			style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }}
+			onWheel={( e ) => {
+				if( e.deltaY < 0 )
+					scrollPrev();
+				else
+					scrollNext();
+			}}
 			ref={ childrenElem }
 		>
 			{ suggestions }

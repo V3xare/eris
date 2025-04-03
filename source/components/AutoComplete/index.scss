@@ -5,14 +5,7 @@
 	display: inline-block;
 	align-self: flex-start;
 	user-select: none;
-
-	&-stretch{
-		width: 100%;
-	}
-	&-stretch &-suggestions{
-		width: 100%;
-		max-width: 100%;
-	}
+	white-space: nowrap;
 
 	&-shadowfix{
 		left: 0px;
@@ -84,6 +77,18 @@
 		margin-left: 8px;
 	}
 
+	&-stretch{
+		width: 100%;
+	}	
+	&-row &-suggestions{
+		flex-direction: row;
+		scroll-behavior: smooth;
+	}
+	&-stretch &-suggestions{
+		width: 100%;
+		max-width: 100%;
+	}
+
 }
 
 .autocomplete > .input-focus{
@@ -100,4 +105,20 @@
 }
 .autocomplete-larger.autocomplete-expanded > .input{
     border-radius: 8px 8px 0px 0px;
+}
+
+
+.autocomplete-scrollLeft, .autocomplete-scrollRight{
+	opacity: 0.5;
+	pointer-events: none;
+	width: 20px;
+	top: 0px;
+	bottom: 0px;
+	position: absolute;
+	display: none;
+	z-index: 3;
+	background-color: red;
+}
+.autocomplete-scrollRight{
+	right: 0px;
 }

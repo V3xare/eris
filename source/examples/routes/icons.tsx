@@ -18,7 +18,7 @@ export const IconsRoute = ( props ) => {
 
 		for( let key in values ){
 			list.push(
-				<Tooltip key={ key } content={ keys[ key ] }>{ values[ key ]({ ...props, size: "200%", padding: 10, color: "#000" })  }</Tooltip>
+				<Tooltip key={ key } content={ keys[ key ] }>{ values[ key ]({ ...props, size: "200%", padding: 10 })  }</Tooltip>
 			);
 		};
 
@@ -26,13 +26,19 @@ export const IconsRoute = ( props ) => {
 	}, []);
 
 	return (
-		<Card borderless padding={ 0 }>
+		<div>
 
-			<Card>
-				<Divider>Icomoon pack</Divider>		
-				{ icons }
+			<Card header={ "Icons" }>
+
+				<Card>
+					<Row>{ "Icomoon pack" }</Row>
+					<div>
+						{ icons }
+					</div>									
+				</Card>
+
 			</Card>
 
-		</Card>
+		</div>
 	);
 };

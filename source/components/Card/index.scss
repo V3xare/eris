@@ -32,12 +32,12 @@
 	border-top: 0px;	
 }
 
-.card  .card-body > .row{
+.card .card-body > .row{
 	line-height: 2;
 	font-size: 14px;
 }
 
-.card .card .row{
+.card .card .card-body > .row, .card .card .card-header > .row{
 	align-items: center;
 	white-space: pre-line;
 }
