@@ -78,13 +78,30 @@
     display: flex !important;
 	border-radius: 4px;
 	box-shadow: none;
+	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+	color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+}
+.autocomplete-headerless .autocomplete-suggestions{
+    position: relative;
+    height: auto !important;
+    display: flex !important;
+	border-radius: 4px;
+	box-shadow: none;
+	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+	color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+}
+.autocomplete-headerless .autocomplete-hovered{
+	background-color: transparent;
+}
+.autocomplete-headerless .autocomplete-selected{
+	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
 }
 .autocomplete-headerless .input{
     display: none;
 }
 
 .autocomplete-row *::-webkit-scrollbar-track{
-	background: radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(3, 0, 20, 0) 100%);
+	//background: radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(3, 0, 20, 0) 100%);
 }
 
 .autocomplete-row *::-webkit-scrollbar{
@@ -94,7 +111,7 @@
 }
 
 .autocomplete-row *::-webkit-scrollbar-thumb{
-	background-color: #c3bbff21;
+	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
 	border-radius: inherit;
 }
 .autocomplete-row > .autocomplete-scrollLeft, .autocomplete-row > .autocomplete-scrollRight{

@@ -81,12 +81,12 @@
 			padding: 3px 5px 2px;
 			border-radius: 4px;
 			//background-color: #3f376b;
-			background-color: mix( var( --element-bg ), var( --element-accent ), calc(10% * var(--element-text-multi-sub)) );
+			background-color: mix( var( --element-bg ), var( --element-accent ), calc(14% * var(--element-text-multi-sub)) );
 		}
 
 	}
 	&-selected &-value-length{
-		background-color: mix( var( --element-bg ), var( --element-accent ), calc(15% * var(--element-text-multi-sub)) );
+		background-color: mix( var( --element-bg ), var( --element-accent ), calc(25% * var(--element-text-multi-sub)) );
 	}	
 
 	&-stretch{
