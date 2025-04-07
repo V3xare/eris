@@ -14,6 +14,6 @@ export const Divider = ( props ) => {
 		}
 		style={ style }
 	>{
-		<Text strong>{ children }</Text>
+		children ? (<Text strong>{ children }</Text>) : (null)
 	}</div>);
 };
