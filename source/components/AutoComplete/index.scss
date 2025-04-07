@@ -57,6 +57,7 @@
 	}	
 	&-item .icon{
 		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+		margin-right: 8px;
 	}
 
 	&-hovered{
@@ -74,7 +75,6 @@
 	}
 
 	&-value{
-		margin-left: 8px;
 
 		&-length{
 			margin: 0px 4px;
