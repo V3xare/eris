@@ -7,6 +7,7 @@ import { Input } from "../../components/Input";
 import { Select } from "../../components/Select";
 import { Icons } from "../../components/Icons";
 import { Number } from "../../components/Number";
+import { MultiSelect } from "@components/MultiSelect/multiselect";
 
 export const InputRoute = ( props ) => {
 
@@ -96,6 +97,21 @@ export const InputRoute = ( props ) => {
 					</Row>									
 				</Card>				
 
+				<Card>
+					<Row>{ "Multiselect" }</Row>
+					<Row>
+						<MultiSelect
+							value={[ "en", "de" ]} 				
+							suggestions={[
+								{ value: "en", title: "English", icon: <Icons.user/> },
+								{ value: "ru", title: "Russian", icon: <Icons.user/> },
+								{ value: "ch", title: "Chinese" },
+								{ value: "de", title: "German" },
+							]} 
+						/>
+					</Row>									
+				</Card>							
+				
 				<Card>
 					<Row>{ "Headerless Row Stretch" }</Row>
 					<Row>
