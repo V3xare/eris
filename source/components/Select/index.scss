@@ -81,15 +81,6 @@
 	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
 	color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 }
-.autocomplete-headerless .autocomplete-suggestions{
-    position: relative;
-    height: auto !important;
-    display: flex !important;
-	border-radius: 4px;
-	box-shadow: none;
-	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
-	color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
-}
 .autocomplete-headerless .autocomplete-hovered{
 	background-color: transparent;
 }

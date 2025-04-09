@@ -1,13 +1,13 @@
 .divider{
 	display: flex;
 	margin: 16px 0;
-	color: rgba(0, 0, 0, 0.85);
 	font-weight: 500;
 	font-size: 16px;
 	white-space: nowrap;
 	text-align: center;
 	border-top: 0;
-	border-top-color: rgba(0, 0, 0, 0.06);
+	border-top-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+	color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 }
 .divider > div{
 	padding: 0px 18px;
