@@ -314,6 +314,7 @@ export const Select = ( props ) => {
 		}
 			style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }}
 			onWheel={( e ) => {
+				e.stopPropagation();
 				if( e.deltaY < 0 )
 					scrollPrev();
 				else
