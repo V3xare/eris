@@ -365,7 +365,10 @@ export default class Common{
 		let n = 0;
 	
 		for( const key in qs ){
-	
+
+			if( qs[ key ] === undefined || qs[ key ] === "" || qs[ key ] === null )
+				continue;
+
 			if( n > 0 )
 				result += "&"
 			else
