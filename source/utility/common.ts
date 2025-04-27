@@ -216,8 +216,10 @@ export default class Common{
 	};
 	public static uint( value: any ) : number{
 
-		if( typeof value == "number" )
-			return value;
+		if( typeof value == "number" ){
+			value = Math.floor( value );
+			return value > 0 ? value : 0;
+		};
 
 		value = parseInt( value ) || 0;
 
