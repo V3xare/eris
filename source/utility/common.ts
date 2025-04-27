@@ -210,7 +210,7 @@ export default class Common{
 	public static int( value: any ) : number{
 
 		if( typeof value == "number" )
-			return value;
+			return Math.floor( value );
 
 		return parseInt( value ) || 0;
 	};
