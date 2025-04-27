@@ -380,26 +380,17 @@ export default class Common{
 	
 		return result;
 	};	
-	public static offset( target: HTMLElement ) : { x: number, y: number }{
+	public static offset( target: HTMLElement ) : { x: number, y: number, width: number, height: number }{
 
 		if( !target )
-			return { x: 0, y: 0 };
+			return { x: 0, y: 0, width: 0, height: 0 };
 
-		let parent: HTMLElement | null = target;
-		let end: number = 30;
-		let offset = { x: 0, y: 0 };
-
-		while( parent && parent.nodeName != "BODY" ){
-
-			offset.x += parent.offsetLeft;
-			offset.y += parent.offsetTop;
-			parent = parent.parentElement;
-			end--;
-
-			if( end == 0 )
-				break;
-
-		};
+		let offset = { x: 0, y: 0, width: 0, height: 0 };
+		let aabb = target.getBoundingClientRect();
+		offset.x = aabb.x;
+		offset.y = aabb.y;		
+		offset.width = aabb.width;
+		offset.height = aabb.height;
 
 		return offset;
 	};
