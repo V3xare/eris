@@ -7,12 +7,12 @@ import "./index.scss"
 import Common from "../../utility/common";
 import { Text } from "../../components/Typography";
 
-const TooltipCalcPosition = ( event, tooltip, target ) => {
+export const TooltipCalcPosition = ( event, tooltip, target, margin, marginFixed ) => {
 
 	let e = { x: event.clientX, y: event.clientY };
 	let isReversed = tooltip.classList.contains( "tooltip-reverseY" );
-	let margin = 10;
-	let marginFixed = 12;
+	//let margin = 10;
+	//let marginFixed = 12;
 	let padding = 10;
 
 	//let aabb = tooltip.getBoundingClientRect();
@@ -52,7 +52,7 @@ const TooltipCalcPosition = ( event, tooltip, target ) => {
 	if( offsetXR > screenWidth )
 		position.x += screenWidth - offsetXR;
 	if( offsetYT < 0 || isReversed ){
-		position.y = (p.y + s.y) + margin * 2;
+		position.y = (p.y + s.y) + margin + padding;
 		reverseY = true;
 	};
 
@@ -97,7 +97,7 @@ export const Tooltip = ( props ) => {
 				element.current.classList.remove( "tooltip-reverseY" );	
 			};
 
-			let position = TooltipCalcPosition( mouse.current, element.current, target );
+			let position = TooltipCalcPosition( mouse.current, element.current, target, 10, 12 );
 
 			if( position.reverseY )
 				element.current.classList.add( "tooltip-reverseY" );

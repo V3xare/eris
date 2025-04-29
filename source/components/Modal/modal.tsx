@@ -5,6 +5,7 @@ import { Text } from "../../components/Typography";
 import Common from "../../utility/common";
 
 import "./modal.scss"
+import { TooltipCalcPosition } from "@components/Tooltip";
 
 export const ModalContext = React.createContext({});
 
@@ -25,9 +26,16 @@ const ModalCalcPosition = ( target ) => {
 };
 
 export const Modal = ( props ) => {
-	let { className, children, style, active, onClose, trigger, ...rest } = props;
+	let { className, children, style, active, onClose, attach, margin, trigger, ...rest } = props;
 	const element = useRef( null );
+	const triggerRef = useRef( null );
 	let [ triggerActive, setTriggerActive ] = useState( false );
+
+	if( !margin )
+		margin = { x: 0, y: 30 };
+
+	margin.x = margin.x === undefined ? 0 : Common.float( margin.x );
+	margin.y = margin.y === undefined ? 20 : Common.float( margin.y );
 
 	if( !onClose )
 		onClose = () => {};
@@ -72,7 +80,16 @@ export const Modal = ( props ) => {
 				return;
 			};
 
-			let position = ModalCalcPosition( element.current );
+			let position;
+			
+			if( attach && triggerRef.current ){
+				let b = triggerRef.current.getBoundingClientRect();
+				let clientX = b.x + b.width * 0.5;
+				let clientY = b.y + b.height * 0.5;
+				position = TooltipCalcPosition({ clientX: clientX, clientY: clientY }, element.current, triggerRef.current, margin.y, margin.y + 2 );
+			}else{
+				position = ModalCalcPosition( element.current );;
+			};
 
 			element.current.style.left = position.x;
 			element.current.style.top = position.y;
@@ -100,11 +117,13 @@ export const Modal = ( props ) => {
 		}
 		{
 			trigger ?
-			(React.cloneElement( trigger, {
-				onClick: ( e ) => {
-					setTriggerActive( true );
-				},
-			}))		
+			(<span ref={ triggerRef }>{
+				React.cloneElement( trigger, {
+					onClick: ( e ) => {
+						setTriggerActive( true );
+					},
+				})	
+			}</span>)		
 			: 
 			null
 		}		

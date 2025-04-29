@@ -56,7 +56,7 @@ export const ButtonRoute = ( props ) => {
 				<Space/>
 				<Space/>
 				
-				<Modal trigger={ <Button value={ "Trigger" }/> }>
+				<Modal trigger={ <Button value={ "Trigger" }/> } attach>
 
 					<Column>
 						<Row>
