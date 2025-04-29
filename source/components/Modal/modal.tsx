@@ -5,7 +5,7 @@ import { Text } from "../../components/Typography";
 import Common from "../../utility/common";
 
 import "./modal.scss"
-import { TooltipCalcPosition } from "@components/Tooltip";
+import { TooltipCalcPosition } from "../../components/Tooltip";
 
 export const ModalContext = React.createContext({});
 
