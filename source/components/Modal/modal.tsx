@@ -26,10 +26,19 @@ const ModalCalcPosition = ( target ) => {
 };
 
 export const Modal = ( props ) => {
-	let { className, children, style, active, onClose, attach, margin, snap, trigger, ...rest } = props;
+	let { className, children, style, active, onClose, attach, margin, snap, auto, trigger, ...rest } = props;
 	const element = useRef( null );
 	const triggerRef = useRef( null );
+	const triggerAutoRef = useRef({
+		x: 0,
+		y: 0,
+		width: 0,
+		height: 0
+	});
 	let [ triggerActive, setTriggerActive ] = useState( false );
+
+	if( auto === undefined )
+		auto = true;
 
 	if( !margin )
 		margin = { x: 0, y: 30 };
@@ -76,6 +85,8 @@ export const Modal = ( props ) => {
 		if( !active )
 			return;
 
+		triggerAutoRef.current = triggerRef.current.getBoundingClientRect();
+
 		let interval = setInterval(() => {
 
 			if( !element.current )
@@ -89,7 +100,7 @@ export const Modal = ( props ) => {
 			let position;
 			
 			if( attach && triggerRef.current ){
-				let b = triggerRef.current.getBoundingClientRect();
+				let b = auto ? triggerRef.current.getBoundingClientRect() : triggerAutoRef.current;
 				let clientX = b.x + b.width * snap.x;
 				let clientY = b.y + b.height * snap.y;
 				position = TooltipCalcPosition({ clientX: clientX, clientY: clientY }, element.current, triggerRef.current, margin.y, margin.y + 2 );
