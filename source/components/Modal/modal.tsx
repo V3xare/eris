@@ -26,7 +26,7 @@ const ModalCalcPosition = ( target ) => {
 };
 
 export const Modal = ( props ) => {
-	let { className, children, style, active, onClose, attach, margin, trigger, ...rest } = props;
+	let { className, children, style, active, onClose, attach, margin, snap, trigger, ...rest } = props;
 	const element = useRef( null );
 	const triggerRef = useRef( null );
 	let [ triggerActive, setTriggerActive ] = useState( false );
@@ -35,7 +35,13 @@ export const Modal = ( props ) => {
 		margin = { x: 0, y: 30 };
 
 	margin.x = margin.x === undefined ? 0 : Common.float( margin.x );
-	margin.y = margin.y === undefined ? 20 : Common.float( margin.y );
+	margin.y = margin.y === undefined ? 20 : Common.float( margin.y );	
+	
+	if( !snap )
+		snap = { x: 0.5, y: 0.5 };
+
+	snap.x = snap.x === undefined ? 0.5 : Common.float( snap.x );
+	snap.y = snap.y === undefined ? 0.5 : Common.float( snap.y );
 
 	if( !onClose )
 		onClose = () => {};
@@ -84,8 +90,8 @@ export const Modal = ( props ) => {
 			
 			if( attach && triggerRef.current ){
 				let b = triggerRef.current.getBoundingClientRect();
-				let clientX = b.x + b.width * 0.5;
-				let clientY = b.y + b.height * 0.5;
+				let clientX = b.x + b.width * snap.x;
+				let clientY = b.y + b.height * snap.y;
 				position = TooltipCalcPosition({ clientX: clientX, clientY: clientY }, element.current, triggerRef.current, margin.y, margin.y + 2 );
 			}else{
 				position = ModalCalcPosition( element.current );;
