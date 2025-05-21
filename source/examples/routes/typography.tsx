@@ -41,6 +41,9 @@ export const TypographyRoute = ( props ) => {
 				<Divider>Raw flex style</Divider>
 
 				<Editable>Hello World</Editable>
+				<Row>
+					<Editable value={ "Inactive" } inactive></Editable>
+				</Row>
 				<Text>Hello World</Text>
 				<Text strong>Hello World</Text>
 

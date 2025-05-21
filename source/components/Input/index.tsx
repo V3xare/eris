@@ -13,6 +13,7 @@ export const Input = ( props ) => {
 		placeholder, tools, injection,
 		size,
 		span,
+		inactive,
 		alert, notice, conditions, tooltipClassName,
 		onChange, onFocus, onBlur, onKeyDown, onKeyUp, onClear, larger,
 		...rest 
@@ -160,10 +161,10 @@ export const Input = ( props ) => {
 	}, [ tools, autocomplete, value ] );	
 
 	return (
-	<Tooltip className={ tooltipClassName } content={ noticeList.list } hidden={ !visible } alert={ alert || !noticeList.success } paddingLess={ Array.isArray( conditions ) }>
+	<Tooltip className={ tooltipClassName } content={ noticeList.list } hidden={ !visible || inactive } alert={ alert || !noticeList.success } paddingLess={ Array.isArray( conditions ) }>
 	<span 
 		className={ 
-			Props.className( "input", className, { focus: isFocused, larger: larger, span: span, alert: (alert || !noticeList.success) } ) 
+			Props.className( "input", className, { focus: isFocused, larger: larger, span: span, inactive, alert: (alert || !noticeList.success) } ) 
 		}
 		style={ style }
 	>
@@ -176,6 +177,11 @@ export const Input = ( props ) => {
 			className={ "typography" }
 			onFocus={( e ) => {
 
+				if( inactive ){
+					e.preventDefault();
+					return;
+				};
+
 				autocomplete.onFocus({ value: e.target.value, event: e });
 
 				if( onFocus )
@@ -185,6 +191,11 @@ export const Input = ( props ) => {
 
 			}}
 			onBlur={( e ) => {
+
+				if( inactive ){
+					e.preventDefault();
+					return;
+				};
 
 				autocomplete.onBlur({ value: e.target.value, event: e });
 
@@ -196,6 +207,11 @@ export const Input = ( props ) => {
 			}}
 			onKeyDown={( e ) => {
 
+				if( inactive ){
+					e.preventDefault();
+					return;
+				};
+
 				autocomplete.onKeyDown({ value: e.target.value, event: e });
 
 				if( onKeyDown )
@@ -204,6 +220,11 @@ export const Input = ( props ) => {
 			}}			
 			onKeyUp={( e ) => {
 
+				if( inactive ){
+					e.preventDefault();
+					return;
+				};
+
 				autocomplete.onKeyUp({ value: e.target.value, event: e });
 
 				if( onKeyUp )
@@ -211,6 +232,11 @@ export const Input = ( props ) => {
 
 			}}	
 			onChange={( e ) => {
+
+				if( inactive ){
+					e.preventDefault();
+					return;
+				};
 
 				let v = e.target.value;
 

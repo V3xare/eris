@@ -9,7 +9,7 @@ import { Tooltip } from "../../components/Tooltip";
 
 export function Editable( props ){
 
-	let { className, value, onChange, ...rest } = props;
+	let { className, value, onChange, inactive, ...rest } = props;
 	const [ height, setHeight ] = useState( 0 );
 	const [ focus, setFocus ] = useState( false );
 
@@ -25,7 +25,8 @@ export function Editable( props ){
 	return (
 	<div
 		className={ Props.className( "typography", className, {
-			editable: true
+			editable: true,
+			inactive: inactive
 		}) }
 	>
 		<Text
@@ -33,6 +34,10 @@ export function Editable( props ){
 			preserveNL={ true }
 			ref={ textElem }
 			onMouseDown={() => {
+
+				if( inactive )
+					return;
+
 				setFocus( true );
 				setTimeout(() => {
 
@@ -56,6 +61,10 @@ export function Editable( props ){
 				active
 				transparent={ focus }
 				onClick={() => {
+
+					if( inactive )
+						return;
+
 					setFocus( !focus );
 					setTimeout(() => {
 
@@ -79,6 +88,9 @@ export function Editable( props ){
 			className={ Props.className( "typography", "", (!focus ? "hidden" : "") ) }
 			onChange={( e ) => {
 
+				if( inactive )
+					return;
+
 				textElem.current.innerHTML = e.target.value;
 
 				area.current.style.height = 0 + "px";
@@ -93,6 +105,9 @@ export function Editable( props ){
 			}}
 			onFocus={( e ) => {
 
+				if( inactive )
+					return;
+
 				if( props.onFocus )
 					props.onFocus( e );
 
@@ -105,6 +120,9 @@ export function Editable( props ){
 			}}
 			onBlur={( e ) => {
 
+				if( inactive )
+					return;
+
 				if( props.onBlur )
 					props.onBlur( e );
 
@@ -112,6 +130,9 @@ export function Editable( props ){
 
 			}}
 			onKeyDown={( e ) => {
+
+				if( inactive )
+					return;
 
 				if( e.keyCode == 13 && !e.shiftKey ){
 					e.target.blur();

@@ -33,4 +33,17 @@
 		background: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 80% );
 	}
 
+
+	&-inactive{
+		border-color: transparent;
+		box-shadow: 0 0 0px 0px transparent;
+		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 4% );
+		user-select: text;
+
+		& > div{
+			background: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 40% );
+		}
+
+	}
+
 }

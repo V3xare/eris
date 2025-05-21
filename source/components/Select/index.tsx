@@ -27,7 +27,7 @@ const FindIndex = ( parent: any, offset: number ) : number => {
 };
 
 export const Select = ( props ) => {
-	let { className, children, onChange, onSelect, margin, disabled, padding, row, label, stretch, icon, larger, value, headerless, style, list, ...rest } = props;
+	let { className, children, onChange, onSelect, margin, disabled, padding, inactive, row, label, stretch, icon, larger, value, headerless, style, list, ...rest } = props;
 	const [ expanded, setExpanded ] = useState( headerless ? true : false );
 	const [ hovered, setHovered ] = useState( 0 );
 	let [ forcedValue, setForcedValue ] = useState( value );
@@ -54,6 +54,9 @@ export const Select = ( props ) => {
 		setForcedValue( value );
 	}, [ value ]);	
 	useEffect(() => {
+
+		if( inactive )
+			return;
 
 		if( headerless && !expanded )
 			setExpanded( true );
@@ -170,6 +173,10 @@ export const Select = ( props ) => {
 		let index = list.findIndex(( f ) => f.value == forcedValue );
 
 		setHovered( index > -1 ? index : 0 );
+
+		if( inactive )
+			return;
+
 		setExpanded( true );
 
 	}, [ delayedExpand ]);
@@ -249,6 +256,10 @@ export const Select = ( props ) => {
 		<AutoCompleteContext.Provider value={{
 			value: forcedValue,
 			select: () => {
+
+				if( inactive )
+					return;
+
 				if( list && list[ hovered ] ){
 					const v = list[ hovered ];
 					setForcedValue( v.value );
@@ -258,6 +269,10 @@ export const Select = ( props ) => {
 			},
 			onChange: ( e ) => {},
 			onFocus: ( e ) => {
+
+				if( inactive )
+					return;
+
 				setDelayedExpand( delayedExpand + 1 );
 			},
 			onBlur: ( e ) => {
@@ -267,6 +282,9 @@ export const Select = ( props ) => {
 			},
 			onKeyUp: ( e ) => {},
 			onKeyDown: ( e ) => {
+
+				if( inactive )
+					return;
 
 				e.event.preventDefault();
 
@@ -302,7 +320,7 @@ export const Select = ( props ) => {
 			}			
 		}}>		
 			<Input { ...rest }></Input>
-			<div className={ "select-overlay input" + (props.span ? " input-span" : "") } style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
+			<div className={ "select-overlay input" + (props.span ? " input-span" : "") + (props.inactive ? " select-inactive" : "") } style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
 		</AutoCompleteContext.Provider>
 		<div className={ 
 			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 

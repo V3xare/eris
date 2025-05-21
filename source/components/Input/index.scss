@@ -71,6 +71,12 @@
 	&-alert{
 		border-color: #ff3535;
 		box-shadow: 0 0 0px 2px mix( var( --element-bg ), var( --element-alert ), calc(20% * var(--element-text-multi-shadow)), 100% );
+	}	
+	&-inactive{
+		border-color: transparent;
+		box-shadow: 0 0 0px 0px transparent;
+		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 4% );
+		user-select: text;
 	}
 	&-alert > input{
 		color: mix( var( --element-alert-color ), var( --element-alert ), calc(30% * var(--element-text-multi-sub)), 100% );

@@ -14,6 +14,9 @@ export const ToggleRoute = ( props ) => {
 
 			<Card>
 				<Toggle active={ active } onChange={( e ) => setActive( e.value ) }/>
+			</Card>			
+			<Card header={ "Inactive" }>
+				<Toggle active={ true } inactive onChange={( e ) => setActive( e.value ) }/>
 			</Card>
 
 		</Card>

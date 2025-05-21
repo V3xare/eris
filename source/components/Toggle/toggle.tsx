@@ -11,6 +11,7 @@ export const Toggle = ( props ) => {
 		className, children, propValue, style, margin, padding, 
 		value,
 		active,
+		inactive,
 		onChange,
 		...rest 
 	} = props;
@@ -20,10 +21,13 @@ export const Toggle = ( props ) => {
 	return (
 	<div 
 		className={ 
-			Props.className( "toggle", className, { active: active } ) 
+			Props.className( "toggle", className, { active: active, inactive: inactive } ) 
 		}
 		style={ style }
 		onClick={( e ) => {
+
+			if( inactive )
+				return;
 
 			if( onChange )
 				onChange({ value: !active, event: e });
