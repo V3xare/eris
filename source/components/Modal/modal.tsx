@@ -82,10 +82,10 @@ export const Modal = ( props ) => {
 
 	useEffect(() => {
 
-		if( !active || !triggerRef.current )
+		if( !active )
 			return;
 
-		triggerAutoRef.current = triggerRef.current.getBoundingClientRect();
+		triggerAutoRef.current = triggerRef.current ? triggerRef.current.getBoundingClientRect() : triggerAutoRef.current;
 
 		let interval = setInterval(() => {
 
