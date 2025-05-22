@@ -26,7 +26,7 @@ const ModalCalcPosition = ( target ) => {
 };
 
 export const Modal = ( props ) => {
-	let { className, children, style, active, onClose, attach, margin, snap, auto, trigger, ...rest } = props;
+	let { className, children, style, active, onClose, attach, margin, snap, auto, bg, trigger, ...rest } = props;
 	const element = useRef( null );
 	const triggerRef = useRef( null );
 	const triggerAutoRef = useRef({
@@ -122,13 +122,26 @@ export const Modal = ( props ) => {
 		<ModalContext.Provider value={{ close: () => setTriggerActive( false ) }}>
 		{
 			active ? (createPortal(
+				(
+				bg ?
+				(<div className={ Props.className( "modal-bg", className ) }>
+					<div
+						className={ Props.className( "modal", className ) }
+						ref={ element }
+						{ ...rest }
+					>
+						<div className={ "modal-content" }>{ props.children }</div>
+					</div>
+				</div>)
+				:
 				(<div
 					className={ Props.className( "modal", className ) }
 					ref={ element }
 					{ ...rest }
 				>
 					<div className={ "modal-content" }>{ props.children }</div>
-				</div>),
+				</div>)
+				),
 				document.body
 			)) : null
 		}

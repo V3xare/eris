@@ -34,9 +34,9 @@ export const ButtonRoute = ( props ) => {
 
 			<Card header={ "Dynamic" }>
 
-				<Button value={ "Modal" } onClick={( e ) => setModalActive( true ) }/>
+				<Button value={ "Modal" } bg onClick={( e ) => setModalActive( true ) }/>
 				
-				<Modal active={ modalActive } onClose={( e ) => setModalActive( false ) }>
+				<Modal active={ modalActive } bg onClose={( e ) => setModalActive( false ) }>
 
 					<Column>
 						<Row>
