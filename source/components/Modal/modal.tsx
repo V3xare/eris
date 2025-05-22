@@ -82,7 +82,7 @@ export const Modal = ( props ) => {
 
 	useEffect(() => {
 
-		if( !active )
+		if( !active || !triggerRef.current )
 			return;
 
 		triggerAutoRef.current = triggerRef.current.getBoundingClientRect();
