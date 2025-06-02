@@ -37,13 +37,14 @@ export namespace useAnimation{
 				return;
 
 			elem.current.removeEventListener( "transitionend", transition );
+			let ex = expanded;
 
-			//requestAnimationFrame(function(){
+			requestAnimationFrame(function(){
 
 				if( !elem.current )
 					return;
 					
-				if( expanded ){
+				if( ex ){
 					elem.current.style.height = params.minHeight !== undefined ? params.minHeight : "0px";
 					elem.current.style.overflowY = null;
 				}else{
@@ -56,7 +57,7 @@ export namespace useAnimation{
 					if( !elem.current )
 						return;
 
-					if( !expanded ){
+					if( !ex ){
 						elem.current.style.height = params.minHeight !== undefined ? params.minHeight : "0px";
 						elem.current.style.overflowY = null;
 					}else{
@@ -67,7 +68,7 @@ export namespace useAnimation{
 					elem.current.addEventListener( "transitionend", transition );
 				});
 
-			//});
+			});
 
 			return () => {
 
