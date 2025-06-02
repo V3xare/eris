@@ -38,7 +38,7 @@ export namespace useAnimation{
 
 			elem.current.removeEventListener( "transitionend", transition );
 
-			requestAnimationFrame(function(){
+			//requestAnimationFrame(function(){
 
 				if( !elem.current )
 					return;
@@ -67,7 +67,7 @@ export namespace useAnimation{
 					elem.current.addEventListener( "transitionend", transition );
 				});
 
-			});
+			//});
 
 			return () => {
 
