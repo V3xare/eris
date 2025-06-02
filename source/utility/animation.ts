@@ -20,7 +20,7 @@ export namespace useAnimation{
 				elem.current.style.height = null;
 				elem.current.style.overflowY = null;
 			}else{
-				elem.current.style.height = "0px";
+				elem.current.style.height = params.minHeight !== undefined ? params.minHeight : "0px";
 				elem.current.style.overflowY = "hidden";
 			};
 
@@ -44,7 +44,7 @@ export namespace useAnimation{
 					return;
 					
 				if( expanded ){
-					elem.current.style.height = "0px";
+					elem.current.style.height = params.minHeight !== undefined ? params.minHeight : "0px";
 					elem.current.style.overflowY = null;
 				}else{
 					elem.current.style.height = (elem.current.scrollHeight || 1) + "px";
@@ -57,7 +57,7 @@ export namespace useAnimation{
 						return;
 
 					if( !expanded ){
-						elem.current.style.height = "0px";
+						elem.current.style.height = params.minHeight !== undefined ? params.minHeight : "0px";
 						elem.current.style.overflowY = null;
 					}else{
 						elem.current.style.height = (elem.current.scrollHeight || 1) + "px";
