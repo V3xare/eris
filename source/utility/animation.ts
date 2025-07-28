@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useReducer, useState, useRef } from "react";
+import Common from "./common";
 
 export namespace useAnimation{
 	export const Expand = ( expanded, params?, ref? ) => {
 
 		const elem = ref || useRef( null );
+		const animationFrame = useRef( null );
 		
 		if( !params )
 			params = {};
-
-		//const computed = getComputedStyle( elem.current );		
-		//console.log( computed.overflowY );	
 
 		const transition = ( e ) => {
 
@@ -29,6 +28,11 @@ export namespace useAnimation{
 
 		useEffect(() => {
 			transition({});
+			return () => {
+				if( !elem.current )
+					return;
+				elem.current.removeEventListener( "transitionend", transition );
+			};
 		}, []);
 
 		useEffect(() => {
@@ -39,7 +43,9 @@ export namespace useAnimation{
 			elem.current.removeEventListener( "transitionend", transition );
 			let ex = expanded;
 
-			requestAnimationFrame(function(){
+			if( animationFrame.current )
+				cancelAnimationFrame( animationFrame.current );
+			animationFrame.current = requestAnimationFrame(function(){
 
 				if( !elem.current )
 					return;
@@ -52,7 +58,14 @@ export namespace useAnimation{
 					elem.current.style.overflowY = "hidden";
 				};
 
-				requestAnimationFrame(function(){
+				if( animationFrame.current )
+					cancelAnimationFrame( animationFrame.current );
+
+				elem.current.addEventListener( "transitionend", transition );
+
+				animationFrame.current = requestAnimationFrame(function(){
+
+					elem.current.removeEventListener( "transitionend", transition );
 
 					if( !elem.current )
 						return;
@@ -77,27 +90,8 @@ export namespace useAnimation{
 
 				elem.current.removeEventListener( "transitionend", transition );
 			};
-		}, [ expanded ]);
+		}, [ expanded, elem.current ]);
 
 		return elem;
 	};
 };
-
-
-/*
-(() => {
-	let list = document.getElementsByClassName( "glyph" );
-	let text = "";
-
-	for( const item of list ){
-		const name = item.getElementsByClassName( "glyphName" )[ 0 ].innerText.replace( /[-]/g, "" );
-		const value = item.getElementsByClassName( "talign-right" )[ 0 ].firstChild.value;
-		text +=
-"	export const " + name + " = ( props: any ) => {\n" +
-"		return <Icon { ...props }>" + value + "</Icon>;\n" +
-"	};\n";
-	};
-
-	return text;
-})();
- */
