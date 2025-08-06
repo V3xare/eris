@@ -13,6 +13,8 @@ export const Row = ( props ) => {
 		gap,
 		stretch,
 		reverse,
+		align,
+		justify,
 		...rest
 	} = props;
 
@@ -25,7 +27,13 @@ export const Row = ( props ) => {
 		inlineStyle[ "gap" ] = Props.parseGap( gap );
 
 	if( stretch )
-		inlineStyle[ "width" ] = "100%";
+		inlineStyle[ "width" ] = "100%";	
+	
+	if( align )
+		inlineStyle[ "align-items" ] = align;	
+	
+	if( justify )
+		inlineStyle[ "justify-content" ] = justify;
 
 	return (<div
 		className={
