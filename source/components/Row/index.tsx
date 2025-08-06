@@ -30,10 +30,10 @@ export const Row = ( props ) => {
 		inlineStyle[ "width" ] = "100%";	
 	
 	if( align )
-		inlineStyle[ "align-items" ] = align;	
+		inlineStyle[ "alignItems" ] = align;	
 	
 	if( justify )
-		inlineStyle[ "justify-content" ] = justify;
+		inlineStyle[ "justifyContent" ] = justify;
 
 	return (<div
 		className={
