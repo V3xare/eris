@@ -148,6 +148,11 @@ function useAsyncReducer( state: any, [ type, append, data ]: any ){
 			...state,
 			["waitList"]: [ ...append ]
 		};		
+	}else if( type == "step" ){
+		return {
+			...state,
+			["index"] : (state.index + 1)
+		};		
 	};
 
 	return state;
@@ -207,6 +212,7 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 			};			
 
 			setCompleteList([]);
+			dispatch([ "step" ]);
 
 		}, 1 );
 

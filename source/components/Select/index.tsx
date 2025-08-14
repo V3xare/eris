@@ -144,6 +144,7 @@ export const Select = ( props ) => {
 
 		let timeout = setTimeout(() => {
 
+			childrenElem.current.style.width = "auto";
 			let rect1 = childrenElem.current.getClientRects();
 			let rect2 = childrenElem.current.getClientRects();
 
@@ -156,14 +157,16 @@ export const Select = ( props ) => {
 			if( w1 < width && w2 < width )
 				return;
 
-			setWidth( w1 > w2 ? w1 : w2 );
+			let w = w1 > w2 ? w1 : w2;
+			setWidth( w );
+			childrenElem.current.style.width = w + "px";
 
 		}, 10 );
 		
 		return () => {
 			clearTimeout( timeout );
 		};
-	}, [ expanded ]);
+	}, [ expanded, list ]);
 
 	useEffect(() => {
 
