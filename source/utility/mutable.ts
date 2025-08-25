@@ -257,8 +257,8 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 		setLoading( true );
 
 		let source = Request.cancel();
-
 		let paramsParsed = { ...params };
+		let hasFiles = false;
 
 		for( let key in paramsParsed ){
 
@@ -266,14 +266,53 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 				continue;
 
 			paramsParsed[ key ] = params[ key ]( paramsParsed, requestParams );
+
+			if( paramsParsed[ key ] instanceof FileList )
+				hasFiles = true;
+			
 		};
 
 		for( let key in requestParams.append ){
 			paramsParsed[ key ] = requestParams.append[ key ];
+
+			if( paramsParsed[ key ] instanceof FileList )
+				hasFiles = true;	
+
 		};
 
-		let cfg: RequestInit = { ...config, [ "cancelTokenSource" ]: source, [ "data" ]: paramsParsed };
+		let cfg: RequestInit = { ...config, [ "cancelTokenSource" ]: source, [ "data" ]: null };
+
+		if( hasFiles && cfg.method == "POST" ){
+			let formData = new FormData();
+
+			for( let key in paramsParsed ){
+
+				if( paramsParsed[ key ] instanceof FileList ){
+					
+					for( let n = 0; n < paramsParsed[ key ].length; n++ ){
+						formData.append( key, paramsParsed[ key ][ n ] );
+					};
+
+				}else{
+					formData.append( key, paramsParsed[ key ] );
+				};
+
+			};
+
+			if( !cfg.headers )
+				cfg.headers = {};
+
+			cfg.headers[ "Content-Type" ] = "multipart/form-data";
+
+			cfg.data = formData;
+
+		}else{
+			cfg.data = paramsParsed;
+		};
+
 		delete cfg.auto;
+
+		console.log( cfg );
 
 		Request.fetch( cfg )
 		.then( response => {

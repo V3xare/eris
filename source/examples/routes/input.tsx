@@ -8,8 +8,14 @@ import { Select } from "../../components/Select";
 import { Icons } from "../../components/Icons";
 import { Number } from "../../components/Number";
 import { MultiSelect } from "@components/MultiSelect/multiselect";
+import { useAsync } from "@utility/mutable";
 
 export const InputRoute = ( props ) => {
+
+	const edit = useAsync({
+		method: "POST",
+		url: "./test/edit/"
+	}, {});
 
 	return (
 		<div>
@@ -195,6 +201,17 @@ export const InputRoute = ( props ) => {
 					<Row>{ "Simple" }</Row>
 					<Row>
 						<Number value={ 67 } min={ 0 } max={ 100 } step={ 5 } onChange={( e ) => console.log( e ) }/>
+					</Row>
+				</Card>			
+
+			</Card>			
+			
+			<Card header={ "File" }>
+
+				<Card>
+					<Row>{ "Simple" }</Row>
+					<Row>
+						<input type="file" multiple onChange={( e ) => edit.fetch({ testFile: e.target.files }) }/>
 					</Row>
 				</Card>			
 
