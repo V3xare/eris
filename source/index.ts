@@ -87,3 +87,6 @@ import { Space } from "./components/Space/space"
 export { Space };
 import { AutoComplete } from "./components/AutoComplete"
 export { AutoComplete };
+
+import { useDelta, usePrevious } from "./utility/use.delta"
+export {  useDelta, usePrevious };

@@ -310,9 +310,10 @@ export const useAsync = ( config: RequestInit, params: any, keys?: any[] ) => {
 			cfg.data = paramsParsed;
 		};
 
-		delete cfg.auto;
+		if( cfg.method == "GET" )
+			cfg.params = cfg.data;
 
-		console.log( cfg );
+		delete cfg.auto;
 
 		Request.fetch( cfg )
 		.then( response => {
