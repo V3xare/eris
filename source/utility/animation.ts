@@ -65,10 +65,10 @@ export namespace useAnimation{
 
 				animationFrame.current = requestAnimationFrame(function(){
 
-					elem.current.removeEventListener( "transitionend", transition );
-
 					if( !elem.current )
 						return;
+
+					elem.current.removeEventListener( "transitionend", transition );
 
 					if( !ex ){
 						elem.current.style.height = params.minHeight !== undefined ? params.minHeight : "0px";
