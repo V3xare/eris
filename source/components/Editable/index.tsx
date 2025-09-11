@@ -9,7 +9,7 @@ import { Tooltip } from "../../components/Tooltip";
 
 export function Editable( props ){
 
-	let { className, value, onChange, inactive, button, ...rest } = props;
+	let { className, value, onChange, inactive, stretch, button, ...rest } = props;
 	const [ height, setHeight ] = useState( 0 );
 	const [ focus, setFocus ] = useState( false );
 
@@ -26,7 +26,8 @@ export function Editable( props ){
 	<div
 		className={ Props.className( "typography", className, {
 			editable: true,
-			inactive: inactive
+			inactive: inactive, 
+			stretch: stretch
 		}) }
 	>
 		<Text
