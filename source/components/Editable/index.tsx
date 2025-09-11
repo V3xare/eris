@@ -9,7 +9,7 @@ import { Tooltip } from "../../components/Tooltip";
 
 export function Editable( props ){
 
-	let { className, value, onChange, inactive, ...rest } = props;
+	let { className, value, onChange, inactive, button, ...rest } = props;
 	const [ height, setHeight ] = useState( 0 );
 	const [ focus, setFocus ] = useState( false );
 
@@ -56,32 +56,35 @@ export function Editable( props ){
 			{ forcedValue || " " }
 		</Text>
 
-		<Tooltip content={ "Edit" }>
-			<Icons.pencil
-				active
-				transparent={ focus }
-				onClick={() => {
+		{
+			button ? (
+			<Tooltip content={ "Edit" }>
+				<Icons.pencil
+					active
+					transparent={ focus }
+					onClick={() => {
 
-					if( inactive )
-						return;
-
-					setFocus( !focus );
-					setTimeout(() => {
-
-						if( !area.current )
+						if( inactive )
 							return;
 
-						area.current.focus();
-						area.current.setSelectionRange(
-							area.current.value.length,
-							area.current.value.length
-						);
+						setFocus( !focus );
+						setTimeout(() => {
 
-					});
-				}}
-			/>
-		</Tooltip>
+							if( !area.current )
+								return;
 
+							area.current.focus();
+							area.current.setSelectionRange(
+								area.current.value.length,
+								area.current.value.length
+							);
+
+						});
+					}}
+				/>
+			</Tooltip>
+			) : (null)
+		}
 
 		<textarea
 			ref={ area }
