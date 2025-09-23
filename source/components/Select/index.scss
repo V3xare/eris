@@ -84,6 +84,7 @@
 	max-width: 100%;
 }
 .autocomplete-headerless .autocomplete-suggestions{
+	z-index: 0;
     position: relative;
     height: auto !important;
     display: flex !important;

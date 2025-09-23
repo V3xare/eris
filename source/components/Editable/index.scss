@@ -69,6 +69,10 @@
 	}
 
 }
+.typography-alert{
+	border-color: #ff3535;
+	box-shadow: 0 0 0px 2px mix( var( --element-bg ), var( --element-alert ), calc(20% * var(--element-text-multi-shadow)), 100% );
+}	
 .typography-stretch{
 	width: 100%;
 }

@@ -14,7 +14,8 @@
 		border: none;
 		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
 		border-radius: 4px;
-		transition: none;		
+		transition: none;
+		user-select: none;
 
 		&-tags{
 			display: flex;
@@ -31,7 +32,38 @@
 			color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 			border-radius: 3px;
 			padding: 2px 4px 2px 6px;
-			margin: 4px 0px 4px 4px;			
+			margin: 4px 0px 4px 4px;
+			position: relative;
+			cursor: default;
+
+			&-sortable{
+				cursor: move;
+			}
+			&-default:before{
+				position: absolute;
+				content: "";
+				left: 0px;
+				right: 0px;
+				bottom: 0px;
+				top: 50%;
+				border: 1px solid mix( var( --element-bg ), var( --element-default-border ), calc(100% * var(--element-text-multi-main)), 100% );
+				box-shadow: inset 0px -4px 6px mix( var( --element-bg ), var( --element-default-shadow ), calc(90% * var(--element-text-multi-main)), 20% );
+				border-top: none;
+				border-radius: inherit;
+				border-top-left-radius: 0px;
+				border-top-right-radius: 0px;
+				pointer-events: none;	
+			}
+
+			&-dragged{
+				outline: 1px dotted mix( var( --element-bg ), var( --element-drag-border ), calc(90% * var(--element-text-multi-main)), 100% );
+			}
+			&-dragged > *{
+				opacity: 0.5;
+			}
+			&-title{
+				transition: all 0.15s ease-in-out;
+			}
 
 			& .icon{
 				margin-right: 3px;
@@ -101,7 +133,7 @@
 	
 		&-expanded{
 			display: flex;
-		}
+		}		
 
 		&-item{
 			padding: 3px 7px 4px;
@@ -110,9 +142,20 @@
 			display: flex;
 			align-items: baseline;
 			transition: all 0.15s ease-in-out;
+			user-select: none;
 			cursor: pointer;
 
-			&-checkbox{
+			&-dragged{
+				outline: 1px dotted orange;
+			}
+			&-dragged > *{
+				opacity: 0.5;
+			}
+			&-sortable{
+				cursor: move;
+			}			
+
+			&-checkbox, &-default{
 				box-sizing: border-box;
 				width: 18px;
 				height: 18px;
@@ -130,10 +173,11 @@
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
 				font-size: 16px;	
-				border-color: mix( var( --element-bg ), var( --element-accent ), calc(14% * var(--element-text-multi-main)), 15% );
+				border-color: mix( var( --element-bg ), var( --element-accent ), calc(24% * var(--element-text-multi-main)), 80% );
 				margin-right: 8px;
+				cursor: pointer;
 			}
-			&-checkbox:before{
+			&-checkbox:before, &-default:before{
 				content: "\ea10";
 				width: 12px;
 				height: 12px;
@@ -142,7 +186,15 @@
 				left: 2px;
 				top: 3px;
 				font-size: 11px;
-			}	
+			}
+			&-default{
+				position: relative;
+				margin-right: 0px;
+				border-radius: 50%;
+			}			
+			&-default-hidden{
+				display: none;
+			}
 
 			& .typography{
 				flex-grow: 10;
@@ -158,7 +210,7 @@
 			}
 
 		}
-		&-item-selected > &-item-checkbox{
+		&-item-selected > &-item-checkbox, &-item-isDefault > &-item-default{
 			background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 15% );
 			color: mix( var( --element-text ), var( --element-accent ), calc(60% * var(--element-text-multi-main)), 100% );
 		}					
@@ -178,4 +230,28 @@
 
 	}
 
+}
+
+.multiselect-headerless .multiselect-header{
+	display: none;
+}
+.multiselect-headerless .multiselect-suggestions{
+	z-index: 0;
+    position: relative;
+    height: auto !important;
+    display: flex !important;
+	border-radius: 4px;
+	box-shadow: none;
+	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+	color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+}
+.multiselect-headerless .multiselect-suggestions-item-focused{
+	background-color: transparent;
+}
+.multiselect-headerless .multiselect-suggestions-item-selected{
+	//background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 6% );
+}
+.multiselect-stretch{
+	width: 100%;
+	max-width: 100%;
 }

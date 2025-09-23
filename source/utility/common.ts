@@ -1,4 +1,5 @@
 import QueryString from "qs";
+import VMath from "./vmath";
 import { Location } from "react-router-dom";
 
 export default class Common{
@@ -429,6 +430,64 @@ export default class Common{
 		};
 
 		return false;
+	};	
+	public static insideClassLast( target: HTMLElement, inside: string ) : HTMLElement | false{
+
+		if( !target )
+			return false;
+
+		let parent: HTMLElement | null = target;
+		let last: HTMLElement | null = target;
+
+		while( parent && parent.nodeName != "BODY" ){
+
+			if( parent.classList.contains( inside ) )
+				return last;
+
+			last = parent;
+			parent = parent.parentElement;
+		};
+
+		return false;
+	};
+	public static dragElement( event: any, dragItem: any, targetItem: any, list: string[], parentClass: string, axis: { x?: boolean, y?: boolean } ) : any[] | false{
+
+		if( !dragItem )
+			return false;
+
+		if( targetItem.value == dragItem.value )
+			return false;
+
+		let parent = Common.insideClassLast( event.target, parentClass );
+
+		if( !parent )
+			return false;
+
+		let offset = Common.offset( parent );
+		let side = { x: (event.clientX - offset.x - offset.width * 0.5), y : (event.clientY - offset.y - offset.height * 0.5) };
+		let lastIndex = list.findIndex(( f ) => f == dragItem.value );
+		let newList = list.filter(( f ) => f != dragItem.value );
+		let index = newList.findIndex(( f ) => f == targetItem.value );
+
+		if( index < 0 )
+			return false;
+
+		if( axis.x )
+			index += VMath.clamp( side.x, 0, 1 );		
+		if( axis.y )
+			index += VMath.clamp( side.y, 0, 1 );
+
+		if( index < 0 )
+			index = 0;
+		if( index > newList.length )
+			index = newList.length;
+
+		if( lastIndex == index )
+			return false;
+
+		newList.splice( index, 0, dragItem.value );
+
+		return newList;
 	};
 	public static resize( array: any[], length: number, defVal: any ) : any[]{
 		return length < array.length ?

@@ -51,11 +51,27 @@ export const Input = ( props ) => {
 			let list: any[] = [];
 			let lineSuccess = false;
 			let index = 0;
+			let error: any = null;
 
 			for( let item of conditions ){
 
 				index++;
-				lineSuccess = (value || "").match( item.condition );
+				error = null;
+
+				if( item.condition == "json" ){
+					try{
+						JSON.parse( value || "" );
+						lineSuccess = true;
+					}catch( e: any ){ 
+
+						if( e && e.message )
+							error = JSON.stringify( e.message, null, 3 );
+
+						lineSuccess = false;
+					};
+				}else{
+					lineSuccess = (value || "").match( item.condition );
+				};
 
 				if( !lineSuccess )
 					success = false;
@@ -63,7 +79,7 @@ export const Input = ( props ) => {
 				list.push(
 					<div className={ Props.className( "input-condition", { failed: !lineSuccess, success: lineSuccess }) } key={ index }>
 						<div className={ "input-condition-verified" }>{ lineSuccess ? <Icons.checkmark/> : <Icons.cancelcircle/> }</div>
-						<div className={ "input-condition-desc" }>{ item.desc }</div>
+						<div className={ "input-condition-desc" }>{ error ? error : item.desc }</div>
 					</div>
 				);
 
