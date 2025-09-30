@@ -8,8 +8,8 @@ import { Icons } from "../../components/Icons";
 export const MultiSelectRoute = ( props ) => {
 
 	let [ list, setList ] = useState([ "en", "de" ]);
-	let [ list2, setList2 ] = useState([ "numberV", "checkboxV", "stringV2" ]);//useState([ { value: "numberV", preset: 5.0 }, { value: "checkboxV", preset: false } ]);
-	let [ listPreset2, setListPreset2 ] = useState({ numberV: 5, checkboxV: true });
+	let [ list2, setList2 ] = useState([ "value1", "value2", "value3" ]);//useState([ { value: "value1", preset: 5.0 }, { value: "value2", preset: false } ]);
+	let [ listPreset2, setListPreset2 ] = useState({ value1: 5, value2: true });
 	let [ defaultValue, setDefaultValue ] = useState( "" );
 
 	console.log( list2, listPreset2 );
@@ -37,10 +37,10 @@ export const MultiSelectRoute = ( props ) => {
 						value={ list2 } 
 						preset={ listPreset2 }
 						suggestions={[
-							{ value: "stringV", title: "Value 1", type: "text" },
-							{ value: "numberV", title: "Value 2", type: "number", min: 0, max: 10 },
-							{ value: "checkboxV", title: "Value 3", type: "checkbox" },
-							{ value: "stringV2", title: "Value 4" },
+							{ value: "value1", title: "Value 1", type: "number", min: 0, max: 10 },
+							{ value: "value2", title: "Value 2", type: "checkbox" },
+							{ value: "value3", title: "Value 3" },
+							{ value: "value4", title: "Value 4", type: "text" },
 						]} 
 						placeholder={ "Start typying here" }
 						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); }}
@@ -54,10 +54,10 @@ export const MultiSelectRoute = ( props ) => {
 						defaultValue={ defaultValue }
 						sortable
 						suggestions={[
-							{ value: "stringV", title: "Value 1" },
-							{ value: "numberV", title: "Value 2" },
-							{ value: "checkboxV", title: "Value 3" },
-							{ value: "stringV2", title: "Value 4" },
+							{ value: "value1", title: "Value 1" },
+							{ value: "value2", title: "Value 2" },
+							{ value: "value3", title: "Value 3" },
+							{ value: "value4", title: "Value 4" },
 						]} 
 						placeholder={ "Start typying here" }
 						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); setDefaultValue( e.defaultValue ); }}
@@ -73,10 +73,10 @@ export const MultiSelectRoute = ( props ) => {
 						headerless
 						stretch
 						suggestions={[
-							{ value: "stringV", title: "Value 1" },
-							{ value: "numberV", title: "Value 2" },
-							{ value: "checkboxV", title: "Value 3" },
-							{ value: "stringV2", title: "Value 4" },
+							{ value: "value1", title: "Value 1" },
+							{ value: "value2", title: "Value 2" },
+							{ value: "value3", title: "Value 3" },
+							{ value: "value4", title: "Value 4" },
 						]} 
 						placeholder={ "Start typying here" }
 						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); console.log( e.defaultValue ); setDefaultValue( e.defaultValue ); }}

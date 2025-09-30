@@ -180,7 +180,7 @@ export const MultiSelect = ( props ) => {
 									return;
 
 								setList( result );
-								onChange({ value: result, defaultValue: item.value });
+								onChange({ value: result, defaultValue: defaultValueForced });
 							}}							
 						>
 							{ item.icon }<Text>{ item.title }</Text>
@@ -249,7 +249,7 @@ export const MultiSelect = ( props ) => {
 							isDefault: defaultValueForced == item.value, 
 							focused: listIndex == index,
 							dragged: drag && drag.value == item.value,
-							sortable: sortable && headerless
+							sortable: sortable
 						})}
 						onMouseUp={( e ) => {
 							e.preventDefault();

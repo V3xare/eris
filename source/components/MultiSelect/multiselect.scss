@@ -37,7 +37,7 @@
 			cursor: default;
 
 			&-sortable{
-				cursor: move;
+				cursor: grab;
 			}
 			&-default:before{
 				position: absolute;
@@ -152,7 +152,7 @@
 				opacity: 0.5;
 			}
 			&-sortable{
-				cursor: move;
+				cursor: grab;
 			}			
 
 			&-checkbox, &-default{
