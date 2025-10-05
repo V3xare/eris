@@ -8,11 +8,12 @@ import { Icons } from "../../components/Icons";
 export const MultiSelectRoute = ( props ) => {
 
 	let [ list, setList ] = useState([ "en", "de" ]);
+	let [ sortList, setSortList ] = useState([]);
 	let [ list2, setList2 ] = useState([ "value1", "value2", "value3" ]);//useState([ { value: "value1", preset: 5.0 }, { value: "value2", preset: false } ]);
 	let [ listPreset2, setListPreset2 ] = useState({ value1: 5, value2: true });
 	let [ defaultValue, setDefaultValue ] = useState( "" );
 
-	console.log( list2, listPreset2 );
+	console.log( list2, defaultValue, sortList );
 
 	return (
 		<div>
@@ -53,14 +54,15 @@ export const MultiSelectRoute = ( props ) => {
 						hasDefault
 						defaultValue={ defaultValue }
 						sortable
+						sort={ sortList }
 						suggestions={[
-							{ value: "value1", title: "Value 1" },
+							{ value: "value1", title: "Value 1", defaultIgnored: true },
 							{ value: "value2", title: "Value 2" },
 							{ value: "value3", title: "Value 3" },
 							{ value: "value4", title: "Value 4" },
 						]} 
 						placeholder={ "Start typying here" }
-						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); setDefaultValue( e.defaultValue ); }}
+						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); setDefaultValue( e.defaultValue ); setSortList( e.sort ); }}
 					/>
 				</Card>							
 				
@@ -70,16 +72,17 @@ export const MultiSelectRoute = ( props ) => {
 						hasDefault
 						defaultValue={ defaultValue }
 						sortable
+						sort={ sortList }
 						headerless
 						stretch
 						suggestions={[
-							{ value: "value1", title: "Value 1" },
+							{ value: "value1", title: "Value 1", defaultIgnored: true },
 							{ value: "value2", title: "Value 2" },
 							{ value: "value3", title: "Value 3" },
 							{ value: "value4", title: "Value 4" },
 						]} 
 						placeholder={ "Start typying here" }
-						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); console.log( e.defaultValue ); setDefaultValue( e.defaultValue ); }}
+						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); setDefaultValue( e.defaultValue ); setSortList( e.sort ); }}
 					/>
 				</Card>				
 

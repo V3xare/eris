@@ -21,6 +21,7 @@ export const MultiSelect = ( props ) => {
 		hasDefault,
 		defaultValue,
 		sortable,
+		sort,
 		suggestions,
 		...rest 
 	} = props;
@@ -32,6 +33,7 @@ export const MultiSelect = ( props ) => {
 	const [ defaultValueForced, setDefaultValueForced ] = useState( null );
 	const [ filter, setFilter ] = useState( "" );
 	const [ list, setList ] = useState([]);
+	const [ sortList, setSortList ] = useState([]);
 	const [ listIndex, setListIndex ] = useState( 0 );
 	const [ expanded, setExpanded ] = useState( headerless ? true : false );
 
@@ -41,9 +43,63 @@ export const MultiSelect = ( props ) => {
 	useEffect(() => {
 		setList( Array.isArray( value ) ? value : [] );
 	}, [ value ]);	
+
 	useEffect(() => {
+
+		let sortedTable = {};
+		let s: any[] = [];
+
+		if( !Array.isArray( sort ) )
+			sort = [ ...sortList ];
+
+		for( let v of sort ){
+			s.push( v );
+			sortedTable[ v ] = true;
+		};
+
+		for( let item of suggestions ){
+
+			if( sortedTable[ item.value ] )
+				continue;
+
+			s.push( item.value );
+		};
+
+		setSortList( s );
+	}, [ sort, suggestions ]);		
+
+	useEffect(() => {
+
+		if( !hasDefault )
+			return;
+
+		let index = list.indexOf( defaultValue );
+
+		if( index < 0 )
+			defaultValue = list[ 0 ] || "";
+
+		let needle = suggestions.find(( f ) => f.value == defaultValue );
+
+		if( needle && needle.defaultIgnored || !needle ){
+
+			defaultValue = "";
+
+			for( let item of suggestions ){
+
+				if( item.defaultIgnored || list.indexOf( item.value ) < 0 )
+					continue;
+
+				defaultValue = item.value;
+				break;
+			};
+
+		};
+
+		if( defaultValue == defaultValueForced )
+			return;
+
 		setDefaultValueForced( defaultValue );
-	}, [ defaultValue ]);
+	}, [ defaultValue, value, list ]);
 
 	useEffect(() => {
 
@@ -97,6 +153,7 @@ export const MultiSelect = ( props ) => {
 			min: item.min,
 			max: item.max,
 			type: item.type,
+			defaultIgnored: item.defaultIgnored,
 			selected: list.find(( f ) => f == (item.value || item.title) )
 		}
 	};
@@ -107,7 +164,7 @@ export const MultiSelect = ( props ) => {
 
 		if( sortable ){
 
-			for( const key of list ){
+			for( const key of sortList ){
 
 				let item = suggestions.find(( f ) => f.value == key );
 
@@ -121,26 +178,25 @@ export const MultiSelect = ( props ) => {
 					continue;
 
 				array.push(itemToObject( titleLower, item ));
-			};
+			};		
 
-		};
+		}else{
 
-		for( const item of suggestions ){
+			for( const item of suggestions ){
 
-			if( sortable && list.findIndex(( f )  => f == item.value ) > -1 )
-				continue;
+				let title = item.title || item.value || "";
+				let titleLower = title.toLowerCase();
 
-			let title = item.title || item.value || "";
-			let titleLower = title.toLowerCase();
+				if( filter && (titleLower.indexOf( filterLower ) < 0) )
+					continue;
 
-			if( filter && (titleLower.indexOf( filterLower ) < 0) )
-				continue;
+				array.push(itemToObject( titleLower, item ));
+			};		
 
-			array.push(itemToObject( titleLower, item ));
 		};
 
 		return array;
-	}, [ suggestions, filter, list ]);
+	}, [ suggestions, filter, list, sortList ]);
 
 	if( !onChange )
 		onChange = () => {};
@@ -174,13 +230,22 @@ export const MultiSelect = ( props ) => {
 								setDrag( item );
 							}}
 							onMouseMove={( e ) => {
-								let result = Common.dragElement( e, drag, item, list, "multiselect-header-tags", { x: true } );
 
-								if( !result )
+								let sList = Common.dragElement( e, drag, item, sortList, "multiselect-header-tags", { x: true } );
+
+								if( sList )
+									setSortList( sList );
+
+								let vList = Common.dragElement( e, drag, item, list, "multiselect-header-tags", { x: true } );
+
+								if( vList )
+									setList( vList );
+
+								if( !sList && !vList )
 									return;
 
-								setList( result );
-								onChange({ value: result, defaultValue: defaultValueForced });
+								onChange({ value: vList ? vList : list, defaultValue: defaultValueForced, sort: sList ? sList : sortList });
+
 							}}							
 						>
 							{ item.icon }<Text>{ item.title }</Text>
@@ -189,7 +254,7 @@ export const MultiSelect = ( props ) => {
 							onClick={() => { 
 								let result = list.filter(( f ) => f != item.value );
 								setList( result );
-								onChange({ value: result, defaultValue: defaultValueForced });
+								onChange({ value: result, defaultValue: defaultValueForced, sort: sortList });
 							}}
 						>x</span>
 					</div>
@@ -230,7 +295,7 @@ export const MultiSelect = ( props ) => {
 					
 					let result = item.selected ? list.filter(( f ) => f != item.value ) : [ ...list, item.value ];
 					setList( result );
-					onChange({ value: result, defaultValue: defaultValueForced });
+					onChange({ value: result, defaultValue: defaultValueForced, sort: sortList });
 
 					if( !filter )
 						return;
@@ -261,57 +326,110 @@ export const MultiSelect = ( props ) => {
 						}}
 						onMouseDown={( e ) => {
 							mouseDownRef.current = false;
-							if( !sortable || !item.selected )
+							if( !sortable )
 								return;
 							setDrag( item );
 						}}
 						onMouseMove={( e ) => {
-							let result = Common.dragElement( e, drag, item, list, "multiselect-suggestions", { y: true } );
-							mouseDownRef.current = true;
 
-							if( !result )
+							if( !sortable || !drag )
 								return;
 
-							setList( result );
-							onChange({ value: result, defaultValue: defaultValueForced });
+							mouseDownRef.current = true;
+
+							let sList = Common.dragElement( e, drag, item, sortList, "multiselect-suggestions", { y: true } );
+
+							if( sList )
+								setSortList( sList );
+
+							let vList = Common.dragElement( e, drag, item, list, "multiselect-suggestions", { y: true } );
+
+							if( vList && drag.selected )
+								setList( vList );
+
+							if( !sList && !vList )
+								return;
+
+							onChange({ value: vList && drag.selected ? vList : list, defaultValue: defaultValueForced, sort: sList ? sList : sortList });
 						}}										
 						>
-							<span 
+							<div 
 								className={ "multiselect-suggestions-item-checkbox" }
-								onMouseDown={( e ) => { 
-									e.preventDefault();
-									e.stopPropagation();
-								}}
-								onClick={( e ) => { 
-									e.preventDefault();
-									e.stopPropagation();
+							>
+								<div 
+									className={ "multiselect-suggestions-item-checkbox-push" }
+									onMouseDown={( e ) => { 
+										e.preventDefault();
+										e.stopPropagation();
+									}}
+									onClick={( e ) => { 
+										e.preventDefault();
+										e.stopPropagation();
 
-									let result = item.selected ? list.filter(( f ) => f != item.value ) : [ ...list, item.value ];
-									setList( result );
-									onChange({ value: result, defaultValue: defaultValueForced });
-								}}
-							></span>
+										let result: any[] = [ ...list ];
+										
+										if( item.selected )
+											result = result.filter(( f ) => f != item.value );
+										else{
+											let index = sortList.findIndex(( f ) => f == item.value );
+
+											if( index < 0 )
+												result = [ ...list, item.value ];
+											else{
+
+												let key = "";
+
+												for( ; index < sortList.length; index++ ){
+
+													if( list.findIndex(( f ) => f == sortList[ index ] ) < 0 )
+														continue;
+
+													key = sortList[ index ];
+													break;
+												};
+
+												index = list.findIndex(( f ) => f == key );
+
+												if( index > -1 )
+													result.splice( index, 0, item.value );
+												else
+													result.push( item.value );
+
+											};
+
+										};
+
+										setList( result );
+										onChange({ value: result, defaultValue: defaultValueForced, sort: sortList });
+									}}									
+								>
+								</div>
+							</div>
 							{ item.icon }
 							<Text>{ item.title }</Text>
-							<span 
+							<div 
 								className={ Props.className( "multiselect-suggestions-item-default", { 
-									hidden: !hasDefault || !item.selected, 
+									hidden: !hasDefault || !item.selected || item.defaultIgnored, 
 								})}								
-								onMouseDown={( e ) => { 
-									e.preventDefault();
-									e.stopPropagation();
-								}}
-								onClick={( e ) => { 
-									e.preventDefault();
-									e.stopPropagation();
+							>
+								<div 
+									className={ "multiselect-suggestions-item-default-push" }
+									onMouseDown={( e ) => { 
+										e.preventDefault();
+										e.stopPropagation();
+									}}
+									onClick={( e ) => { 
+										e.preventDefault();
+										e.stopPropagation();
 
-									if( !hasDefault )
-										return;
+										if( !hasDefault || (item.value == defaultValueForced) )
+											return;
 
-									setDefaultValueForced( item.value );
-									onChange({ value: list, defaultValue: defaultValueForced == item.value ? null : item.value });
-								}}
-							></span>							
+										setDefaultValueForced( item.value );
+										onChange({ value: list, defaultValue: item.value, sort: sortList });
+									}}									
+								></div>
+							</div>							
 						</div>
 				}) }
 		</div>		

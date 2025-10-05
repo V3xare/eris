@@ -175,7 +175,6 @@
 				font-size: 16px;	
 				border-color: mix( var( --element-bg ), var( --element-accent ), calc(24% * var(--element-text-multi-main)), 80% );
 				margin-right: 8px;
-				cursor: pointer;
 			}
 			&-checkbox:before, &-default:before{
 				content: "\ea10";
@@ -194,6 +193,20 @@
 			}			
 			&-default-hidden{
 				display: none;
+			}
+			&-checkbox-push, &-default-push{
+				position: absolute;
+				cursor: pointer;
+				left: -2px;
+				right: -2px;
+				top: -2px;
+				bottom: -2px;
+			}
+			 &-default-push{
+				left: -4px;
+				right: -4px;
+				top: -4px;
+				bottom: -4px;
 			}
 
 			& .typography{
