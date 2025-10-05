@@ -253,6 +253,7 @@
     position: relative;
     height: auto !important;
     display: flex !important;
+	max-height: none;
 	border-radius: 4px;
 	box-shadow: none;
 	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
