@@ -130,7 +130,7 @@ export const Modal = ( props ) => {
 						ref={ element }
 						{ ...rest }
 					>
-						<div className={ "modal-content" } onMouseDown={( e ) => { e.stopPropagation(); }}>{ props.children }</div>
+						<div className={ "modal-content" }>{ props.children }</div>
 					</div>
 				</div>)
 				:
