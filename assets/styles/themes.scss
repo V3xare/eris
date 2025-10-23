@@ -93,9 +93,10 @@ $themes: (
     ),
 	white: (
 		"bg": rgb(244, 244, 244),
+		"modal-bg": rgba(0, 0, 0, 0.13),
 		"bg-overlay": transparent,
 		"gloss": radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%),
-
+		
 		"element-bg": rgb(244, 244, 244),
 		"element-overlay": rgb(21, 18, 38),
 		"element-shadow": rgb(124, 124, 124),
@@ -116,7 +117,7 @@ $themes: (
 		"element-text-multi-sub": 1.0,
 		"element-text-multi-text": 1.0,
 		"element-text-multi-shadow": 1.0,  
-		"header-multi-shadow": 1.0,         
+		"header-multi-shadow": 1.0,            
     ),
 	default: (
 		"bg": rgb(244, 244, 244),
