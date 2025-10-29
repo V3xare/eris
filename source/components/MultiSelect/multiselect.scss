@@ -175,6 +175,7 @@
 				font-size: 16px;	
 				border-color: mix( var( --element-bg ), var( --element-accent ), calc(24% * var(--element-text-multi-main)), 80% );
 				margin-right: 8px;
+				flex-shrink: 0;
 			}
 			&-checkbox:before, &-default:before{
 				content: "\ea10";
