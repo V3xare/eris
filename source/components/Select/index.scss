@@ -102,6 +102,11 @@
 .autocomplete-headerless .input{
     display: none;
 }
+.autocomplete-headerless .autocomplete-item{
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+}
 
 .autocomplete-row *::-webkit-scrollbar-track{
 	//background: radial-gradient(100% 121.87% at 0% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(3, 0, 20, 0) 100%);
