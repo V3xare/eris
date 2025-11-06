@@ -191,6 +191,17 @@ export const Input = ( props ) => {
 			placeholder={ placeholder }
 			value={ value || "" }
 			className={ "typography" }
+			onMouseDown={( e ) => {
+
+				if( inactive ){
+					e.preventDefault();
+					return;
+				};
+
+				if( autocomplete.onMouseDown )
+					autocomplete.onMouseDown({ value: e.target.value, event: e });
+
+			}}
 			onFocus={( e ) => {
 
 				if( inactive ){
@@ -198,7 +209,8 @@ export const Input = ( props ) => {
 					return;
 				};
 
-				autocomplete.onFocus({ value: e.target.value, event: e });
+				if( autocomplete.onFocus )
+					autocomplete.onFocus({ value: e.target.value, event: e });
 
 				if( onFocus )
 					onFocus({ value: e.target.value, event: e });
@@ -213,12 +225,13 @@ export const Input = ( props ) => {
 					return;
 				};
 
-				autocomplete.onBlur({ value: e.target.value, event: e });
+				if( autocomplete.onBlur )
+					autocomplete.onBlur({ value: e.target.value, event: e });
 
 				if( onBlur )
 					onBlur({ value: e.target.value, event: e });
 
-					setIsFocused( false );	
+				setIsFocused( false );	
 
 			}}
 			onKeyDown={( e ) => {
@@ -228,7 +241,8 @@ export const Input = ( props ) => {
 					return;
 				};
 
-				autocomplete.onKeyDown({ value: e.target.value, event: e });
+				if( autocomplete.onKeyDown )
+					autocomplete.onKeyDown({ value: e.target.value, event: e });
 
 				if( onKeyDown )
 					onKeyDown({ value: e.target.value, event: e });
@@ -241,7 +255,8 @@ export const Input = ( props ) => {
 					return;
 				};
 
-				autocomplete.onKeyUp({ value: e.target.value, event: e });
+				if( autocomplete.onKeyUp )
+					autocomplete.onKeyUp({ value: e.target.value, event: e });
 
 				if( onKeyUp )
 					onKeyUp({ value: e.target.value, event: e });
@@ -256,7 +271,8 @@ export const Input = ( props ) => {
 
 				let v = e.target.value;
 
-				autocomplete.onChange({ value: e.target.value, event: e, ref: elemWrap.current, rewrite: ( newV ) => v = newV });
+				if( autocomplete.onChange )
+					autocomplete.onChange({ value: e.target.value, event: e, ref: elemWrap.current, rewrite: ( newV ) => v = newV });
 
 				if( onChange )
 					onChange({ value: e.target.value, event: e, ref: elemWrap.current, rewrite: ( newV ) => v = newV });

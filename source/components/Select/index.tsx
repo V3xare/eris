@@ -27,7 +27,7 @@ const FindIndex = ( parent: any, offset: number ) : number => {
 };
 
 export const Select = ( props ) => {
-	let { className, children, onChange, onSelect, margin, disabled, padding, inactive, row, label, stretch, icon, larger, value, headerless, style, list, ...rest } = props;
+	let { className, children, onChange, onSelect, margin, cycle, disabled, padding, inactive, row, label, stretch, minWidth, icon, larger, value, headerless, style, list, ...rest } = props;
 	const [ expanded, setExpanded ] = useState( headerless ? true : false );
 	const [ hovered, setHovered ] = useState( 0 );
 	let [ forcedValue, setForcedValue ] = useState( value );
@@ -146,7 +146,7 @@ export const Select = ( props ) => {
 
 			childrenElem.current.style.width = "auto";
 			let rect1 = childrenElem.current.getClientRects();
-			let rect2 = childrenElem.current.getClientRects();
+			let rect2 = overlayElem.current.getClientRects();
 
 			if( !rect1[ 0 ] || !rect2[ 0 ] )
 				return;
@@ -252,7 +252,9 @@ export const Select = ( props ) => {
 
 	return (<div
 		className={
-			Props.className( "autocomplete", (className ? (className + " select") : "select"), { expanded: expanded, larger: larger, row: row, stretch: stretch, disabled: disabled, headerless: headerless } )
+			Props.className( "autocomplete", (className ? (className + " select") : "select"), { 
+				expanded: expanded, larger: larger, row: row, stretch: stretch, cycle: cycle, disabled: disabled, headerless: headerless 
+			})
 		}
 		style={ style }
 	>
@@ -271,9 +273,31 @@ export const Select = ( props ) => {
 				};				
 			},
 			onChange: ( e ) => {},
+			onMouseDown: ( e ) => {
+
+				if( !cycle )
+					return;
+
+				let v = forcedValue;
+				let index = list.findIndex(( f ) => f.value == v );
+				
+				if( (index + 1) >= list.length )
+					index = 0;
+				else
+					index += 1;
+
+				v = list[ index ] ? list[ index ].value : "";
+
+				setForcedValue( v );
+				onSelect({ value: v });
+				onChange({ value: v } );					
+			},
 			onFocus: ( e ) => {
 
 				if( inactive )
+					return;
+
+				if( cycle )
 					return;
 
 				setDelayedExpand( delayedExpand + 1 );
@@ -323,7 +347,12 @@ export const Select = ( props ) => {
 			}			
 		}}>		
 			<Input { ...rest }></Input>
-			<div className={ "select-overlay input" + (props.span ? " input-span" : "") + (props.inactive ? " select-inactive" : "") } style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
+			<div className={ 
+				"select-overlay input" 
+				+ (props.span ? " input-span" : "") 
+				+ (props.inactive ? " select-inactive" : "") 
+				+ (props.cycle ? " select-cycle" : "") 
+			} style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }} ref={ overlayElem }>{ icon }{ title }<Icons.expand transition reverse={ !expanded }/></div>
 		</AutoCompleteContext.Provider>
 		<div className={ 
 			Props.className( "autocomplete-shadowfix", { hidden: !expanded } ) 
@@ -333,7 +362,7 @@ export const Select = ( props ) => {
 		<div className={ 
 			Props.className( "autocomplete-suggestions" ) 
 		}
-			style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto") }}
+			style={{ width: stretch ? "" : (expanded ? (width || "auto") : "auto"), minWidth: minWidth }}
 			onWheel={( e ) => {
 				e.stopPropagation();
 				if( e.deltaY < 0 )

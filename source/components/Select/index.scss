@@ -22,6 +22,7 @@
 		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 		outline: none;		
 	}
+
 	.select-overlay{
 		position: relative;
 		padding: 7px 9px;
@@ -55,8 +56,11 @@
 		white-space: nowrap;
 	}
 
-	.select-overlay .icon{
-		margin: 0px 4px;
+	.select-overlay .icon:first-child{
+		margin: 0px 6px 0px 0px;
+	}
+	.select-overlay .icon:last-child{
+		margin: 0px 0px 0px 4px;
 	}
 
 	& .input-span{
@@ -75,6 +79,19 @@
 	}
 	
 }
+
+.autocomplete-cycle{
+
+	& input{
+		cursor: pointer;
+	}
+
+	& > .select-overlay .icon:last-child{
+		display: none;
+	}
+
+}
+
 
 .autocomplete-expanded .select-overlay .icon{
 	//color: #1890ff;
