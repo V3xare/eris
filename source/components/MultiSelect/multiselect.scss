@@ -223,6 +223,10 @@
 				outline: none;
 			}
 
+			& .typography{
+				flex-grow: 10;
+			}	
+
 		}
 		&-item-selected > &-item-checkbox, &-item-isDefault > &-item-default{
 			background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 15% );
@@ -233,7 +237,13 @@
 		}
 		&-item-focused{
 			background-color: mix( var( --element-bg ), var( --element-accent ), calc(5% * var(--element-text-multi-sub)) );
-		}		
+		}	
+		&-item-prefix{
+			flex-grow: 0 !important;
+			min-width: 40px;
+			text-align: center;
+			margin-right: 8px;
+		}					
 		&-item .icon{
 			//color: $icons-accent;
 			padding-right: 4px;
@@ -270,3 +280,4 @@
 	width: 100%;
 	max-width: 100%;
 }
+

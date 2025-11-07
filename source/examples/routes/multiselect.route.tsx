@@ -65,7 +65,7 @@ export const MultiSelectRoute = ( props ) => {
 						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); setDefaultValue( e.defaultValue ); setSortList( e.sort ); }}
 					/>
 				</Card>							
-				
+
 				<Card header={ "Default Headerless" }>
 					<MultiSelect 
 						value={ list2 }
@@ -85,6 +85,29 @@ export const MultiSelectRoute = ( props ) => {
 						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); setDefaultValue( e.defaultValue ); setSortList( e.sort ); }}
 					/>
 				</Card>				
+
+								
+				<Card header={ "Default Headerless Prefix" }>
+					<MultiSelect 
+						value={ list2 }
+						hasDefault
+						defaultValue={ defaultValue }
+						sortable
+						sort={ sortList }
+						headerless
+						stretch
+						prefix={ "40px" }
+						suggestions={[
+							{ value: "value1", prefix: "km\\s", title: "Value 1" },
+							{ value: "value2", prefix: "km\\s", title: "Value 2" },
+							{ value: "value3", prefix: "km\\s", title: "Value 3" },
+							{ value: "value4", prefix: "km\\s", title: "Value 4" },
+						]} 
+						placeholder={ "Start typying here" }
+						onChange={( e ) => { setList2( e.value ); setListPreset2( e.preset ); setDefaultValue( e.defaultValue ); setSortList( e.sort ); }}
+					/>
+				</Card>							
+				
 
 			</Card>
 

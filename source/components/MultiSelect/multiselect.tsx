@@ -20,6 +20,7 @@ export const MultiSelect = ( props ) => {
 		stretch,
 		hasDefault,
 		defaultValue,
+		prefix,
 		sortable,
 		sort,
 		suggestions,
@@ -150,6 +151,7 @@ export const MultiSelect = ( props ) => {
 			value: item.value || item.title || "",
 			lower: title,
 			icon: item.icon,
+			prefix: item.prefix,
 			min: item.min,
 			max: item.max,
 			type: item.type,
@@ -406,6 +408,7 @@ export const MultiSelect = ( props ) => {
 								</div>
 							</div>
 							{ item.icon }
+							{ prefix ? (<Text className={ "multiselect-suggestions-item-prefix" } style={{ width: prefix }}>{ item.prefix === undefined ? "" : item.prefix }</Text>) : null }
 							<Text>{ item.title }</Text>
 							<div 
 								className={ Props.className( "multiselect-suggestions-item-default", { 
