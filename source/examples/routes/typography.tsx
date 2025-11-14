@@ -27,7 +27,7 @@ export const TypographyRoute = ( props ) => {
 				<Divider>Raw flex style</Divider>
 				<Row gap={ 20 }>
 					<Tooltip content={ "Blue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue Block" } bg={ "#67d9b4" } free>
-						<Column flex={ 1 } style={{ backgroundColor: "#67d9b4" }}>1</Column>
+						<Column flex={ 1 } style={{ backgroundColor: "#67d9b4", position: "fixed", top: 20, right: 440 }}>1</Column>
 					</Tooltip>
 					<Tooltip content={ "Red Block" } bg={ "#f0a21b" }>
 						<Column flex={ 9 } style={{ backgroundColor: "#f0a21b" }}>2</Column>
