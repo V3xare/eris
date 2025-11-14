@@ -7,7 +7,7 @@ import "./index.scss"
 import Common from "../../utility/common";
 import { Text } from "../../components/Typography";
 
-export const TooltipCalcPosition = ( event, tooltip, target, margin, marginFixed ) => {
+export const TooltipCalcPosition = ( event, tooltip, target, margin, marginFixed, free? ) => {
 
 	let e = { x: event.clientX, y: event.clientY };
 	let isReversed = tooltip.classList.contains( "tooltip-reverseY" );
@@ -36,14 +36,15 @@ export const TooltipCalcPosition = ( event, tooltip, target, margin, marginFixed
 	let m = { x: e.x, y: e.y };
 	let s = { x: b.width, y: b.height };
 
+	let sticky = free ? m : p;
 	let position = {
 		x: (m.x - c.x * 0.5),
-		y: (p.y - c.y) - margin
+		y: (sticky.y - c.y) - margin
 	};
 
 	let offsetXL = m.x - c.x * 0.5 - padding;
 	let offsetXR = m.x + c.x * 0.5 + padding;
-	let offsetYT = p.y - c.y - margin - padding;
+	let offsetYT = sticky.y - c.y - margin - padding;
 	let screenWidth = document.documentElement.clientWidth;
 	let reverseY = false;
 
@@ -52,7 +53,7 @@ export const TooltipCalcPosition = ( event, tooltip, target, margin, marginFixed
 	if( offsetXR > screenWidth )
 		position.x += screenWidth - offsetXR;
 	if( offsetYT < 0 || isReversed ){
-		position.y = (p.y + s.y) + margin + padding;
+		position.y = (sticky.y + s.y) + margin + padding;
 		reverseY = true;
 	};
 
@@ -60,7 +61,7 @@ export const TooltipCalcPosition = ( event, tooltip, target, margin, marginFixed
 };
 
 export const Tooltip = ( props ) => {
-	let { className, children, style, content, hidden, paddingLess, bg, alert, ...rest } = props;
+	let { className, children, style, content, hidden, paddingLess, free, bg, alert, ...rest } = props;
 	const [ target, setTarget ] = useState( null );
 	const [ created, setCreated ] = useState( false );
 	const element = useRef( null );
@@ -97,7 +98,7 @@ export const Tooltip = ( props ) => {
 				element.current.classList.remove( "tooltip-reverseY" );	
 			};
 
-			let position = TooltipCalcPosition( mouse.current, element.current, target, 10, 12 );
+			let position = TooltipCalcPosition( mouse.current, element.current, target, 10, 12, free );
 
 			if( position.reverseY )
 				element.current.classList.add( "tooltip-reverseY" );

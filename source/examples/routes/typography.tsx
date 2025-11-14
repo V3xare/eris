@@ -26,7 +26,7 @@ export const TypographyRoute = ( props ) => {
 			<Card>
 				<Divider>Raw flex style</Divider>
 				<Row gap={ 20 }>
-					<Tooltip content={ "Blue Block" } bg={ "#67d9b4" }>
+					<Tooltip content={ "Blue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue BlockBlue Block" } bg={ "#67d9b4" } free>
 						<Column flex={ 1 } style={{ backgroundColor: "#67d9b4" }}>1</Column>
 					</Tooltip>
 					<Tooltip content={ "Red Block" } bg={ "#f0a21b" }>
