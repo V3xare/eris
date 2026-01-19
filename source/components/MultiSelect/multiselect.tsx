@@ -162,7 +162,7 @@ export const MultiSelect = ( props ) => {
 	let sgList: any[] = useMemo(() => {
 
 		let array: any[] = [];
-		let filterLower = (filter || "").toLowerCase();
+		let filterLower = Common.string( filter || "" ).toLowerCase();
 
 		if( sortable ){
 
@@ -174,7 +174,7 @@ export const MultiSelect = ( props ) => {
 					continue;
 
 				let title = item.title || item.value || "";
-				let titleLower = title.toLowerCase();
+				let titleLower = Common.string( title ).toLowerCase();
 
 				if( filter && (titleLower.indexOf( filterLower ) < 0) )
 					continue;
@@ -187,12 +187,12 @@ export const MultiSelect = ( props ) => {
 			for( const item of suggestions ){
 
 				let title = item.title || item.value || "";
-				let titleLower = title.toLowerCase();
+				let titleLower = Common.string( title ).toLowerCase();
 
 				if( filter && (titleLower.indexOf( filterLower ) < 0) )
 					continue;
 
-				array.push(itemToObject( titleLower, item ));
+				array.push( itemToObject( titleLower, item ) );
 			};		
 
 		};
