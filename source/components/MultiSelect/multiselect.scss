@@ -191,6 +191,7 @@
 				position: relative;
 				margin-right: 0px;
 				border-radius: 50%;
+				margin-left: 6px;
 			}			
 			&-default-hidden{
 				display: none;
@@ -246,7 +247,8 @@
 		}					
 		&-item .icon{
 			//color: $icons-accent;
-			margin-right: 4px;
+			margin-right: 6px;
+			flex-shrink: 0;
 		}		
 		&-selected{
 			//background-color: #f4f4f4;
