@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useReducer } from "react";
 
-export const LangContext = React.createContext({
+export const LangContextDefault = {
 	get: ( key: string, args?: string[], params?: any ) => { 
 		return ""; 
 	}, 
-});
+};
+export type LangContextType = typeof LangContextDefault; 
+export const LangContext = React.createContext( LangContextDefault );
 
 const LangReducer = ( state, [ type, data, data2 ] ) => {
 

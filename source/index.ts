@@ -52,8 +52,8 @@ export { Calendar };
 
 import { Loading } from "./components/Loading"
 export { Loading };
-import { Lang, LangContext } from "./components/Lang"
-export { Lang, LangContext };
+import { Lang, LangContext, LangContextType } from "./components/Lang"
+export { Lang, LangContext, LangContextType };
 
 import { List } from "./components/List"
 export { List };
