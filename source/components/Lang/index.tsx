@@ -4,6 +4,8 @@ export const LangContextDefault = {
 	get: ( key: string, args?: string[], params?: any ) => { 
 		return ""; 
 	}, 
+	current: "en",
+	dispatch: ( args: any ) => {}
 };
 export type LangContextType = typeof LangContextDefault; 
 export const LangContext = React.createContext( LangContextDefault );
