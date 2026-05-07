@@ -1,4 +1,4 @@
-@import "../../../assets/styles/preset";
+@use "../../../assets/styles/preset";
 
 @font-face {
 	font-family: icomoon;
@@ -23,11 +23,11 @@
 	transition: all .2s ease-in-out;
 }
 .icon-active{
-	color: $icons;
+	color: #00000080;
 	cursor: pointer;
 }
 .icon-active:hover{
-	color: $icons-accent-hover;
+	color: #00a2ff;
 }
 
 @keyframes icon-spin{

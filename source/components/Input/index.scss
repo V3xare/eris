@@ -1,4 +1,4 @@
-@import "../../../assets/styles/functions.scss";
+@use "../../../assets/styles/functions.color.scss" as color;
 
 .input{
     box-sizing: border-box;
@@ -18,8 +18,8 @@
     min-height: 28px;
     padding: 0px;
     transition: box-shadow 140ms;
-	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
-    color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+	background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+    color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 	outline: none;
 
 	& > input{
@@ -30,10 +30,10 @@
 		flex-basis: 100%;
 		background: transparent;
         padding: 0px;
-        color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+        color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 	}
 	& > input::placeholder{
-		color: mix( var( --element-text ), var( --element-text-flat ), calc(80% * var(--element-text-multi-text)), 50% );
+		color: color.mix( var( --element-text ), var( --element-text-flat ), calc(80% * var(--element-text-multi-text)), 50% );
 	}
 	&-focus{
 		//border-color: $accent;
@@ -55,11 +55,11 @@
 		flex-wrap: nowrap;
 	}	
 	& .icon{
-		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+		color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 	}
 
 	&-tool:hover, &-tool:hover{
-		background-color: mix( var( --element-bg ), var( --element-accent ), calc(5% * var(--element-text-multi-sub)) );
+		background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(5% * var(--element-text-multi-sub)) );
 	}
 
 	&-tool{
@@ -70,16 +70,16 @@
 	}
 	&-alert{
 		border-color: #ff3535;
-		box-shadow: 0 0 0px 2px mix( var( --element-bg ), var( --element-alert ), calc(20% * var(--element-text-multi-shadow)), 100% );
+		box-shadow: 0 0 0px 2px color.mix( var( --element-bg ), var( --element-alert ), calc(20% * var(--element-text-multi-shadow)), 100% );
 	}	
 	&-inactive{
 		border-color: transparent;
 		box-shadow: 0 0 0px 0px transparent;
-		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 4% );
+		background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 4% );
 		user-select: text;
 	}
 	&-alert > input{
-		color: mix( var( --element-alert-color ), var( --element-alert ), calc(30% * var(--element-text-multi-sub)), 100% );
+		color: color.mix( var( --element-alert-color ), var( --element-alert ), calc(30% * var(--element-text-multi-sub)), 100% );
 	}
 	&-conditions{
 		padding: 6px 0px;

@@ -1,4 +1,4 @@
-@import "../../../assets/styles/functions.scss";
+@use "../../../assets/styles/functions.color.scss" as color;
 
 @keyframes ButtonAnimation{
 	from {
@@ -42,9 +42,9 @@
 		border-radius: inherit;
 		position: relative;
 		border-radius: inherit;
-		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
-		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
-		border: 1px solid mix( var( --element-bg ), var( --element-accent ), calc(30% * var(--element-text-multi-sub)), 10% );		
+		color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+		background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
+		border: 1px solid color.mix( var( --element-bg ), var( --element-accent ), calc(30% * var(--element-text-multi-sub)), 10% );		
 	}
 
     &:hover > .button-wrap{
@@ -57,20 +57,20 @@
 	}
 
 	&-disabled > .button-wrap{
-		background-color: mix( var( --bg ), var( --element-bg ), calc(30% * var(--element-text-multi-main)), 100% );
-		color: mix( var( --bg ), var( --element-text ), calc(50% * var(--element-text-multi-text)), 100% );
+		background-color: color.mix( var( --bg ), var( --element-bg ), calc(30% * var(--element-text-multi-main)), 100% );
+		color: color.mix( var( --bg ), var( --element-text ), calc(50% * var(--element-text-multi-text)), 100% );
 		cursor: default;
 	}	
 	&-disabled:hover > .button-wrap{
 		opacity: 1;
 	}
 	&-warning > .button-wrap{
-		background-color: mix( var( --element-bg ), var( --element-warning ), calc(35% * var(--element-text-multi-main)), 100% );
-		color: mix( var( --element-accent ), var( --element-warning ), calc(50% * var(--element-text-multi-text)), 100% );
+		background-color: color.mix( var( --element-bg ), var( --element-warning ), calc(35% * var(--element-text-multi-main)), 100% );
+		color: color.mix( var( --element-accent ), var( --element-warning ), calc(50% * var(--element-text-multi-text)), 100% );
 	}	
 	&-danger > .button-wrap{
-		background-color: mix( var( --element-bg ), var( --element-alert ), calc(35% * var(--element-text-multi-main)), 100% );
-		color: mix( var( --element-accent ), var( --element-alert ), calc(50% * var(--element-text-multi-text)), 100% );
+		background-color: color.mix( var( --element-bg ), var( --element-alert ), calc(35% * var(--element-text-multi-main)), 100% );
+		color: color.mix( var( --element-accent ), var( --element-alert ), calc(50% * var(--element-text-multi-text)), 100% );
 	}
 
     &-animation{

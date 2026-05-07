@@ -1,4 +1,4 @@
-@import "../../../assets/styles/functions.scss";
+@use "../../../assets/styles/functions.color.scss" as color;
 
 .modal{
 	position: fixed;
@@ -12,8 +12,8 @@
 	z-index: 21;
 	top: 0px;
 	left: 0px;
-	//background-color: mix( var( --element-bg ), var( --element-accent ), 5% );
-	color: mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 100% );
+	//background-color: color.mix( var( --element-bg ), var( --element-accent ), 5% );
+	color: color.mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 100% );
 	background: var(--gloss);
 	background-color: var(--bg);	
 }

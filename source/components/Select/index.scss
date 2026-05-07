@@ -1,4 +1,4 @@
-@import "../../../assets/styles/functions.scss";
+@use "../../../assets/styles/functions.color.scss" as color;
 
 .select{
 
@@ -18,8 +18,8 @@
 		transition: all 240ms;
 		overflow: hidden;
 		border: none;
-		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
-		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+		background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+		color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 		outline: none;		
 	}
 
@@ -69,7 +69,7 @@
 	.select-inactive{
 		border-color: transparent;
 		box-shadow: 0 0 0px 0px transparent;
-		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 4% );
+		background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 4% );
 		user-select: text;
 
 		& > .icon{
@@ -107,14 +107,14 @@
     display: flex !important;
 	border-radius: 4px;
 	box-shadow: none;
-	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
-	color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+	background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+	color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 }
 .autocomplete-headerless .autocomplete-hovered{
 	background-color: transparent;
 }
 .autocomplete-headerless .autocomplete-selected{
-	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
+	background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
 }
 .autocomplete-headerless .input{
     display: none;
@@ -137,7 +137,7 @@
 }
 
 .autocomplete-row *::-webkit-scrollbar-thumb{
-	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
+	background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
 	border-radius: inherit;
 }
 .autocomplete-row > .autocomplete-scrollLeft, .autocomplete-row > .autocomplete-scrollRight{

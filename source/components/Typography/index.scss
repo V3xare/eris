@@ -1,7 +1,7 @@
-@import "../../../assets/styles/preset";
+@use "../../../assets/styles/preset";
 
 .typography{
-	font-family: $fonts;
+	font-family: Roboto;
 	font-size: 14px;
     font-weight: normal;
     //color: rgba(0, 0, 0, 0.85);
@@ -26,7 +26,7 @@
 }
 .typography-link, .typography-link > a{
 	font-weight: bold;
-	color: $link;
+	color: #56b7ff;
 	cursor: pointer;
 	text-decoration: none;
 }

@@ -1,11 +1,11 @@
-@import "../../../assets/styles/functions.scss";
+@use "../../../assets/styles/functions.color.scss" as color;
 
 .toggle{
 	position: relative;
     width: 40px;
     height: 21px;
     box-sizing: border-box;
-	background: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 14% );
+	background: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 14% );
     border-radius: 4px;
     padding: 4px;
     flex-shrink: 0;
@@ -15,12 +15,12 @@
 
 	&-active{
 		position: relative;
-		background: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 20% );
+		background: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 20% );
 	}
 
 	& > div{
 		position: relative;
-		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 14% );
+		background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 14% );
 		width: 50%;
 		height: 100%;
 		border-radius: 3px;
@@ -30,18 +30,18 @@
 	&-active > div{
 		position: relative;
 		left: 50%;
-		background: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 80% );
+		background: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 80% );
 	}
 
 
 	&-inactive{
 		border-color: transparent;
 		box-shadow: 0 0 0px 0px transparent;
-		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 14% );
+		background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 14% );
 		user-select: text;
 
 		& > div{
-			background: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 40% );
+			background: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 40% );
 		}
 
 	}

@@ -1,4 +1,4 @@
-@import "../../../assets/styles/functions.scss";
+@use "../../../assets/styles/functions.color.scss" as color;
 
 .multiselect{
 	min-width: 240px;
@@ -12,7 +12,7 @@
 		flex-direction: row;
 		flex-wrap: nowrap;
 		border: none;
-		background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+		background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
 		border-radius: 4px;
 		transition: none;
 		user-select: none;
@@ -28,8 +28,8 @@
 			flex-direction: row;
 			flex-wrap: nowrap;
 			align-items: center;
-			background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
-			color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+			background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 10% );
+			color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 			border-radius: 3px;
 			padding: 2px 4px 2px 6px;
 			margin: 4px 0px 4px 4px;
@@ -46,8 +46,8 @@
 				right: 0px;
 				bottom: 0px;
 				top: 50%;
-				border: 1px solid mix( var( --element-bg ), var( --element-default-border ), calc(100% * var(--element-text-multi-main)), 100% );
-				box-shadow: inset 0px -4px 6px mix( var( --element-bg ), var( --element-default-shadow ), calc(90% * var(--element-text-multi-main)), 20% );
+				border: 1px solid color.mix( var( --element-bg ), var( --element-default-border ), calc(100% * var(--element-text-multi-main)), 100% );
+				box-shadow: inset 0px -4px 6px color.mix( var( --element-bg ), var( --element-default-shadow ), calc(90% * var(--element-text-multi-main)), 20% );
 				border-top: none;
 				border-radius: inherit;
 				border-top-left-radius: 0px;
@@ -56,7 +56,7 @@
 			}
 
 			&-dragged{
-				outline: 1px dotted mix( var( --element-bg ), var( --element-drag-border ), calc(90% * var(--element-text-multi-main)), 100% );
+				outline: 1px dotted color.mix( var( --element-bg ), var( --element-drag-border ), calc(90% * var(--element-text-multi-main)), 100% );
 			}
 			&-dragged > *{
 				opacity: 0.5;
@@ -83,7 +83,7 @@
 				padding: 0px 4px 2px 4px;
 
 				&:hover{
-					background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 15% );
+					background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 15% );
 				}
 
 			}	
@@ -99,11 +99,11 @@
 			flex: 1;
 			width: 60px;
 			min-width: 60px;
-			color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+			color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 			min-height: 32px;			
 		}
 		&-input::placeholder{
-			color: mix( var( --element-text ), var( --element-text-flat ), calc(80% * var(--element-text-multi-text)), 50% );
+			color: color.mix( var( --element-text ), var( --element-text-flat ), calc(80% * var(--element-text-multi-text)), 50% );
 		}	
 
 		&-active{
@@ -128,8 +128,8 @@
 		border-color: transparent;
 		z-index: 2;
 		display: none;
-		background-color: mix( var( --element-bg ), var( --element-accent ), 0% );
-		color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+		background-color: color.mix( var( --element-bg ), var( --element-accent ), 0% );
+		color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 	
 		&-expanded{
 			display: flex;
@@ -173,7 +173,7 @@
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
 				font-size: 16px;	
-				border-color: mix( var( --element-bg ), var( --element-accent ), calc(24% * var(--element-text-multi-main)), 80% );
+				border-color: color.mix( var( --element-bg ), var( --element-accent ), calc(24% * var(--element-text-multi-main)), 80% );
 				margin-right: 8px;
 				flex-shrink: 0;
 			}
@@ -230,14 +230,14 @@
 
 		}
 		&-item-selected > &-item-checkbox, &-item-isDefault > &-item-default{
-			background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 15% );
-			color: mix( var( --element-text ), var( --element-accent ), calc(60% * var(--element-text-multi-main)), 100% );
+			background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 15% );
+			color: color.mix( var( --element-text ), var( --element-accent ), calc(60% * var(--element-text-multi-main)), 100% );
 		}					
 		&-item:hover{
 			//background-color: #f4f4f4;
 		}
 		&-item-focused{
-			background-color: mix( var( --element-bg ), var( --element-accent ), calc(5% * var(--element-text-multi-sub)) );
+			background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(5% * var(--element-text-multi-sub)) );
 		}	
 		&-item-prefix{
 			flex-grow: 0 !important;
@@ -269,14 +269,14 @@
 	max-height: none;
 	border-radius: 4px;
 	box-shadow: none;
-	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
-	color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+	background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+	color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
 }
 .multiselect-headerless .multiselect-suggestions-item-focused{
 	background-color: transparent;
 }
 .multiselect-headerless .multiselect-suggestions-item-selected{
-	//background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 6% );
+	//background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 6% );
 }
 .multiselect-stretch{
 	width: 100%;

@@ -1,4 +1,4 @@
-@import "../../../assets/styles/functions.scss";
+@use "../../../assets/styles/functions.color.scss" as color;
 
 .typography-editable{
 	position: relative;
@@ -7,8 +7,8 @@
     width: 240px;
     min-width: 240px;
     border: none;
-    background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
-    color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+    background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
+    color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
     border-radius: 4px;
     min-height: 28px;	
 }
@@ -25,7 +25,7 @@
     top: 7px;
     position: absolute;
     right: -21px;
-    color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 60% );
+    color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 60% );
 }
 .typography-editable > textarea{
 	position: absolute;
@@ -47,13 +47,13 @@
     margin: 0px 0px 0px 0px;
     width: calc(100% + 0px);
     background-color: transparent;
-    color: mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+    color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
     border: 0px solid transparent;
     border-radius: 4px;	
 }
 .typography-editable > textarea:focus{
 	border-color: transparent;
-	box-shadow: 0 0 0 1px mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-sub)), 50% );
+	box-shadow: 0 0 0 1px color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-sub)), 50% );
 	border-right-width: 0px !important;
 	outline: 0;
 }
@@ -61,7 +61,7 @@
 .typography-inactive{
 	border-color: transparent;
 	box-shadow: 0 0 0px 0px transparent;
-	background-color: mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 4% );
+	background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 4% );
 	user-select: text;
 
 	& > .icon{
@@ -71,7 +71,7 @@
 }
 .typography-alert{
 	border-color: #ff3535;
-	box-shadow: 0 0 0px 2px mix( var( --element-bg ), var( --element-alert ), calc(20% * var(--element-text-multi-shadow)), 100% );
+	box-shadow: 0 0 0px 2px color.mix( var( --element-bg ), var( --element-alert ), calc(20% * var(--element-text-multi-shadow)), 100% );
 }	
 .typography-stretch{
 	width: 100%;

@@ -1,4 +1,4 @@
-@import "../../../assets/styles/functions.scss";
+@use "../../../assets/styles/functions.color.scss" as color;
 
 .card{
 	padding: 0px;
@@ -10,17 +10,17 @@
 	background: var( --gloss );
 	border: 0px;
 	margin: 8px 8px 0px 8px;
-	box-shadow: 0 0 10px mix( var( --element-shadow ), var( --element-accent ), calc(0% * var(--element-text-multi-shadow)), 14% );
+	box-shadow: 0 0 10px color.mix( var( --element-shadow ), var( --element-accent ), calc(0% * var(--element-text-multi-shadow)), 14% );
 
 
 	&-header{
 		padding: 14px 11px 0px 11px;
-		color: mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 100% );
+		color: color.mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 100% );
 		background: transparent;
 	}	
 	&-body{
 		padding: 6px 11px;
-		color: mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 70% );
+		color: color.mix( var( --element-text-flat ), var( --element-accent ), calc(7.5% * var(--element-text-multi-text)), 70% );
 	}
 
 }

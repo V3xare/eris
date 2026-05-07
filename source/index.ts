@@ -1,7 +1,7 @@
 
 //#Utility
 
-import "../assets/styles/functions.scss"
+import "../assets/styles/functions.color.scss"
 import "../assets/styles/themes.scss"
 
 import { useAnimation } from "./utility/animation"
