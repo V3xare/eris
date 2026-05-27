@@ -272,6 +272,7 @@
 	box-shadow: none;
 	background-color: color.mix( var( --element-bg ), var( --element-accent ), calc(90% * var(--element-text-multi-main)), 13% );
 	color: color.mix( var( --element-text ), var( --element-accent ), calc(50% * var(--element-text-multi-text)), 100% );
+	padding: 3px 0px 3px 3px;
 }
 .multiselect-headerless .multiselect-suggestions-item-focused{
 	background-color: transparent;
