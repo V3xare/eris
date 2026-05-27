@@ -5,6 +5,7 @@ import { Text } from "../../components/Typography";
 import { useAnimation } from "../../utility/animation";
 import Common from "../../utility/common";
 import { Toggle } from "../../components/Toggle/toggle";
+import { Tooltip } from "../../components/Tooltip";
 
 import "./multiselect.scss"
 
@@ -151,6 +152,7 @@ export const MultiSelect = ( props ) => {
 			value: item.value || item.title || "",
 			lower: title,
 			icon: item.icon,
+			tooltip: item.tooltip,
 			prefix: item.prefix,
 			min: item.min,
 			max: item.max,
@@ -358,55 +360,62 @@ export const MultiSelect = ( props ) => {
 							<div 
 								className={ "multiselect-suggestions-item-checkbox" }
 							>
-								<div 
-									className={ "multiselect-suggestions-item-checkbox-push" }
-									onMouseDown={( e ) => { 
-										e.preventDefault();
-										e.stopPropagation();
-									}}
-									onClick={( e ) => { 
-										e.preventDefault();
-										e.stopPropagation();
+								<Tooltip
+									content={ item.tooltip }
+									hidden={ !item.tooltip }
+								>
+									<div 
+										className={ "multiselect-suggestions-item-checkbox-push" }
+										onMouseDown={( e ) => { 
+											e.preventDefault();
+											e.stopPropagation();
+										}}
+										onClick={( e ) => { 
+											e.preventDefault();
+											e.stopPropagation();
 
-										let result: any[] = [ ...list ];
-										
-										if( item.selected )
-											result = result.filter(( f ) => f != item.value );
-										else{
-											let index = sortList.findIndex(( f ) => f == item.value );
-
-											if( index < 0 )
-												result = [ ...list, item.value ];
+											let result: any[] = [ ...list ];
+											
+											if( item.selected )
+												result = result.filter(( f ) => f != item.value );
 											else{
+												let index = sortList.findIndex(( f ) => f == item.value );
 
-												let key = "";
+												if( index < 0 )
+													result = [ ...list, item.value ];
+												else{
 
-												for( ; index < sortList.length; index++ ){
+													let key = "";
 
-													if( list.findIndex(( f ) => f == sortList[ index ] ) < 0 )
-														continue;
+													for( ; index < sortList.length; index++ ){
 
-													key = sortList[ index ];
-													break;
+														if( list.findIndex(( f ) => f == sortList[ index ] ) < 0 )
+															continue;
+
+														key = sortList[ index ];
+														break;
+													};
+
+													index = list.findIndex(( f ) => f == key );
+
+													if( index > -1 )
+														result.splice( index, 0, item.value );
+													else
+														result.push( item.value );
+
 												};
-
-												index = list.findIndex(( f ) => f == key );
-
-												if( index > -1 )
-													result.splice( index, 0, item.value );
-												else
-													result.push( item.value );
 
 											};
 
-										};
+											setList( result );
+											onChange({ value: result, defaultValue: defaultValueForced, sort: sortList });
+										}}									
+									>
+									</div>
+								</Tooltip>
 
-										setList( result );
-										onChange({ value: result, defaultValue: defaultValueForced, sort: sortList });
-									}}									
-								>
-								</div>
 							</div>
+
 							{ item.icon }
 							{ prefix ? (<Text className={ "multiselect-suggestions-item-prefix" } style={{ width: prefix }}>{ item.prefix === undefined ? "" : item.prefix }</Text>) : null }
 							<Text>{ item.title }</Text>
