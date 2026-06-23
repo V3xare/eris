@@ -220,7 +220,6 @@ export function Editable( props ){
 			}}
 			style={{ height: (height ? (height + "px") : "") }}
 			value={ forcedValue }
-			rows={ 1 }
 		/>
 
 	</div>
