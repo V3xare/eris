@@ -144,6 +144,9 @@ export const Select = ( props ) => {
 
 		let timeout = setTimeout(() => {
 
+			if( !childrenElem.current || !overlayElem.current )
+				return;
+
 			childrenElem.current.style.width = "auto";
 			let rect1 = childrenElem.current.getClientRects();
 			let rect2 = overlayElem.current.getClientRects();
