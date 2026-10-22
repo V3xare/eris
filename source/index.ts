@@ -89,4 +89,7 @@ import { AutoComplete } from "./components/AutoComplete"
 export { AutoComplete };
 
 import { useDelta, usePrevious } from "./utility/use.delta"
-export {  useDelta, usePrevious };
+export { useDelta, usePrevious };
+
+import { useCancelList, CancelListModuleInit, CancelListContext, CancelListContextType } from "./components/CancelList/cancel.list";
+export { useCancelList, CancelListModuleInit, CancelListContext, CancelListContextType }

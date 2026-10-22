@@ -6,6 +6,7 @@ import Common from "../../utility/common";
 
 import "./modal.scss"
 import { TooltipCalcPosition } from "../../components/Tooltip";
+import { useCancelList } from "../CancelList/cancel.list";
 
 export const ModalContext = React.createContext({});
 
@@ -117,6 +118,8 @@ export const Modal = ( props ) => {
 			clearInterval( interval );
 		};
 	}, [ active ]);
+
+	useCancelList( className || "modal", triggerActive, setTriggerActive );
 
 	return <React.Fragment>
 		<ModalContext.Provider value={{ close: () => setTriggerActive( false ) }}>
